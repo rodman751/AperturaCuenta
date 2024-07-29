@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewData["Title"] = "Paso 1: Validación";
+}
+@model Entidades.DatosDactilares
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Datos Dactilares</title>
+</head>
+<body>
+    <h1>Verificar Datos Dactilares</h1>
+
+    @if (ViewBag.Message != null)
+    {
+        <div>
+            <strong>@ViewBag.Message</strong>
+        </div>
+    }
+
+    <form asp-action="ComprobarDatos" method="post">
+        <div>
+            <label for="Identificacion">Identificación:</label>
+            <input type="text" id="Identificacion" name="Identificacion" value="" required />
+        </div>
+        <div>
+            <label for="Codigo_Dactilar">Código Dactilar:</label>
+            <input type="text" id="Codigo_Dactilar" name="Codigo_Dactilar" value="" required />
+        </div>
+        <button type="submit">Verificar</button>
+    </form>
+</body>
+</html>
+
+
