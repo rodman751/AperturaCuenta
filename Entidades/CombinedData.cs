@@ -8,6 +8,7 @@ namespace Entidades.CuentaApertura
 {
     public class CombinedData
     {
+        public DatosDactilares DatosDactilares { get; set; }
         public Usuario Usuario { get; set; }
         public DireccionMapa DireccionMapa { get; set; }
     }

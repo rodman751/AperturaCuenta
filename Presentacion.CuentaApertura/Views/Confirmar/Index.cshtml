@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model Entidades.CuentaApertura.CombinedData
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Confirmación</title>
+</head>
+<body>
+    <h1>Apertura de cuenta Creada Correctamente</h1>
+    <h1>Confirmación de Datos</h1>
+
+    <h2>Datos Dactilares</h2>
+    <p>@Model.DatosDactilares.Identificacion</p>
+    <p>@Model.DatosDactilares.Codigo_Dactilar</p>
+
+
+    <h2>Usuario</h2>
+    <p>Nombre: @Model.Usuario.Nombre</p>
+    <p>Email: @Model.Usuario.Apellido</p>
+
+   @*  <h2>Dirección</h2>
+    <p>Calle: @Model.DireccionMapa.Direccion</p>
+    <p>Ciudad: @Model.DireccionMapa.Provincia</p>
+ *@
+    <form asp-action="FinalizarApertura" asp-controller="Steps" method="post">
+        
+        <button type="submit">Finalizar</button>
+    </form>
+
+</body>
+</html>

@@ -12,7 +12,8 @@ namespace Interface.AperturaCuenta
         void GuardarDatosCookie<T>(string cookieName, T data);
         T? ObtenerDatosCookie<T>(string cookieName) where T : class;
 
-        Task AgregarClaimsAsync(Usuario user);
+        Task AgregarClaimsAsync(DatosDactilares datos);
         Task SignOutAsync();
+        void EliminarCookie(string cookieName);
     }
 }

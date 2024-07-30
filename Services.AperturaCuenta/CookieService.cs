@@ -48,13 +48,13 @@ namespace Services.AperturaCuenta
             return null;
         }
 
-        public async Task AgregarClaimsAsync(Usuario user)
+        public async Task AgregarClaimsAsync(DatosDactilares datos)
         {
             var claims = new List<Claim>
-        {
-            new Claim("Nombre", user.Nombre),
-            new Claim("Apellido", user.Apellido)
-        };
+            {
+                new Claim("Identificaion", datos.Identificacion),
+            
+            };
 
             var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
@@ -66,9 +66,20 @@ namespace Services.AperturaCuenta
             await _httpContextAccessor.HttpContext?.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
         }
 
+
         public async Task SignOutAsync()
         {
             await _httpContextAccessor.HttpContext?.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        public void EliminarCookie(string cookieName)
+        {
+            var options = new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddDays(-1) // Establecer una fecha de expiración en el pasado para eliminar la cookie
+            };
+
+            _httpContextAccessor.HttpContext?.Response.Cookies.Append(cookieName, string.Empty, options);
         }
     }
 }
