@@ -15,5 +15,7 @@ namespace Interface.AperturaCuenta
         Task AgregarClaimsAsync(DatosDactilares datos);
         Task SignOutAsync();
         void EliminarCookie(string cookieName);
+        void GuardarPasoActual(int paso);
+        int ObtenerPasoActual();
     }
 }

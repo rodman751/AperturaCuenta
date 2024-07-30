@@ -46,7 +46,7 @@ namespace Presentacion.CuentaApertura.Controllers
                 if (existe)
                 {
                     TempData["Message"] = "Los datos existen.";
-                    //  recuperar datos del usuario
+                    
                     ViewBag.Identificacion = model.Identificacion; // con la identificación se puede buscar el usuario
 
                 }
@@ -59,7 +59,7 @@ namespace Presentacion.CuentaApertura.Controllers
                 
                 return RedirectToAction("Index", "UsuarioView");
             }
-
+            
        
             return View(model);
         }

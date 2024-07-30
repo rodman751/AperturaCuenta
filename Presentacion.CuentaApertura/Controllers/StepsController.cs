@@ -72,6 +72,8 @@ namespace Presentacion.CuentaApertura.Controllers
 
             return RedirectToAction("Index", "Confirmar", combinedData);
         }
+
+
         public IActionResult FinalizarApertura()
         {
             _cookieService.EliminarCookie("DatosDactilaresCookie");

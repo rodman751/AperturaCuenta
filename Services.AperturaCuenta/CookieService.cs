@@ -81,5 +81,29 @@ namespace Services.AperturaCuenta
 
             _httpContextAccessor.HttpContext?.Response.Cookies.Append(cookieName, string.Empty, options);
         }
+
+        // para los guardar los pasos de las vistas
+        public void GuardarPasoActual(int paso)
+        {
+            var options = new CookieOptions
+            {
+                Expires = DateTimeOffset.UtcNow.AddMinutes(5)
+            };
+
+            _httpContextAccessor.HttpContext?.Response.Cookies.Append("PasoActualCookie", paso.ToString(), options);
+        }
+
+        public int ObtenerPasoActual()
+        {
+            if (_httpContextAccessor.HttpContext?.Request.Cookies.TryGetValue("PasoActualCookie", out var pasoStr) == true)
+            {
+                if (int.TryParse(pasoStr, out int paso))
+                {
+                    return paso;
+                }
+            }
+
+            return 0; // Retorna 0 si no hay paso guardado
+        }
     }
 }
