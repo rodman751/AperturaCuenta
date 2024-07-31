@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Interface.AperturaCuenta;
 
-namespace Presentacion.CuentaApertura.Views.Confirm
+namespace Presentacion.CuentaApertura.Controllers
 {
     public class ConfirmarController : Controller
     {
@@ -32,9 +32,9 @@ namespace Presentacion.CuentaApertura.Views.Confirm
             };
 
             return View(combinedData);
-            
+
         }
 
-       
+
     }
 }

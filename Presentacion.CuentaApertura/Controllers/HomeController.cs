@@ -31,7 +31,24 @@ namespace Presentacion.CuentaApertura.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [HttpPost]
+        public IActionResult Inicio()
+        {
+            int pasoActual = _cookieService.ObtenerPasoActual();
+            switch (pasoActual)
+            {
+                case 1:
+                    return RedirectToAction("Index", "UsuarioView");
+                case 2:
+                    return RedirectToAction("Index","UsuarioView");
+                case 3:
+                    return RedirectToAction("Index","Confirmar");
+                default:
+                    return RedirectToAction("Index", "DatosDactilares"); // Redirige al primer paso si no hay paso guardado
+            }
+        }
 
-      
+
+
     }
 }

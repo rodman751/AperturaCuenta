@@ -23,7 +23,8 @@ namespace Presentacion.CuentaApertura.Controllers
             {
                 
                 _cookieService.GuardarDatosCookie("UsuarioCookie", model);
-                
+                _cookieService.GuardarPasoActual(2);
+
                 return RedirectToAction("Confirm");
             }
 
@@ -69,17 +70,18 @@ namespace Presentacion.CuentaApertura.Controllers
 
 
             //
-
+            _cookieService.GuardarPasoActual(3);
             return RedirectToAction("Index", "Confirmar", combinedData);
         }
 
 
         public IActionResult FinalizarApertura()
         {
+            _cookieService.EliminarCookie("PasoActualCookie");
             _cookieService.EliminarCookie("DatosDactilaresCookie");
             _cookieService.EliminarCookie("UsuarioCookie");
             _cookieService.EliminarCookie("DireccionMCokkie");
-            _cookieService.SignOutAsync();
+            //_cookieService.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
     }

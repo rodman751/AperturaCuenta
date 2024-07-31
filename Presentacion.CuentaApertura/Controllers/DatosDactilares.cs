@@ -23,14 +23,19 @@ namespace Presentacion.CuentaApertura.Controllers
             _cookieService = cookieService;
         }
         
-        [HttpGet]
+       
         public IActionResult Index()
         {
             if (TempData.ContainsKey("Message"))
             {
                 ViewBag.Message = TempData["Message"];
             }
-            return View();
+
+            var datosStep1 = _cookieService.ObtenerDatosCookie<Entidades.DatosDactilares>("DatosDactilaresCookie");
+
+            // Si hay datos guardados, inicializar el modelo con ellos
+            var model = datosStep1 ?? new Entidades.DatosDactilares();
+            return View(model);
         }
 
         [HttpPost]
@@ -40,7 +45,7 @@ namespace Presentacion.CuentaApertura.Controllers
             {
                 // Verificar si el dato existe
                 bool existe = _datosDactilaresService.ExisteDato(model);
-                _cookieService.AgregarClaimsAsync(model);
+               // _cookieService.AgregarClaimsAsync(model);
                 _cookieService.GuardarDatosCookie("DatosDactilaresCookie",model);
 
                 if (existe)
@@ -56,7 +61,7 @@ namespace Presentacion.CuentaApertura.Controllers
                    
                 }
 
-                
+                _cookieService.GuardarPasoActual(1);
                 return RedirectToAction("Index", "UsuarioView");
             }
             
