@@ -1,7 +1,7 @@
-﻿using Interface.AperturaCuenta;
+﻿
 using Repositorio.Interfaces;
 using Repositorio.Repositorios;
-using Services.AperturaCuenta;
+
 
 namespace Repositorio
 {

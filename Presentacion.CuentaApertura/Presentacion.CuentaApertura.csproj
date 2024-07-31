@@ -18,9 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Entidades\Entidades.CuentaApertura.csproj" />
-    <ProjectReference Include="..\Interface.AperturaCuenta\Interface.AperturaCuenta.csproj" />
-    <ProjectReference Include="..\Services.AperturaCuenta\Services.AperturaCuenta.csproj" />
+    <ProjectReference Include="..\Repositorio\Repositorio.csproj" />
+    <ProjectReference Include="..\ServiceManager\ServiceManager.csproj" />
   </ItemGroup>
 
 </Project>

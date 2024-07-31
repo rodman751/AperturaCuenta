@@ -1,4 +1,5 @@
-﻿using Interface.AperturaCuenta;
+﻿using Entidades.CuentaApertura;
+using Interface.AperturaCuenta;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace ServiceManager
     public interface IServiceManager
     {
         ICookieService CookieService { get; }
+        CombinedData ObtenerDatosCombinados();
+        void borrarCookie();
     }
 }

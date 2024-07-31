@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Services.AperturaCuenta;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Repositorio;
+using ServiceManager;
+using Presentacion.CuentaApertura.Extensions;
 
 namespace Presentacion.CuentaApertura
 {
@@ -22,9 +25,10 @@ namespace Presentacion.CuentaApertura
             // Registra el servicio de datos dactilares
             
             // Registra el servicio de cookies
-            builder.Services.AddHttpContextAccessor(); // Necesario para IHttpContextAccessor
-            builder.Services.AddScoped<ICookieService, CookieService>();
-
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.ConfigureRepositoryManager();
+            builder.Services.ConfigureServiceManager();
+            builder.Services.ConfigureCookieService();
             //servico de cokkie
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
              .AddCookie(config =>
