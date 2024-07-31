@@ -8,6 +8,7 @@ namespace Entidades
 {
     public class OTP
     {
+        public int Id { get; set; }
         public string Codigo { get; set; } 
     }
 }

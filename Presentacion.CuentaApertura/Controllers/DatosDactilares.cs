@@ -15,11 +15,11 @@ namespace Presentacion.CuentaApertura.Controllers
     {
 
         private readonly ICookieService _cookieService;
-        private readonly IDatosDactilaresService _datosDactilaresService;
+       
 
-        public DatosDactilares(IDatosDactilaresService datosDactilaresService, ICookieService cookieService)
+        public DatosDactilares( ICookieService cookieService)
         {
-            _datosDactilaresService = datosDactilaresService;
+            
             _cookieService = cookieService;
         }
         
@@ -44,22 +44,10 @@ namespace Presentacion.CuentaApertura.Controllers
             if (ModelState.IsValid)
             {
                 // Verificar si el dato existe
-                bool existe = _datosDactilaresService.ExisteDato(model);
+                //bool existe = _datosDactilaresService.ExisteDato(model);
                // _cookieService.AgregarClaimsAsync(model);
                 _cookieService.GuardarDatosCookie("DatosDactilaresCookie",model);
 
-                if (existe)
-                {
-                    TempData["Message"] = "Los datos existen.";
-                    
-                    ViewBag.Identificacion = model.Identificacion; // con la identificación se puede buscar el usuario
-
-                }
-                else
-                {
-                    TempData["Message"] = "Los datos no existen.";
-                   
-                }
 
                 _cookieService.GuardarPasoActual(1);
                 return RedirectToAction("Index", "UsuarioView");

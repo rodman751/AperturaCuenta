@@ -1,6 +1,8 @@
 using Interface.AperturaCuenta;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Services.AperturaCuenta;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Presentacion.CuentaApertura
 {
@@ -9,6 +11,8 @@ namespace Presentacion.CuentaApertura
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<DbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'DbContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
@@ -16,7 +20,7 @@ namespace Presentacion.CuentaApertura
             builder.Services.AddControllersWithViews();
 
             // Registra el servicio de datos dactilares
-            builder.Services.AddScoped<IDatosDactilaresService, DatosDactilaresService>();
+            
             // Registra el servicio de cookies
             builder.Services.AddHttpContextAccessor(); // Necesario para IHttpContextAccessor
             builder.Services.AddScoped<ICookieService, CookieService>();

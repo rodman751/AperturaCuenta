@@ -8,6 +8,7 @@ namespace Entidades
 {
     public class InformacionPersonal
     {
+        public int Id { get; set; }
         public double Ingresos { get; set; }
         public double Gastos { get; set; }
         public string PaisNacimiento { get; set; }
