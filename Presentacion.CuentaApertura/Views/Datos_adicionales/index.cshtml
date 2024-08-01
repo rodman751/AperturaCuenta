@@ -52,15 +52,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
                                 <label class="u-label u-label-1">Nombre</label>
-                                <input type="text" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required
-                                       value="@ViewBag.Usuario" />
+                                <input type="text" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required value="@ViewBag.Usuario" />
                                 <span class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
                                 <label class="u-label u-label-2">Apellido</label>
-                                <input type="text" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required
-                                       value="@ViewBag.Apellido" />
+                                <input type="text" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required value="@ViewBag.Apellido" />
                                 <span class="text-danger"></span>
                             </div>
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-2"></div>
@@ -103,52 +101,50 @@
                                 <span asp-validation-for="NivelDeInstruccion" class="text-danger"></span>
                             </div>
 
-                            <div class="u-form-checkbox-group u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
+                            <!-- Condición Laboral -->
+                            <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
                                 <label class="u-label u-label-8">Condición laboral</label>
-                                <div class="u-form-checkbox-group-wrapper">
-                                    <div class="u-input-row">
-                                        <input asp-for="Dependiente" type="checkbox" value="Dependiente" class="u-field-input" />
-                                        <label class="u-field-label">Dependiente</label>
-                                    </div>
-                                    <div class="u-input-row">
-                                        <input asp-for="NegocioPropio" type="checkbox" value="Negocio Propio" class="u-field-input" />
-                                        <label class="u-field-label">Negocio Propio</label>
-                                    </div>
-                                    <div class="u-input-row">
-                                        <input asp-for="Ninguno" type="checkbox" value="Ninguno" class="u-field-input" />
-                                        <label class="u-field-label">Ninguno</label>
-                                    </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Dependiente" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <label class="u-field-label">Dependiente</label>
                                 </div>
-                                <span  class="text-danger"></span>  
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="NegocioPropio" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <label class="u-field-label">Negocio Propio</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Ninguno" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <label class="u-field-label">Ninguno</label>
+                                </div>
+                                <span class="text-danger"></span>
                             </div>
 
-                            <div class="u-form-checkbox-group u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-12">
+                            <!-- Tipo de Vivienda -->
+                            <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-12">
                                 <label class="u-label u-label-9">Tipo Vivienda:</label>
-                                <div class="u-form-checkbox-group-wrapper">
-                                    <div class="u-input-row">
-                                        <input asp-for="VivoConFamiliares" type="checkbox" value="Vivo con familiares." class="u-field-input" />
-                                        <label class="u-field-label">Vivo con familiares.</label>
-                                    </div>
-                                    <div class="u-input-row">
-                                        <input asp-for="Propia" type="checkbox" value="Propia" class="u-field-input" />
-                                        <label class="u-field-label">Propia</label>
-                                    </div>
-                                    <div class="u-input-row">
-                                        <input asp-for="PropiaHipotecada" type="checkbox" value="Propia hipotecada" class="u-field-input" />
-                                        <label class="u-field-label">Propia hipotecada</label>
-                                    </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="VivoConFamiliares" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <label class="u-field-label">Vivo con familiares.</label>
                                 </div>
-                                <span  class="text-danger"></span>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Propia" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <label class="u-field-label">Propia</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="PropiaHipotecada" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <label class="u-field-label">Propia hipotecada</label>
+                                </div>
+                                <span class="text-danger"></span>
                             </div>
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-4"></div>
 
                             <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-label-top u-form-group-14">
-                                <input asp-for="ActividadesEnOtroPais" type="checkbox" value="On" class="u-field-input" />
+                                <input asp-for="ActividadesEnOtroPais" type="checkbox" value="true" class="u-field-input" id="ActividadesEnOtroPaisCheckbox" />
                                 <label class="u-field-label">Actividades en otro Pais?</label>
                             </div>
 
-                            <div class="u-form-group u-form-partition-factor-2 u-label-top u-form-group-15">
+                            <div class="u-form-group u-form-partition-factor-2 u-label-top u-form-group-15" id="DetallesActividadesEnOtroPaisDiv" style="display: none;">
                                 <label asp-for="DetallesActividadesEnOtroPais" class="u-form-control-hidden u-label u-label-10"></label>
                                 <input asp-for="DetallesActividadesEnOtroPais" placeholder="" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8" />
                                 <span asp-validation-for="DetallesActividadesEnOtroPais" class="text-danger"></span>
@@ -165,17 +161,11 @@
                                 <span asp-validation-for="AceptoTerminos" class="text-danger"></span>
                             </div>
 
-                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-6"></div>
-
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
-                                
+                                <button class="u-active-palette-2-light-2 u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-palette-2-light-1 u-palette-2-base u-radius-6 u-btn-2">Guardar</button>
                             </div>
 
-                            <div class="u-form-send-message u-form-send-success">Correcto</div>
-                            <div class="u-form-send-error u-form-send-message">Error</div>
                             <input type="hidden" value="" name="recaptchaResponse" />
-                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a" />
                         </form>
 
                     </div>
@@ -255,3 +245,18 @@
 
 </body>
 </html>
+
+@section Scripts{
+
+
+    <script>
+    document.getElementById('ActividadesEnOtroPaisCheckbox').addEventListener('change', function() {
+        var detallesDiv = document.getElementById('DetallesActividadesEnOtroPaisDiv');
+        if (this.checked) {
+            detallesDiv.style.display = 'block';
+        } else {
+            detallesDiv.style.display = 'none';
+        }
+    });
+    </script>
+}

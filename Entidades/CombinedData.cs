@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Entidades.CuentaApertura
         public DireccionMapa ?DireccionMapa { get; set; }
         public InformacionPersonal ?InformacionPersonal { get; set; }
         public OTP ?OTP { get; set; }
+        public FaceScan? FaceScan { get; set; }
 
     }
 }

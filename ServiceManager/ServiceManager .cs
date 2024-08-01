@@ -1,6 +1,8 @@
 ﻿using Entidades;
 using Entidades.CuentaApertura;
 using Interface.AperturaCuenta;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositorio;
 using Services.AperturaCuenta;
 
@@ -32,12 +34,18 @@ namespace ServiceManager
             var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
             var usuarioCookie = _cookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
             var direccionMapa = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
+            var DatosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
+            var faceScan = _cookieService.ObtenerDatosCookie<Entidades.FaceScan>("FaceScanCookie");
+            var otp = _cookieService.ObtenerDatosCookie<OTP>("OTPCookie");
 
             return new CombinedData
             {
                 DatosDactilares = datosDactilares,
                 Usuario = usuarioCookie,
-                DireccionMapa = direccionMapa
+                DireccionMapa = direccionMapa,
+                InformacionPersonal = DatosAdicionales,
+                FaceScan = faceScan,
+                OTP = otp
             };
         }
 
