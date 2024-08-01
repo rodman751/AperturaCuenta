@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 3: Direccion";
 }
-
+@model Entidades.DireccionMapa
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
 <head>
@@ -44,66 +44,90 @@
                         </span>tu cuenta
                     </h3>
                     <div class="u-form u-form-1" id="carousel-fa54">
-                        <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-spacing-9 u-form-vertical u-inner-form" source="email" name="form" style="padding: 22px;">
+                        <form asp-action="GuardarDireccionMCookie" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-9 u-form-vertical u-inner-form" style="padding: 22px;">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-1"></div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                                <label for="name-7daf" class="u-label u-label-1">Nombre</label>
-                                <input type="text" placeholder="Ingrese su nombre" id="name-7daf" name="name" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required="">
+                                <label  class="u-label u-label-1">Nombre</label>
+                                <input type="text" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required
+                                       value="@ViewBag.Usuario" />
+                                <span  class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
-                                <label for="name-7daf" class="u-label u-label-2">Apellido</label>
-                                <input type="text" placeholder="Ingrese su apellido" id="name-7daf" name="name-1" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required="">
+                                <label  class="u-label u-label-2">Apellido</label>
+                                <input  type="text" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required
+                                       value="@ViewBag.Apellido" />
+                                <span  class="text-danger"></span>
                             </div>
+
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-2"></div>
+
                             <div class="u-form-group u-form-select u-label-top u-form-group-5">
-                                <label for="select-b9be" class="u-label u-label-3">Provincias</label>
+                                <label asp-for="Provincia" class="u-label u-label-3">Provincias</label>
                                 <div class="u-form-select-wrapper">
-                                    <select id="select-b9be" name="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" required="required">
-                                        <option value="Imbabura" data-calc="">Imbabura</option>
+                                    <select asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" required>
+                                        <option value="Imbabura">Imbabura</option>
+                                        <!-- Añade más opciones si es necesario -->
                                     </select>
                                     <svg class="u-caret u-caret-svg u-text-grey-80" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                                 </div>
+                                <span asp-validation-for="Provincia" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-select u-label-top u-form-group-6">
-                                <label for="select-5152" class="u-label u-label-4">Cantón:</label>
+                                <label asp-for="Canton" class="u-label u-label-4">Cantón:</label>
                                 <div class="u-form-select-wrapper">
-                                    <select id="select-5152" name="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" required="required">
-                                        <option value="Ibarra" data-calc="">Ibarra</option>
-                                        <option value="Item 2" data-calc="">Item 2</option>
-                                        <option value="Item 3" data-calc="">Item 3</option>
+                                    <select asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" required>
+                                        <option value="Ibarra">Ibarra</option>
+                                        <option value="Item 2">Item 2</option>
+                                        <option value="Item 3">Item 3</option>
+                                        <!-- Añade más opciones si es necesario -->
                                     </select>
                                     <svg class="u-caret u-caret-svg u-text-grey-80" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                                 </div>
+                                <span asp-validation-for="Canton" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-select u-label-top u-form-group-7">
-                                <label for="select-0195" class="u-label u-label-5">Parroquia:</label>
+                                <label asp-for="Parroquia" class="u-label u-label-5">Parroquia:</label>
                                 <div class="u-form-select-wrapper">
-                                    <select id="select-0195" name="select" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5">
-                                        <option value="El Sagrario" data-calc="">El Sagrario</option>
-                                        <option value="Item 2" data-calc="">Item 2</option>
-                                        <option value="Item 3" data-calc="">Item 3</option>
+                                    <select asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5">
+                                        <option value="El Sagrario">El Sagrario</option>
+                                        <option value="Item 2">Item 2</option>
+                                        <option value="Item 3">Item 3</option>
+                                        <!-- Añade más opciones si es necesario -->
                                     </select>
                                     <svg class="u-caret u-caret-svg u-text-grey-80" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                                 </div>
+                                <span asp-validation-for="Parroquia" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-label-top u-form-group-8">
-                                <label for="text-0836" class="u-label u-label-6">Dirección: </label>
-                                <input type="text" placeholder="" id="text-0836" name="Direccion" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-6">
+                                <label asp-for="Direccion" class="u-label u-label-6">Dirección:</label>
+                                <input asp-for="Direccion" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-6" />
+                                <span asp-validation-for="Direccion" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-label-top u-form-group-9">
-                                <label for="text-5bb9" class="u-label u-label-7">Referencia</label>
-                                <input type="text" placeholder="" id="text-5bb9" name="Referencia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-7">
+                                <label asp-for="Referencia" class="u-label u-label-7">Referencia</label>
+                                <input asp-for="Referencia" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-7" />
+                                <span asp-validation-for="Referencia" class="text-danger"></span>
                             </div>
+
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-3"></div>
+
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                <input type="submit" value="submit" class="u-form-control-hidden">
-                                <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">cONTINUAR&nbsp;</a>
+                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
                             </div>
-                            <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
-                            <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>
+
+                            <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
+                            <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
+
                             <input type="hidden" value="" name="recaptchaResponse">
                             <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
                         </form>
+
                     </div>
                     <div class="u-grey-light-2 u-map u-map-1">
                         <div class="embed-responsive">

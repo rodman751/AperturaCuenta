@@ -44,7 +44,7 @@ namespace Presentacion.CuentaApertura.Controllers
                 case 3:
                     return RedirectToAction("Index","Confirmar");
                 default:
-                    return RedirectToAction("Index", "DatosDactilares"); // Redirige al primer paso si no hay paso guardado
+                    return RedirectToAction("Index", "DatosDactilares");
             }
         }
 

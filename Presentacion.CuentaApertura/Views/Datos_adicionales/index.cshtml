@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 4: Datos adicionales";
 }
-@model Entidades.DatosDactilares
+@model Entidades.InformacionPersonal
 
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
@@ -47,106 +47,137 @@
                         </span>tu cuenta
                     </h3>
                     <div class="u-form u-form-1">
-                        <form asp-action="" class="u-clearfix u-form-spacing-13 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="GuardarDatos_Adicionales" asp-controller="Steps" class="u-clearfix u-form-spacing-13 u-form-vertical u-inner-form" method="post" style="padding: 5px;">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                                <label for="name-ad96" class="u-label u-label-1">Nombre</label>
-                                <input type="text" placeholder="Ingrese su nombre" id="name-ad96" name="name" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-1" required="">
+                                <label class="u-label u-label-1">Nombre</label>
+                                <input type="text" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required
+                                       value="@ViewBag.Usuario" />
+                                <span class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
-                                <label for="name-ad96" class="u-label u-label-2">Apellido</label>
-                                <input type="text" placeholder="Ingrese su apellido" id="name-ad96" name="name-2" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-2" required="">
+                                <label class="u-label u-label-2">Apellido</label>
+                                <input type="text" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required
+                                       value="@ViewBag.Apellido" />
+                                <span class="text-danger"></span>
                             </div>
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-2"></div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
-                                <label for="name-611e" class="u-label u-label-3">Ingresos:</label>
-                                <input type="text" placeholder="Ingrese sus ingresos." id="name-611e" name="Ingresos" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" required="">
+                                <label asp-for="Ingresos" class="u-label u-label-3"></label>
+                                <input asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" required />
+                                <span asp-validation-for="Ingresos" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
-                                <label for="name-611e" class="u-label u-label-4">Gastos:</label>
-                                <input type="text" placeholder="Ingrese su apellido" id="name-611e" name="Gastos" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" required="">
+                                <label asp-for="Gastos" class="u-label u-label-4"></label>
+                                <input asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" required />
+                                <span asp-validation-for="Gastos" class="text-danger"></span>
                             </div>
+
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-3"></div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-8">
-                                <label for="name-2e2e" class="u-label u-label-5">Nombre</label>
-                                <input type="text" placeholder="Ingrese su nombre" id="name-2e2e" name="name-1" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required="">
+                                <label asp-for="PaisNacimiento" class="u-label u-label-5"></label>
+                                <input asp-for="PaisNacimiento" placeholder="PaisNacimiento" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
+                                <span asp-validation-for="PaisNacimiento" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-9">
-                                <label for="name-2e2e" class="u-label u-label-6">Apellido</label>
-                                <input type="text" placeholder="Ingrese su apellido" id="name-2e2e" name="name-3" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required="">
+                                <label asp-for="CiudadNacimiento" class="u-label u-label-6"></label>
+                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su apellido" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required />
+                                <span asp-validation-for="CiudadNacimiento" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-group u-form-select u-label-top u-form-group-10">
-                                <label for="select-54bc" class="u-label u-label-7">Desplegable</label>
+                                <label asp-for="NivelDeInstruccion" class="u-label u-label-7"></label>
                                 <div class="u-form-select-wrapper">
-                                    <select id="select-54bc" name="select" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-7">
-                                        <option value="Item 1" data-calc="">Item 1</option>
-                                        <option value="Item 2" data-calc="">Item 2</option>
-                                        <option value="Item 3" data-calc="">Item 3</option>
+                                    <select asp-for="NivelDeInstruccion" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-7">
+                                        <option value="Item 1">Item 1</option>
+                                        <option value="Item 2">Item 2</option>
+                                        <option value="Item 3">Item 3</option>
                                     </select>
-                                    <svg class="u-caret u-caret-svg" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
                                 </div>
+                                <span asp-validation-for="NivelDeInstruccion" class="text-danger"></span>
                             </div>
+
                             <div class="u-form-checkbox-group u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
                                 <label class="u-label u-label-8">Condición laboral</label>
                                 <div class="u-form-checkbox-group-wrapper">
                                     <div class="u-input-row">
-                                        <input id="field-5e02" type="checkbox" name="checkbox[]" value="Dependiente" class="u-field-input" checked="checked" data-calc="">
-                                        <label class="u-field-label" for="field-5e02">Dependiente</label>
+                                        <input asp-for="Dependiente" type="checkbox" value="Dependiente" class="u-field-input" />
+                                        <label class="u-field-label">Dependiente</label>
                                     </div>
                                     <div class="u-input-row">
-                                        <input id="field-3664" type="checkbox" name="checkbox[]" value="Negocio Propio" class="u-field-input" data-calc="">
-                                        <label class="u-field-label" for="field-3664">Negocio Propio</label>
+                                        <input asp-for="NegocioPropio" type="checkbox" value="Negocio Propio" class="u-field-input" />
+                                        <label class="u-field-label">Negocio Propio</label>
                                     </div>
                                     <div class="u-input-row">
-                                        <input id="field-237b" type="checkbox" name="checkbox[]" value="Ninguno" class="u-field-input" data-calc="">
-                                        <label class="u-field-label" for="field-237b">Ninguno</label>
+                                        <input asp-for="Ninguno" type="checkbox" value="Ninguno" class="u-field-input" />
+                                        <label class="u-field-label">Ninguno</label>
                                     </div>
                                 </div>
+                                <span  class="text-danger"></span>  
                             </div>
+
                             <div class="u-form-checkbox-group u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-12">
                                 <label class="u-label u-label-9">Tipo Vivienda:</label>
                                 <div class="u-form-checkbox-group-wrapper">
                                     <div class="u-input-row">
-                                        <input id="field-d9d3" type="checkbox" name="checkbox-1[]" value="Vivo con familiares." class="u-field-input" checked="checked" data-calc="">
-                                        <label class="u-field-label" for="field-d9d3">Vivo con familiares.</label>
+                                        <input asp-for="VivoConFamiliares" type="checkbox" value="Vivo con familiares." class="u-field-input" />
+                                        <label class="u-field-label">Vivo con familiares.</label>
                                     </div>
                                     <div class="u-input-row">
-                                        <input id="field-5ed6" type="checkbox" name="checkbox-1[]" value="Propia" class="u-field-input" data-calc="">
-                                        <label class="u-field-label" for="field-5ed6">Propia</label>
+                                        <input asp-for="Propia" type="checkbox" value="Propia" class="u-field-input" />
+                                        <label class="u-field-label">Propia</label>
                                     </div>
                                     <div class="u-input-row">
-                                        <input id="field-8765" type="checkbox" name="checkbox-1[]" value="Propia hipotecada" class="u-field-input" data-calc="">
-                                        <label class="u-field-label" for="field-8765">Propia hipotecada</label>
+                                        <input asp-for="PropiaHipotecada" type="checkbox" value="Propia hipotecada" class="u-field-input" />
+                                        <label class="u-field-label">Propia hipotecada</label>
                                     </div>
                                 </div>
+                                <span  class="text-danger"></span>
                             </div>
+
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-4"></div>
+
                             <div class="u-form-checkbox u-form-group u-form-partition-factor-2 u-label-top u-form-group-14">
-                                <input type="checkbox" id="checkbox-31df" name="checkbox-2" value="On" class="u-field-input">
-                                <label for="checkbox-31df" class="u-field-label">Actividades en otro Pais?</label>
+                                <input asp-for="ActividadesEnOtroPais" type="checkbox" value="On" class="u-field-input" />
+                                <label class="u-field-label">Actividades en otro Pais?</label>
                             </div>
+
                             <div class="u-form-group u-form-partition-factor-2 u-label-top u-form-group-15">
-                                <label for="text-dda6" class="u-form-control-hidden u-label u-label-10"></label>
-                                <input type="text" placeholder="" id="text-dda6" name="Actividad en otro pais" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8">
+                                <label asp-for="DetallesActividadesEnOtroPais" class="u-form-control-hidden u-label u-label-10"></label>
+                                <input asp-for="DetallesActividadesEnOtroPais" placeholder="" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8" />
+                                <span asp-validation-for="DetallesActividadesEnOtroPais" class="text-danger"></span>
                             </div>
+
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-5"></div>
+
                             <div class="u-form-agree u-form-group u-label-top u-form-group-17">
                                 <label class="u-label u-label-11"></label>
-                                <input type="checkbox" id="agree-3abd" name="agree" class="u-agree-checkbox u-field-input" required="">
-                                <label for="agree-3abd" class="u-agree-label u-field-label">
+                                <input asp-for="AceptoTerminos" type="checkbox" class="u-agree-checkbox u-field-input" required />
+                                <label class="u-agree-label u-field-label">
                                     Yo acepto los <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="#">Términos de Servicio</a>
                                 </label>
+                                <span asp-validation-for="AceptoTerminos" class="text-danger"></span>
                             </div>
+
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-6"></div>
+
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                <input type="submit" value="submit" class="u-form-control-hidden">
+                                <input type="submit" value="submit" class="u-form-control-hidden" />
                                 <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-2">CONTINUAR</a>
                             </div>
+
                             <div class="u-form-send-message u-form-send-success">Correcto</div>
                             <div class="u-form-send-error u-form-send-message">Error</div>
-                            <input type="hidden" value="" name="recaptchaResponse">
-                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+                            <input type="hidden" value="" name="recaptchaResponse" />
+                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a" />
                         </form>
+
                     </div>
                 </div>
             </div>

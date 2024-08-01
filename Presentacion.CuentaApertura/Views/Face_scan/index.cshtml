@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 5: Reconocimiento Facial";
 }
-
+@model Presentacion.CuentaApertura.Models.FaceScan
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
 <head>
@@ -43,12 +43,24 @@
                     </h3><span class="u-file-icon u-icon u-icon-circle u-palette-1-base u-icon-1"><img src="images/391125.png" alt=""></span>
                     <img class="custom-expanded u-image u-image-round u-radius u-image-2" src="images/circle-alert-icon-free-vector.jpg" data-image-width="980" data-image-height="980">
                     <div class="u-form u-form-1">
-                        <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="GuardarFaceScan" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+
+                            <!-- Campos ocultos para datos del rostro usando asp-for -->
+                            <input asp-for="FaceId" type="text" />
+                            <input asp-for="ImageUrl" type="text" />
+                            <input asp-for="DetectedAt" type="datetime-local" />
+                            <input asp-for="Age" type="number" />
+                            <input asp-for="Gender" type="text" />
+                            <input asp-for="Emotion" type="text" />
+
+                            <!-- Campo de envío del formulario -->
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
                                 <input type="submit" value="submit" class="u-form-control-hidden">
                                 <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</a>
                             </div>
+
+                            <!-- Mensajes de éxito y error -->
                             <div class="u-form-send-message u-form-send-success">Correcto</div>
                             <div class="u-form-send-error u-form-send-message">Error</div>
                             <input type="hidden" value="" name="recaptchaResponse">

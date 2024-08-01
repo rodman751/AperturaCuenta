@@ -29,8 +29,9 @@ namespace Presentacion.CuentaApertura.Controllers
                 _serviceManager.CookieService.GuardarPasoActual(2);
                 //_cookieService.GuardarDatosCookie("UsuarioCookie", model);
                 //_cookieService.GuardarPasoActual(2);
-
-                return RedirectToAction("Confirm");
+                ViewBag.Usuario = model.Nombre;
+                ViewBag.Apellido = model.Apellido;
+                return RedirectToAction("Index","Direccion");
             }
 
             return View(model);
@@ -44,51 +45,78 @@ namespace Presentacion.CuentaApertura.Controllers
             if (ModelState.IsValid)
             {
                 _serviceManager.CookieService.GuardarDatosCookie("DireccionMCokkie", model);
-                //_cookieService.GuardarDatosCookie("DireccionMCokkie", model);
-
-                return RedirectToAction("Confirm");
+                _serviceManager.CookieService.GuardarPasoActual(3);
+               
+                return RedirectToAction("Index","Datos_Adicionales");
             }
 
             return View(model);
         }
 
-        [HttpGet]
-        public IActionResult Confirm()
+        [HttpPost]
+        public IActionResult GuardarDatos_Adicionales(Entidades.InformacionPersonal model)
         {
+            if (ModelState.IsValid)
+            {
+                _serviceManager.CookieService.GuardarDatosCookie("GuardarDatos_Adicionales", model);
+                _serviceManager.CookieService.GuardarPasoActual(4);
+                var usuarioCookie = _serviceManager.CookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
+                ViewBag.Usuario = usuarioCookie.Nombre;
+                ViewBag.Apellido = usuarioCookie.Apellido;
 
-            //var DatosDactilares = _cookieService.ObtenerDatosCookie<Entidades.DatosDactilares>("DatosDactilaresCookie");
-            //var UsuarioCookie = _cookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
-            //var DireccionMCokkie = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
+                return RedirectToAction("Index","Face_scan");
+            }
 
-            //var combinedData = new CombinedData
-            //{
-            //    DatosDactilares = DatosDactilares,
-            //    Usuario = UsuarioCookie,
-            //    DireccionMapa = DireccionMCokkie
-
-            //};
-           
-
-            // Aquí puedes combinarlos en un objeto para la vista de confirmación o enviar al endpoint
-
-
-
-
-            //
-            _serviceManager.CookieService.GuardarPasoActual(3);
-            return RedirectToAction("Index", "Confirmar");
+            return View(model);
         }
+
+        [HttpPost]
+        public IActionResult GuardarFaceScan(Models.FaceScan model)
+        {
+            if (ModelState.IsValid)
+            {
+                _serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model);
+                _serviceManager.CookieService.GuardarPasoActual(5);
+                var usuarioCookie = _serviceManager.CookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
+                ViewBag.Usuario = usuarioCookie.Nombre;
+                ViewBag.Apellido = usuarioCookie.Apellido;
+
+                return RedirectToAction("Index", "OTP");
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult GuardarOTP(Entidades.OTP model)
+        {
+            if (ModelState.IsValid)
+            {
+                _serviceManager.CookieService.GuardarDatosCookie("OTPCookie", model);
+                _serviceManager.CookieService.GuardarPasoActual(6);
+               
+
+                return RedirectToAction("Index", "Resumen_Final");
+            }
+
+            return View(model);
+        }
+
+        //[HttpGet]
+        //public IActionResult Resumen_Final()
+        //{
+
+            
+        //    _serviceManager.CookieService.GuardarPasoActual(9);
+        //    return RedirectToAction("Index", "Confirmar");
+        //}
 
 
         public IActionResult FinalizarApertura()
         {
-            //_cookieService.EliminarCookie("PasoActualCookie");
-            //_cookieService.EliminarCookie("DatosDactilaresCookie");
-            //_cookieService.EliminarCookie("UsuarioCookie");
-            //_cookieService.EliminarCookie("DireccionMCokkie");
 
             _serviceManager.borrarCookie();
-            //_cookieService.SignOutAsync();
+            
             return RedirectToAction("Index", "Home");
         }
     }

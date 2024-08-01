@@ -28,6 +28,7 @@ namespace Entidades
         // Actividades en otro país
         public bool ActividadesEnOtroPais { get; set; }
         public string? DetallesActividadesEnOtroPais { get; set; }
+        public bool AceptoTerminos { get; set; }
     }
 
 }
