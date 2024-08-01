@@ -45,26 +45,26 @@
               </span>tu cuenta 
             </h3>
             <div class="u-form u-form-1">
-                <form asp-action="ComprobarDatos" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
-                <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
-                <div class="u-form-group u-form-name u-label-top">
-                  <label for="name-61fc" class="u-label u-label-1">IDENTIFICACIÓN</label>
-                  <input type="text" placeholder="Ingresa tu Identificación" id="name-61fc" name="Identificacion" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" required="" maxlength="10">
-                </div>
-                <div class="u-form-group u-label-top u-form-group-3">
-                  <label for="phone-0bf6" class="u-label u-label-2">CÓDIGO DACTILAR</label>
-                  <input type="text" id="phone-0bf6" name="Codigo_Dactilar" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" required="required" placeholder=" Ingresa tu Código Dactilar" maxlength="10">
-                </div>
-                <div class="u-align-left u-form-group u-form-submit u-label-top">
-                  <input type="submit" value="submit" class="u-form-control-hidden">
-                  <a href="#" >CONTINUAR</a>
-                </div>
-                <div class="u-form-send-message u-form-send-success">Correcto</div>
-                <div class="u-form-send-error u-form-send-message">Error</div>
-                <input type="hidden" value="" name="recaptchaResponse">
-                <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
-                            <input type="submit" name="Continuar" value="Continuar" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" />
-              </form>
+                        <form asp-action="ComprobarDatos" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 5px;">
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+                            <div class="u-form-group u-form-name u-label-top">
+                                <label asp-for="Identificacion" class="u-label u-label-1">IDENTIFICACIÓN</label>
+                                <input asp-for="Identificacion" type="text" placeholder="Ingresa tu Identificación" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" />
+                                <span asp-validation-for="Identificacion" class="text-danger"></span>
+                            </div>
+                            <div class="u-form-group u-label-top u-form-group-3">
+                                <label asp-for="Codigo_Dactilar" class="u-label u-label-2">CÓDIGO DACTILAR</label>
+                                <input asp-for="Codigo_Dactilar" type="text" placeholder="Ingresa tu Código Dactilar" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" />
+                                <span asp-validation-for="Codigo_Dactilar" class="text-danger"></span>
+                            </div>
+                            <div class="u-align-left u-form-group u-form-submit u-label-top">
+                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
+                            </div>
+                            <div class="u-form-send-message u-form-send-success">Correcto</div>
+                            <div class="u-form-send-error u-form-send-message">Error</div>
+                            <input type="hidden" value="" name="recaptchaResponse">
+                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+                        </form>
             </div>
           </div>
         </div>

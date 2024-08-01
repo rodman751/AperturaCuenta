@@ -6,14 +6,14 @@ using Interface.AperturaCuenta;
 using Repositorio;
 using ServiceManager;
 
-namespace Presentacion.CuentaApertura.Controllers
+namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
 {
     public class ConfirmarController : Controller
     {
         private readonly ICookieService _cookieService;
         private readonly IRepositorioManager _repositoryManager;
         private readonly IServiceManager _serviceManager;
-        public ConfirmarController(ICookieService cookieService ,IRepositorioManager repositoryManager, IServiceManager serviceManager)
+        public ConfirmarController(ICookieService cookieService, IRepositorioManager repositoryManager, IServiceManager serviceManager)
         {
             _cookieService = cookieService;
             _repositoryManager = repositoryManager;
@@ -31,11 +31,11 @@ namespace Presentacion.CuentaApertura.Controllers
 
 
 
-             var datos =_serviceManager.ObtenerDatosCombinados();
+            var datos = _serviceManager.ObtenerDatosCombinados();
             // Combinarlos en un objeto para la vista de confirmación
             //var combinedData = new CombinedData
             //{
-                
+
             //    DatosDactilares = DatosDactilares,
             //    Usuario = UsuarioCookie,
             //    DireccionMapa = DireccionMCokkie

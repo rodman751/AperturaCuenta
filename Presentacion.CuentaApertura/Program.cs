@@ -29,6 +29,8 @@ namespace Presentacion.CuentaApertura
             builder.Services.ConfigureRepositoryManager();
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureCookieService();
+            builder.Services.AddDataProtection();
+
             //servico de cokkie
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
              .AddCookie(config =>

@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Presentacion.CuentaApertura.Controllers
+namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
 {
-    public class Face_scanController : Controller
+    public class Resumen_finalController : Controller
     {
-        // GET: Face_scanController
+        // GET: Resumen_finalController
         public ActionResult Index()
         {
             return View();

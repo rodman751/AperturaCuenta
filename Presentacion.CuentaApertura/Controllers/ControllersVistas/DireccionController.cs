@@ -11,6 +11,5 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
             return View();
         }
 
-      
     }
 }

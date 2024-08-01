@@ -13,7 +13,7 @@ using Repositorio;
 using ServiceManager;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-namespace Presentacion.CuentaApertura.Controllers
+namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
 {
     public class DatosDactilares : Controller
     {
@@ -23,15 +23,15 @@ namespace Presentacion.CuentaApertura.Controllers
         private readonly IRepositorioManager _repositoryManager;
         private readonly IServiceManager _serviceManager;
 
-        public DatosDactilares( ICookieService cookieService, IRepositorioManager repositoryManager, IServiceManager serviceManager)
+        public DatosDactilares(ICookieService cookieService, IRepositorioManager repositoryManager, IServiceManager serviceManager)
         {
-            
+
             _cookieService = cookieService;
             _repositoryManager = repositoryManager;
             _serviceManager = serviceManager;
         }
-        
-       
+
+
         public IActionResult Index()
         {
             if (TempData.ContainsKey("Message"))
@@ -51,20 +51,20 @@ namespace Presentacion.CuentaApertura.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+
                 _cookieService.GuardarDatosCookie("DatosDactilaresCookie", model);
 
-                
+
                 var usuarios = await _repositoryManager.UsuarioRepository.EjecutarProcedimientoAlmacenado();
 
-                
+
                 if (int.TryParse(model.Identificacion, out int identificacionInt))
                 {
-                    
+
                     var usuarioExistente = usuarios.FirstOrDefault(u => u.Id == identificacionInt);
                     if (usuarioExistente != null)
                     {
-                        
+
                         Usuario newUsuario = new Usuario
                         {
                             Id = usuarioExistente.Id,

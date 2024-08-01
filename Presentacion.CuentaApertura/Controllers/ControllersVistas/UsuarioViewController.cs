@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-namespace Presentacion.CuentaApertura.Controllers
+namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
 {
     public class UsuarioViewController : Controller
     {

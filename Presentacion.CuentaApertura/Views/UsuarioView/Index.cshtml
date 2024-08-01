@@ -46,28 +46,30 @@
                         </span>tu cuenta
                     </h3>
                     <div class="u-form u-form-1" id="carousel-fa54">
-                        <form asp-action="GuardarUsuCookie" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" source="email" name="form" style="padding: 22px;" redirect="true" redirect-address="Page_2.html">
+                        <form asp-action="GuardarUsuCookie" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 22px;">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-1"></div>
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                                <label for="name-263e" class="u-label u-label-1">Nombre</label>
-                                <input type="text" placeholder="Ingrese su nombre" id="name-263e" name="Nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required="">
+                                <label asp-for="Nombre" class="u-label u-label-1">Nombre</label>
+                                <input asp-for="Nombre" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required />
+                                <span asp-validation-for="Nombre" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
-                                <label for="name-263e" class="u-label u-label-2">Apellido</label>
-                                <input type="text" placeholder="Ingrese su apellido" id="name-263e" name="Apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required="">
+                                <label asp-for="Apellido" class="u-label u-label-2">Apellido</label>
+                                <input asp-for="Apellido" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required />
+                                <span asp-validation-for="Apellido" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-label-top u-form-group-4">
-                                <label for="text-cac7" class="u-label u-label-3">Teléfono:</label>
-                                <input type="text" placeholder="Ingresa tu Teléfono." id="text-cac7" name="Telefono" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3">
+                                <label asp-for="Telefono" class="u-label u-label-3">Teléfono:</label>
+                                <input asp-for="Telefono" placeholder="Ingresa tu Teléfono." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" />
+                                <span asp-validation-for="Telefono" class="text-danger"></span>
                             </div>
                             <div class="u-form-email u-form-group u-label-top u-form-group-5">
-                                <label for="text-1715" class="u-label u-label-4">Correo:</label>
-                                <input type="email" placeholder="Ingresa tu correo." id="text-1715" name="Correo" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" required="required">
+                                <label asp-for="Correo" class="u-label u-label-4">Correo:</label>
+                                <input asp-for="Correo" type="email" placeholder="Ingresa tu correo." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" required />
+                                <span asp-validation-for="Correo" class="text-danger"></span>
                             </div>
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                
-                                <input type="submit" value="submit">
-                                <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</a>
+                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
                             </div>
                             <div class="u-form-send-message u-form-send-success"> Thank you! Your message has been sent. </div>
                             <div class="u-form-send-error u-form-send-message"> Unable to send your message. Please fix errors then try again. </div>

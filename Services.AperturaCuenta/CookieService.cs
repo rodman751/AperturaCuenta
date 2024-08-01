@@ -2,6 +2,7 @@
 using Interface.AperturaCuenta;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Authentication;
 using System;
@@ -17,10 +18,11 @@ namespace Services.AperturaCuenta
     public class CookieService : ICookieService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-
-        public CookieService(IHttpContextAccessor httpContextAccessor)
+        private readonly IDataProtector _dataProtector;
+        public CookieService(IHttpContextAccessor httpContextAccessor, IDataProtectionProvider dataProtectionProvider)
         {
             _httpContextAccessor = httpContextAccessor;
+            _dataProtector = dataProtectionProvider.CreateProtector("CookieService");
         }
 
         public void GuardarDatosCookie<T>(string cookieName, T data)
@@ -33,19 +35,34 @@ namespace Services.AperturaCuenta
             // Serializar los datos como JSON para almacenarlos en la cookie
             var jsonData = JsonSerializer.Serialize(data);
 
+            // Encriptar los datos
+            var encryptedData = _dataProtector.Protect(jsonData);
+
             // Almacenar la cookie
-            _httpContextAccessor.HttpContext?.Response.Cookies.Append(cookieName, jsonData, options);
+            _httpContextAccessor.HttpContext?.Response.Cookies.Append(cookieName, encryptedData, options);
         }
 
         public T? ObtenerDatosCookie<T>(string cookieName) where T : class
         {
-            if (_httpContextAccessor.HttpContext?.Request.Cookies.TryGetValue(cookieName, out var jsonData) == true)
+            var encryptedData = _httpContextAccessor.HttpContext?.Request.Cookies[cookieName];
+            if (encryptedData == null)
             {
+                return null; // La cookie no existe
+            }
+
+            try
+            {
+                // Desencriptar los datos
+                var jsonData = _dataProtector.Unprotect(encryptedData);
+
                 // Deserializar los datos JSON de la cookie
                 return JsonSerializer.Deserialize<T>(jsonData);
             }
-
-            return null;
+            catch
+            {
+                // Si ocurre algún error (por ejemplo, datos corruptos), puedes manejarlo aquí
+                return null;
+            }
         }
 
         public async Task AgregarClaimsAsync(DatosDactilares datos)
