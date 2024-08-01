@@ -1,4 +1,6 @@
-﻿using Entidades.CuentaApertura;
+﻿using Entidades;
+using Entidades.CuentaApertura;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,7 @@ namespace Repositorio.Interfaces
     public interface IUsuarioRepository
     {
         void CreateCombinedData(CombinedData usuario);
-        void ObtenerUsuario();
+        List<DatosDactilares> ObtenerUsuarios();
+        Task<List<Usuario>> EjecutarProcedimientoAlmacenado();
     }
 }

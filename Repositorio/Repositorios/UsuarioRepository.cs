@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositorio.Repositorios
 {
-    public class UsuarioRepository:Interfaces.IUsuarioRepository
+    public class UsuarioRepository : Interfaces.IUsuarioRepository
     {
         private readonly DbContext _context;
 
@@ -21,9 +21,16 @@ namespace Repositorio.Repositorios
         {
             _context.CombinedData.Add(usuario);
         }
-        public void ObtenerUsuario()
+
+        public List<DatosDactilares> ObtenerUsuarios()
         {
-            _context.DatosDactilares.ToList();
+            return _context.DatosDactilares.ToList();
+        }
+        public async Task<List<Usuario>> EjecutarProcedimientoAlmacenado()
+        {
+            return await _context.EjecutarProcedimientoAlmacenado();
+
+
         }
     }
 }
