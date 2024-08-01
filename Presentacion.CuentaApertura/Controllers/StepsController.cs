@@ -67,7 +67,7 @@ namespace Presentacion.CuentaApertura.Controllers
             //    DireccionMapa = DireccionMCokkie
 
             //};
-            var datos =_serviceManager.ObtenerDatosCombinados();
+           
 
             // Aquí puedes combinarlos en un objeto para la vista de confirmación o enviar al endpoint
 
@@ -76,7 +76,7 @@ namespace Presentacion.CuentaApertura.Controllers
 
             //
             _serviceManager.CookieService.GuardarPasoActual(3);
-            return RedirectToAction("Index", "Confirmar", datos);
+            return RedirectToAction("Index", "Confirmar");
         }
 
 

@@ -2,6 +2,7 @@
 using Interface.AperturaCuenta;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 
 namespace Presentacion.CuentaApertura.Controllers
 {
@@ -14,20 +15,25 @@ namespace Presentacion.CuentaApertura.Controllers
         }
 
 
-        public IActionResult Index(Usuario usuario)
+        public IActionResult Index()
         {
-            // Si el modelo de usuario tiene valores, mapearlos a la vista
-            if (usuario != null && usuario.Id != 0)
-            {
-                return View(usuario);
-            }
 
+            Usuario model = null;
+            if (TempData["Usuario"] != null)
+            {
+                // Obtener y deserializar el modelo almacenado en TempData
+                model = JsonConvert.DeserializeObject<Usuario>(TempData["Usuario"].ToString());
+            }
+            // Si el modelo de usuario tiene valores, mapearlos a la vista
+            if (model != null && model.Id != 0)
+            {
+                return View(model);
+            }
             var datosStep1 = _cookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
             // Si hay datos guardados, inicializar el modelo con ellos
-            var model = datosStep1 ?? new Usuario();
-
-            return View(model);
-            //return View(new Usuario());
+            var model2 = datosStep1 ?? new Usuario();
+            // Si el modelo de usuario no tiene valores, devolver una vista vacía o con un modelo predeterminado
+            return View(model2);
         }
 
 

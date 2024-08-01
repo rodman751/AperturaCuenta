@@ -12,6 +12,7 @@ using System.Security.Claims;
 using Repositorio;
 using ServiceManager;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 namespace Presentacion.CuentaApertura.Controllers
 {
     public class DatosDactilares : Controller
@@ -76,8 +77,8 @@ namespace Presentacion.CuentaApertura.Controllers
                         // Guardar el paso actual en una cookie
                         _cookieService.GuardarPasoActual(1);
 
-                        
-                        return RedirectToAction("Index", "UsuarioView", newUsuario);
+                        TempData["Usuario"] = JsonConvert.SerializeObject(newUsuario);
+                        return RedirectToAction("Index", "UsuarioView");
                     }
                 }
 
