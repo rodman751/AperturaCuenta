@@ -40,9 +40,15 @@ namespace Presentacion.CuentaApertura.Controllers
                 case 1:
                     return RedirectToAction("Index", "UsuarioView");
                 case 2:
-                    return RedirectToAction("Index","UsuarioView");
+                    return RedirectToAction("Index", "Direccion");
                 case 3:
-                    return RedirectToAction("Index","Confirmar");
+                    return RedirectToAction("Index", "Datos_adicionales");
+                case 4:
+                    return RedirectToAction("Index", "Face_scan");
+                case 5:
+                    return RedirectToAction("Index", "OTP");
+                case 6:
+                    return RedirectToAction("Index", "Resumen_final");
                 default:
                     return RedirectToAction("Index", "DatosDactilares");
             }

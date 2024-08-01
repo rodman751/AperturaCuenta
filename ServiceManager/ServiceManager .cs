@@ -47,6 +47,10 @@ namespace ServiceManager
             _cookieService.EliminarCookie("DatosDactilaresCookie");
             _cookieService.EliminarCookie("UsuarioCookie");
             _cookieService.EliminarCookie("DireccionMCokkie");
+            _cookieService.EliminarCookie("GuardarDatos_Adicionales");
+            _cookieService.EliminarCookie("FaceScanCookie");
+            _cookieService.EliminarCookie("OTPCookie");
+            
         }
 
     }

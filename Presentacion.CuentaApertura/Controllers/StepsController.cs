@@ -29,8 +29,8 @@ namespace Presentacion.CuentaApertura.Controllers
                 _serviceManager.CookieService.GuardarPasoActual(2);
                 //_cookieService.GuardarDatosCookie("UsuarioCookie", model);
                 //_cookieService.GuardarPasoActual(2);
-                ViewBag.Usuario = model.Nombre;
-                ViewBag.Apellido = model.Apellido;
+                //ViewBag.Usuario = model.Nombre;
+                //ViewBag.Apellido = model.Apellido;
                 return RedirectToAction("Index","Direccion");
             }
 
@@ -60,9 +60,7 @@ namespace Presentacion.CuentaApertura.Controllers
             {
                 _serviceManager.CookieService.GuardarDatosCookie("GuardarDatos_Adicionales", model);
                 _serviceManager.CookieService.GuardarPasoActual(4);
-                var usuarioCookie = _serviceManager.CookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
-                ViewBag.Usuario = usuarioCookie.Nombre;
-                ViewBag.Apellido = usuarioCookie.Apellido;
+               
 
                 return RedirectToAction("Index","Face_scan");
             }
