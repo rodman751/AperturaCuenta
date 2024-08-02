@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Repositorio;
 using ServiceManager;
 using Presentacion.CuentaApertura.Extensions;
+using Microsoft.Extensions.FileProviders;
 
 namespace Presentacion.CuentaApertura
 {
@@ -45,6 +46,7 @@ namespace Presentacion.CuentaApertura
 
             var app = builder.Build();
 
+
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
             {
@@ -56,6 +58,17 @@ namespace Presentacion.CuentaApertura
             //cokkie
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseStaticFiles(); // Esta línea sirve archivos estáticos de wwwroot por defecto
+
+            // Configura para servir archivos estáticos desde lib/weights
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "lib", "weights")),
+                RequestPath = "/lib/weights",
+                ServeUnknownFileTypes = true // Permite servir archivos sin extensión
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

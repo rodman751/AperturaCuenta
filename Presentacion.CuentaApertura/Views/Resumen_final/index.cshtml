@@ -12,8 +12,7 @@
     <title>Page_6</title>
     <link rel="stylesheet" href="./css/nicepage.css" media="screen">
     <link rel="stylesheet" href="./css/Page_6.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    
     <meta name="generator" content="Nicepage 6.14.4, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -48,28 +47,16 @@
                         </span>tu cuenta
                     </h3>
                     <div class="otp-container u-form u-form-1">
-                        <div class="u-form u-form-1" id="carousel-fa54">
-                            <h1>Apertura de cuenta Creada Correctamente</h1>
-                            <h1>Confirmación de Datos</h1>
-
-                            <h2>Datos Dactilares</h2>
-                            <p>@Model.DatosDactilares.Identificacion</p>
-                            <p>@Model.DatosDactilares.Codigo_Dactilar</p>
-
-
-                            <h2>Usuario</h2>
-                            <p>Nombre: @Model.Usuario.Nombre</p>
-                            <p>Email: @Model.Usuario.Apellido</p>
-
-                            @*  <h2>Dirección</h2>
-                            <p>Calle: @Model.DireccionMapa.Direccion</p>
-                            <p>Ciudad: @Model.DireccionMapa.Provincia</p>
-                            *@
-                            <form asp-action="FinalizarApertura" asp-controller="Steps"  method="post">
-
-                                <button type="submit">Finalizar</button>
-                            </form>
-                        </div>
+                        <form asp-action="FinalizarApertura" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" id="carousel-fa54">
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-2"></div>
+                            <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-2"> ¡Felicidades! Tu cuenta ha sido creada satisfactoriamente. Los documentos han sido enviados a tu correo electrónico: @Model.Usuario.Correo</p>
+                            <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-3">@Model.DatosDactilares.Identificacion </p>
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-2"></div>
+                            <div class="u-align-left u-form-group u-form-submit u-label-none">
+                            <button class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" type="submit">Finalizar</button>
+                            </div>
+                            
+                        </form>
                     </div>
                 </div>
             </div>
