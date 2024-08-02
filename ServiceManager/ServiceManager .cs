@@ -22,13 +22,15 @@ namespace ServiceManager
 
 
         private readonly ICookieService _cookieService;
-
-        public ServiceManager(ICookieService cookieService)
+        private readonly IPdfService _pdfService;
+        public ServiceManager(ICookieService cookieService, IPdfService pdfService)
         {
             _cookieService = cookieService;
+            _pdfService = pdfService;
         }
 
         public ICookieService CookieService => _cookieService;
+        public IPdfService PdfService => _pdfService;
         public CombinedData ObtenerDatosCombinados()
         {
             var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");

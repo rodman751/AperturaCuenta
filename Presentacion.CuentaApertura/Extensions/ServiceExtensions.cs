@@ -21,5 +21,9 @@ namespace Presentacion.CuentaApertura.Extensions
         {
             services.AddScoped<ICookieService, CookieService>();
         }
+        public static void ConfigurePdfService(this IServiceCollection services)
+        {
+            services.AddScoped<IPdfService, PdfService>();
+        }
     }
 }

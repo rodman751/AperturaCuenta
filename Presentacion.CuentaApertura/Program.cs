@@ -30,6 +30,7 @@ namespace Presentacion.CuentaApertura
             builder.Services.ConfigureServiceManager();
             builder.Services.ConfigureCookieService();
             builder.Services.AddDataProtection();
+            builder.Services.ConfigurePdfService();
 
             //servico de cokkie
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
