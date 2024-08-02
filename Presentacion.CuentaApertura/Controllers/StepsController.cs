@@ -110,12 +110,14 @@ namespace Presentacion.CuentaApertura.Controllers
         //}
 
 
-        public IActionResult FinalizarApertura()
+        public async Task<IActionResult> FinalizarApertura()
         {
 
+            _serviceManager.SendPdfService();
             _serviceManager.borrarCookie();
-            
             return RedirectToAction("Index", "Home");
+
+
         }
     }
 }

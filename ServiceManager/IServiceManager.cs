@@ -15,5 +15,6 @@ namespace ServiceManager
         IPdfService PdfService { get; }
         CombinedData ObtenerDatosCombinados();
         void borrarCookie();
+        Task SendPdfService();
     }
 }

@@ -19,47 +19,20 @@ namespace Presentacion.CuentaApertura.Controllers
         public async Task<IActionResult> SendPdf()
         {
             // Obtén los datos necesarios del servicio
-            var clienteNombre = "John Doe";
+            var clienteNombre = "Rodman Guerrero";
             var cuentaNumero = "1234567890";
             var correo = "ppruebas109@gmail.com";
-            // Crea el HTML con los datos dinámicos
-            string htmlContent = $@"
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <style>
-                body {{
-                    font-family: Arial, sans-serif;
-                    margin: 20px;
-                }}
-                .contract-header {{
-                    text-align: center;
-                    font-size: 24px;
-                    margin-bottom: 20px;
-                }}
-                .contract-content {{
-                    font-size: 14px;
-                }}
-            </style>
-        </head>
-        <body>
-            <div class='contract-header'>
-                Contrato de Apertura de Cuenta
-            </div>
-            <div class='contract-content'>
-                <p>Estimado Cliente,</p>
-                <p>Nos complace informarle que su cuenta ha sido aperturada con éxito.</p>
-                <p>Datos de la Cuenta:</p>
-                <ul>
-                    <li>Nombre: {clienteNombre}</li>
-                    <li>Cuenta: {cuentaNumero}</li>
-                </ul>
-                <p>Gracias por elegirnos.</p>
-                <p>Atentamente,</p>
-                <p>Su Empresa</p>
-            </div>
-        </body>
-        </html>";
+            var cedula = "0450080940";
+
+
+
+            var fechaActual = DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy");
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Templates", "ContractTemplate.html");
+            string htmlContent = await System.IO.File.ReadAllTextAsync(templatePath);
+            htmlContent = htmlContent.Replace("{{clienteNombre}}", clienteNombre)
+                                     .Replace("{{cuentaNumero}}", cuentaNumero)
+                                     .Replace("{{cedula}}", cedula)
+                                     .Replace("{{LUGAR_FECHA}}", fechaActual);
 
             byte[] pdfContent = _serviceManager.PdfService.GeneratePdf(htmlContent);
 

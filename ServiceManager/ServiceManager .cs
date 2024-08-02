@@ -31,6 +31,7 @@ namespace ServiceManager
 
         public ICookieService CookieService => _cookieService;
         public IPdfService PdfService => _pdfService;
+
         public CombinedData ObtenerDatosCombinados()
         {
             var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
@@ -61,6 +62,34 @@ namespace ServiceManager
             _cookieService.EliminarCookie("FaceScanCookie");
             _cookieService.EliminarCookie("OTPCookie");
             
+        }
+
+        public async Task SendPdfService()
+        {
+          
+            var datos = ObtenerDatosCombinados();
+
+            var nombre = datos?.Usuario?.Nombre ?? "NombreDesconocido";
+            var apellido = datos?.Usuario?.Apellido ?? "ApellidoDesconocido";
+            var clienteNombre = $"{nombre} {apellido}";
+            var cuentaNumero = "1234567890";
+            var correo = datos.Usuario.Correo;
+            var cedula = datos.DatosDactilares.Identificacion;
+
+
+            var fechaActual = DateTime.Now.ToString("dd 'de' MMMM 'de' yyyy");
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Templates", "ContractTemplate.html");
+            string htmlContent = await System.IO.File.ReadAllTextAsync(templatePath);
+            htmlContent = htmlContent.Replace("{{clienteNombre}}", clienteNombre)
+                                     .Replace("{{cuentaNumero}}", cuentaNumero)
+                                     .Replace("{{cedula}}", cedula)
+                                     .Replace("{{LUGAR_FECHA}}", fechaActual);
+
+            byte[] pdfContent = PdfService.GeneratePdf(htmlContent);
+
+            await PdfService.SendPdfByEmailAsync(correo, "Contrato de Apertura de Cuenta", "Adjunto encontrará el contrato de apertura de cuenta.", pdfContent);
+
+            //return Ok("PDF enviado exitosamente.");
         }
 
     }

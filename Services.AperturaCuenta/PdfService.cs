@@ -61,5 +61,8 @@ namespace Services.AperturaCuenta
                 await client.DisconnectAsync(true);
             }
         }
+
+
+
     }
 }
