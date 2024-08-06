@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entidades
+namespace Modelos
 {
     public class InformacionPersonal
     {
-        public int Id { get; set; }
+        
         public double Ingresos { get; set; }
         public double Gastos { get; set; }
         public string PaisNacimiento { get; set; }
@@ -30,5 +30,4 @@ namespace Entidades
         public string? DetallesActividadesEnOtroPais { get; set; }
         public bool AceptoTerminos { get; set; }
     }
-
 }

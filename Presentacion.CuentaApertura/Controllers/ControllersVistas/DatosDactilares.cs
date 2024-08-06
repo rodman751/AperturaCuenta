@@ -5,7 +5,7 @@ using Interface.AperturaCuenta;
 using Services.AperturaCuenta;
 using Microsoft.AspNetCore.Authorization;
 using System.Text.Json;
-using Entidades.CuentaApertura;
+
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using System.Security.Claims;
@@ -39,15 +39,15 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
                 ViewBag.Message = TempData["Message"];
             }
 
-            var datosStep1 = _cookieService.ObtenerDatosCookie<Entidades.DatosDactilares>("DatosDactilaresCookie");
+            var datosStep1 = _cookieService.ObtenerDatosCookie<Modelos.DatosDactilares>("DatosDactilaresCookie");
 
             // Si hay datos guardados, inicializar el modelo con ellos
-            var model = datosStep1 ?? new Entidades.DatosDactilares();
+            var model = datosStep1 ?? new Modelos.DatosDactilares();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> ComprobarDatos(Entidades.DatosDactilares model)
+        public async Task<IActionResult> ComprobarDatos(Modelos.DatosDactilares model)
         {
             if (ModelState.IsValid)
             {
@@ -65,9 +65,9 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
                     if (usuarioExistente != null)
                     {
 
-                        Usuario newUsuario = new Usuario
+                        Modelos.Usuario newUsuario = new Modelos.Usuario
                         {
-                            Id = usuarioExistente.Id,
+                            //Id = usuarioExistente.Id,
                             Nombre = usuarioExistente.Nombre,
                             Apellido = usuarioExistente.Apellido,
                             Telefono = usuarioExistente.Telefono,

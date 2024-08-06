@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 3: Direccion";
 }
-@model Entidades.DireccionMapa
+@model Modelos.DireccionMapa
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
 <head>
@@ -201,6 +201,48 @@
         </div>
     </footer>
     
+    @section Scripts{
+        <script>
+    function initialize() {
+        var inputProvincia = document.querySelector('select[name="Provincia"]');
+        var inputCanton = document.querySelector('select[name="Canton"]');
+        var inputParroquia = document.querySelector('select[name="Parroquia"]');
+        var inputDireccion = document.querySelector('input[name="Direccion"]');
+        var inputReferencia = document.querySelector('input[name="Referencia"]');
 
+        var autocomplete = new google.maps.places.Autocomplete(inputDireccion, {
+            types: ['geocode']
+        });
+
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            if (place.address_components) {
+                var addressComponents = place.address_components;
+                addressComponents.forEach(function (component) {
+                    switch (component.types[0]) {
+                        case 'locality': // Ciudad
+                            inputCanton.value = component.long_name;
+                            break;
+                        case 'administrative_area_level_1': // Provincia
+                            inputProvincia.value = component.long_name;
+                            break;
+                        case 'sublocality_level_1': // Parroquia (si aplica)
+                            inputParroquia.value = component.long_name;
+                            break;
+                        case 'street_address': // Dirección
+                            inputDireccion.value = component.long_name;
+                            break;
+                    }
+                });
+            }
+        });
+
+        // Puedes agregar lógica similar para manejar los campos Provincia, Canton y Parroquia
+    }
+
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+    }
 </body>
 </html>

@@ -1,9 +1,13 @@
-﻿namespace Entidades
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Modelos
 {
     public class FaceScan
     {
-        public int Id { get; set; }  // Identificador único para la base de datos
-
         public string FaceId { get; set; }  // Identificador único del rostro proporcionado por el Face API
 
         public string ImageUrl { get; set; }  // URL de la imagen del rostro

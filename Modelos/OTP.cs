@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entidades
+namespace Modelos
 {
     public class OTP
     {
-        public int Id { get; set; }
-        public string Codigo { get; set; } 
+        public string Codigo { get; set; }
     }
 }

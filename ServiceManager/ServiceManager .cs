@@ -1,5 +1,6 @@
 ﻿using Entidades;
-using Entidades.CuentaApertura;
+using Modelos;
+
 using Interface.AperturaCuenta;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -35,10 +36,10 @@ namespace ServiceManager
         public CombinedData ObtenerDatosCombinados()
         {
             var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
-            var usuarioCookie = _cookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
+            var usuarioCookie = _cookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
             var direccionMapa = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
             var DatosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
-            var faceScan = _cookieService.ObtenerDatosCookie<Entidades.FaceScan>("FaceScanCookie");
+            var faceScan = _cookieService.ObtenerDatosCookie<Modelos.FaceScan>("FaceScanCookie");
             var otp = _cookieService.ObtenerDatosCookie<OTP>("OTPCookie");
 
             return new CombinedData
@@ -61,7 +62,8 @@ namespace ServiceManager
             _cookieService.EliminarCookie("GuardarDatos_Adicionales");
             _cookieService.EliminarCookie("FaceScanCookie");
             _cookieService.EliminarCookie("OTPCookie");
-            
+            _cookieService.EliminarCookie("OtpCookie");
+
         }
 
         public async Task SendPdfService()
