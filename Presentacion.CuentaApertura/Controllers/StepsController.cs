@@ -64,10 +64,24 @@ namespace Presentacion.CuentaApertura.Controllers
                 _serviceManager.CookieService.GuardarPasoActual(4);
                
 
-                return RedirectToAction("Index","Face_scan");
+                return RedirectToAction("Index","Face_Check");
             }
 
             return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Camara()
+        {
+            
+            
+            _serviceManager.CookieService.GuardarPasoActual(5);
+
+
+            return RedirectToAction("Index", "Face_scan");
+            
+
+            
         }
 
         [HttpPost]
@@ -76,7 +90,7 @@ namespace Presentacion.CuentaApertura.Controllers
             if (ModelState.IsValid)
             {
                 _serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model);
-                _serviceManager.CookieService.GuardarPasoActual(5);
+                _serviceManager.CookieService.GuardarPasoActual(6);
                 var usuarioCookie = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
                 ViewBag.Usuario = usuarioCookie.Nombre;
                 ViewBag.Apellido = usuarioCookie.Apellido;
@@ -99,7 +113,7 @@ namespace Presentacion.CuentaApertura.Controllers
 
             if (storedOtp == Codigo)
             {
-                _serviceManager.CookieService.GuardarPasoActual(6);
+                _serviceManager.CookieService.GuardarPasoActual(7);
                 // OTP válido, continuar con el siguiente paso
                 _serviceManager.SendPdfService();
                 _notifyService.Success("El código OTP ingresado es válido.");
@@ -114,29 +128,6 @@ namespace Presentacion.CuentaApertura.Controllers
             }
         }
 
-        //[HttpPost]
-        //public IActionResult GuardarOTP(Modelos.OTP model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _serviceManager.CookieService.GuardarDatosCookie("OTPCookie", model);
-        //        _serviceManager.CookieService.GuardarPasoActual(6);
-               
-
-        //        return RedirectToAction("Index", "Resumen_Final");
-        //    }
-
-        //    return View(model);
-        //}
-
-        //[HttpGet]
-        //public IActionResult Resumen_Final()
-        //{
-
-            
-        //    _serviceManager.CookieService.GuardarPasoActual(9);
-        //    return RedirectToAction("Index", "Confirmar");
-        //}
 
 
         public async Task<IActionResult> FinalizarApertura()
