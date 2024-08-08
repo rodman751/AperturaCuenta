@@ -1,0 +1,63 @@
+﻿@{
+    ViewData["Title"] = "Paso 7: Final";
+}
+@model Modelos.CombinedData
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Book an Appointment">
+    <meta name="description" content="">
+    <title>Page_6</title>
+    <link rel="stylesheet" href="./css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="./css/Page_6.css" media="screen">
+    
+    <meta name="generator" content="Nicepage 6.14.4, nicepage.com">
+    <meta name="referrer" content="origin">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+
+
+
+
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page_6">
+    <meta property="og:type" content="website">
+    <meta data-intl-tel-input-cdn-path="intlTelInput/">
+</head>
+<body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
+    
+    <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
+                <div class="u-container-layout u-container-layout-1">
+                    <img class="u-expanded-width-xs u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
+                    <h3 class="u-text u-text-default u-text-1">
+                        <br>Apertura <span style="font-weight: 700;">
+                            <span style="font-weight: 400;">
+                                <span style="font-weight: 700;"></span>
+                            </span>
+                        </span>tu cuenta
+                    </h3>
+                    <div class="otp-container u-form u-form-1">
+                        <form asp-action="FinalizarApertura" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" id="carousel-fa54">
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-2"></div>
+                            <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-2"> ¡Felicidades! Tu cuenta ha sido creada satisfactoriamente. Los documentos han sido enviados a tu correo electrónico: @Model.Usuario.Correo</p>
+                            <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-3">@Model.DatosDactilares.Identificacion </p>
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-2"></div>
+                            <div class="u-align-left u-form-group u-form-submit u-label-none">
+                            <button class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" type="submit">Finalizar</button>
+                            </div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+</body>
+</html>

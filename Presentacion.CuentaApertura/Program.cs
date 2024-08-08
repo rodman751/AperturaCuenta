@@ -1,15 +1,55 @@
+using Interface.AperturaCuenta;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Services.AperturaCuenta;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Repositorio;
+using ServiceManager;
+using Presentacion.CuentaApertura.Extensions;
+using Microsoft.Extensions.FileProviders;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
+
 namespace Presentacion.CuentaApertura
-{
+{ 
     public class Program
     {
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+            builder.Services.AddDbContext<DbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'DbContext' not found.")));
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddControllersWithViews();
+
+            // Registra el servicio de datos dactilares
+            
+            // Registra el servicio de cookies
+            builder.Services.AddHttpContextAccessor();
+            builder.Services.ConfigureRepositoryManager();
+            builder.Services.ConfigureServiceManager();
+            builder.Services.ConfigureCookieService();
+            builder.Services.AddDataProtection();
+            builder.Services.ConfigurePdfService();
+            // notificaciones
+            builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
+
+            //servico de cokkie
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+             .AddCookie(config =>
+             {
+                 config.Cookie.Name = "AperturaCuenta";
+                 config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                 config.LoginPath = "/DatosDactilares";
+             });
+
+       
+
             var app = builder.Build();
+
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
@@ -18,6 +58,23 @@ namespace Presentacion.CuentaApertura
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            //cokkie
+            app.UseAuthentication();
+            app.UseAuthorization();
+            //notificaiones
+            app.UseNotyf();
+            //
+            app.UseStaticFiles(); // Esta línea sirve archivos estáticos de wwwroot por defecto
+
+            // Configura para servir archivos estáticos desde lib/weights
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(
+                    Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "lib", "weights")),
+                RequestPath = "/lib/weights",
+                ServeUnknownFileTypes = true // Permite servir archivos sin extensión
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

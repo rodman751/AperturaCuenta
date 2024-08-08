@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewData["Title"] = "Paso 1: Validación";
+}
+@model Modelos.DatosDactilares
+
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="es"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Book an Appointment">
+    <meta name="description" content="">
+    <title>Page_0</title>
+    <link rel="stylesheet" href="./css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="./css/index.css" media="screen">
+    <meta name="generator" content="Nicepage 6.14.4, nicepage.com">
+    <meta name="referrer" content="origin">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    
+    
+    
+
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page_0">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+  <body data-home-page="Page_0.html" data-home-page-title="Page_0" data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
+    <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <img class="u-expanded-width-xs u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
+            <h3 class="u-text u-text-default u-text-1">
+              <br>Apertura <span style="font-weight: 700;">
+                <span style="font-weight: 400;">
+                  <span style="font-weight: 700;"></span>
+                </span>
+              </span>tu cuenta 
+            </h3>
+            <div class="u-form u-form-1">
+                        <form asp-action="ComprobarDatos" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 5px;">
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+                            <div class="u-form-group u-form-name u-label-top">
+                                <label asp-for="Identificacion" class="u-label u-label-1">IDENTIFICACIÓN</label>
+                                <input asp-for="Identificacion" type="text" placeholder="Ingresa tu Identificación" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" />
+                                <span asp-validation-for="Identificacion" class="text-danger"></span>
+                            </div>
+                            <div class="u-form-group u-label-top u-form-group-3">
+                                <label asp-for="Codigo_Dactilar" class="u-label u-label-2">CÓDIGO DACTILAR</label>
+                                <input asp-for="Codigo_Dactilar" type="text" placeholder="Ingresa tu Código Dactilar" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" />
+                                <span asp-validation-for="Codigo_Dactilar" class="text-danger"></span>
+                            </div>
+                            <div class="u-align-left u-form-group u-form-submit u-label-top">
+                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
+                            </div>
+                            <div class="u-form-send-message u-form-send-success">Correcto</div>
+                            <div class="u-form-send-error u-form-send-message">Error</div>
+                            <input type="hidden" value="" name="recaptchaResponse">
+                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+                        </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    
+    
+  
+</body>
+
+@section Scripts {
+
+    <script>
+        function requestCameraAccess() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Se ha concedido acceso a la cámara
+                    localStorage.setItem('cameraAccess', 'granted');
+                    // Detener el stream para liberar recursos
+                    stream.getTracks().forEach(track => track.stop());
+                })
+                .catch(function (err) {
+                    console.error('Error accessing camera:', err);
+                    // No se ha concedido acceso a la cámara
+                    localStorage.setItem('cameraAccess', 'denied');
+                    alert('Para continuar, debes permitir el acceso a la cámara.');
+                });
+        }
+
+        // Ejecutar la función al cargar la vista
+        document.addEventListener('DOMContentLoaded', requestCameraAccess);
+    </script>
+
+}
+</html>
+
+
