@@ -11,7 +11,7 @@ using AspNetCoreHero.ToastNotification;
 using AspNetCoreHero.ToastNotification.Extensions;
 
 namespace Presentacion.CuentaApertura
-{
+{ 
     public class Program
     {
         public static void Main(string[] args)
