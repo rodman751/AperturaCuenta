@@ -23,10 +23,10 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
                 ViewBag.Usuario = usuario.Nombre;
                 ViewBag.Apellido = usuario.Apellido;
             }
-            var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Entidades.DireccionMapa>("DireccionMCokkie");
+            var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.DireccionMapa>("DireccionMCokkie");
 
             // Si hay datos guardados, inicializar el modelo con ellos
-            var model = datosStep1 ?? new Entidades.DireccionMapa();
+            var model = datosStep1 ?? new Modelos.DireccionMapa();
             return View(model);
             
         }

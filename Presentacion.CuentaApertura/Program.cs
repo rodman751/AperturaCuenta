@@ -7,6 +7,8 @@ using Repositorio;
 using ServiceManager;
 using Presentacion.CuentaApertura.Extensions;
 using Microsoft.Extensions.FileProviders;
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 
 namespace Presentacion.CuentaApertura
 {
@@ -32,6 +34,8 @@ namespace Presentacion.CuentaApertura
             builder.Services.ConfigureCookieService();
             builder.Services.AddDataProtection();
             builder.Services.ConfigurePdfService();
+            // notificaciones
+            builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
 
             //servico de cokkie
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -58,7 +62,9 @@ namespace Presentacion.CuentaApertura
             //cokkie
             app.UseAuthentication();
             app.UseAuthorization();
-
+            //notificaiones
+            app.UseNotyf();
+            //
             app.UseStaticFiles(); // Esta línea sirve archivos estáticos de wwwroot por defecto
 
             // Configura para servir archivos estáticos desde lib/weights

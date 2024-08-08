@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Interface.AperturaCuenta\Interface.AperturaCuenta.csproj" />
+    <ProjectReference Include="..\Modelos\Modelos.csproj" />
     <ProjectReference Include="..\Repositorio\Repositorio.csproj" />
     <ProjectReference Include="..\Services.AperturaCuenta\Services.AperturaCuenta.csproj" />
   </ItemGroup>

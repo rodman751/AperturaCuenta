@@ -1,4 +1,4 @@
-﻿using Entidades.CuentaApertura;
+﻿
 using Entidades;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

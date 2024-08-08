@@ -16,10 +16,10 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
         }
         public ActionResult Index()
         {
-             var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Models.FaceScan>("FaceScanCookie");
+             var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.FaceScan>("FaceScanCookie");
 
             // Si hay datos guardados, inicializar el modelo con ellos
-            var model = datosStep1 ?? new Models.FaceScan();
+            var model = datosStep1 ?? new Modelos.FaceScan();
             return View(model);
         }
 

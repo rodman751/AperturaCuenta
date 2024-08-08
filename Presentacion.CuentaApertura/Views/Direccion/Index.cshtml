@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 3: Direccion";
 }
-@model Entidades.DireccionMapa
+@model Modelos.DireccionMapa
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
 <head>
@@ -22,6 +22,8 @@
     <meta property="og:title" content="Page_2">
     <meta property="og:type" content="website">
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&libraries=places"></script>
+
 </head>
 <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
     <header class="u-clearfix u-custom-color-2 u-header u-header" id="sec-44c8">
@@ -64,45 +66,31 @@
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-2"></div>
 
-                            <div class="u-form-group u-form-select u-label-top u-form-group-5">
+                            <!-- Provincias -->
+                            <div class="u-form-group u-form-text u-label-top u-form-group-5">
                                 <label asp-for="Provincia" class="u-label u-label-3">Provincias</label>
-                                <div class="u-form-select-wrapper">
-                                    <select asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" required>
-                                        <option value="Imbabura">Imbabura</option>
-                                        <!-- Añade más opciones si es necesario -->
-                                    </select>
-                                    <svg class="u-caret u-caret-svg u-text-grey-80" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
-                                </div>
+                                <input asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" type="text" required>
+                                <div id="provincia-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Provincia" class="text-danger"></span>
                             </div>
 
-                            <div class="u-form-group u-form-select u-label-top u-form-group-6">
+                            <!-- Cantones -->
+                            <div class="u-form-group u-form-text u-label-top u-form-group-6">
                                 <label asp-for="Canton" class="u-label u-label-4">Cantón:</label>
-                                <div class="u-form-select-wrapper">
-                                    <select asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" required>
-                                        <option value="Ibarra">Ibarra</option>
-                                        <option value="Item 2">Item 2</option>
-                                        <option value="Item 3">Item 3</option>
-                                        <!-- Añade más opciones si es necesario -->
-                                    </select>
-                                    <svg class="u-caret u-caret-svg u-text-grey-80" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
-                                </div>
+                                <input asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" type="text" required>
+                                <div id="canton-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Canton" class="text-danger"></span>
                             </div>
 
-                            <div class="u-form-group u-form-select u-label-top u-form-group-7">
+                            <!-- Parroquias -->
+                            <div class="u-form-group u-form-text u-label-top u-form-group-7">
                                 <label asp-for="Parroquia" class="u-label u-label-5">Parroquia:</label>
-                                <div class="u-form-select-wrapper">
-                                    <select asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5">
-                                        <option value="El Sagrario">El Sagrario</option>
-                                        <option value="Item 2">Item 2</option>
-                                        <option value="Item 3">Item 3</option>
-                                        <!-- Añade más opciones si es necesario -->
-                                    </select>
-                                    <svg class="u-caret u-caret-svg u-text-grey-80" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16px" height="16px" viewBox="0 0 16 16" style="fill:currentColor;" xml:space="preserve"><polygon class="st0" points="8,12 2,4 14,4 "></polygon></svg>
-                                </div>
+                                <input asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5">
+                                <div id="parroquia-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Parroquia" class="text-danger"></span>
                             </div>
+
+
 
                             <div class="u-form-group u-label-top u-form-group-8">
                                 <label asp-for="Direccion" class="u-label u-label-6">Dirección:</label>
@@ -132,9 +120,17 @@
                     </div>
                     <div class="u-grey-light-2 u-map u-map-1">
                         <div class="embed-responsive">
-                            <iframe class="embed-responsive-item" src="https://maps.google.com/maps?output=embed&amp;q=Ibarra%2C%20Ecuador&amp;z=10&amp;t=m" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLXBvaW50JTIyJTJDJTIyYWRkcmVzcyUyMiUzQSUyMkliYXJyYSUyQyUyMEVjdWFkb3IlMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0FudWxsJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCU3RA=="></iframe>
+                            <div id="map" style="height: 400px; width: 100%;"></div>
+                            <script async
+                                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&loading=async&libraries=places&callback=initMap">
+                            </script>
+                            
+                            @* <iframe class="embed-responsive-item" src="https://maps.google.com/maps?output=embed&amp;q=Ibarra%2C%20Ecuador&amp;z=10&amp;t=m" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLXBvaW50JTIyJTJDJTIyYWRkcmVzcyUyMiUzQSUyMkliYXJyYSUyQyUyMEVjdWFkb3IlMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0FudWxsJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCU3RA=="></iframe>*@
                         </div>
                     </div>
+
+                    
+
                 </div>
             </div>
         </div>
@@ -201,6 +197,178 @@
         </div>
     </footer>
     
+    @section Scripts{
+        <script>
+            function initialize() {
+                var inputProvincia = document.querySelector('input[name="Provincia"]');
+                var inputCanton = document.querySelector('input[name="Canton"]');
+                var inputParroquia = document.querySelector('input[name="Parroquia"]');
+                var inputDireccion = document.querySelector('input[name="Direccion"]');
+                var inputReferencia = document.querySelector('input[name="Referencia"]');
 
+                var autocomplete = new google.maps.places.Autocomplete(inputDireccion, {
+                    types: ['geocode']
+                });
+
+                autocomplete.addListener('place_changed', function () {
+                    var place = autocomplete.getPlace();
+                    if (place.address_components) {
+                        var addressComponents = place.address_components;
+                        addressComponents.forEach(function (component) {
+                            switch (component.types[0]) {
+                                case 'locality': // Ciudad
+                                    inputCanton.value = component.long_name;
+                                    break;
+                                case 'administrative_area_level_1': // Provincia
+                                    inputProvincia.value = component.long_name;
+                                    break;
+                                case 'sublocality_level_1': // Parroquia (si aplica)
+                                    inputParroquia.value = component.long_name;
+                                    break;
+                                case 'street_address': // Dirección
+                                    inputDireccion.value = component.long_name;
+                                    break;
+                            }
+                        });
+                    }
+                });
+
+                // Puedes agregar lógica similar para manejar los campos Provincia, Canton y Parroquia
+            }
+
+            google.maps.event.addDomListener(window, 'load', initialize);
+
+            function initMap() {
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    center: { lat: -0.231, lng: -78.524 }, // Coordenadas iniciales
+                    zoom: 12
+                });
+
+                var marker = new google.maps.Marker({
+                    position: map.getCenter(),
+                    map: map,
+                    draggable: true
+                });
+
+                var geocoder = new google.maps.Geocoder();
+
+                google.maps.event.addListener(marker, 'dragend', function () {
+                    geocodePosition(marker.getPosition(), geocoder, function (address) {
+                        var components = address.address_components;
+                        components.forEach(function (component) {
+                            switch (component.types[0]) {
+                                case 'locality': // Ciudad
+                                    inputCanton.value = component.long_name;
+                                    break;
+                                case 'administrative_area_level_1': // Provincia
+                                    inputProvincia.value = component.long_name;
+                                    break;
+                                case 'sublocality_level_1': // Parroquia (si aplica)
+                                    inputParroquia.value = component.long_name;
+                                    break;
+                                case 'street_address': // Dirección
+                                    inputDireccion.value = component.long_name;
+                                    break;
+                            }
+                        });
+                    });
+                });
+            }
+
+            function geocodePosition(position, geocoder, callback) {
+                geocoder.geocode({
+                    latLng: position
+                }, function (results) {
+                    if (results && results.length > 0) {
+                        callback(results[0]);
+                    }
+                });
+            }
+
+
+
+            const Provincias = [
+                "Azuay", "Bolívar", "Cañar", "Carchi", "Chimborazo",
+                "Cotopaxi", "El Oro", "Esmeraldas", "Galápagos", "Guayas",
+                "Imbabura", "Loja", "Los Ríos", "Manabí", "Morona Santiago",
+                "Napo", "Orellana", "Pastaza", "Pichincha", "Santa Elena",
+                "Santa Isabel", "Santo Domingo de los Tsáchilas", "Sucumbíos", "Tungurahua", "Zamora-Chinchipe"
+            ];
+
+            const Cantones = [
+                "Cuenca", "Azogues", "Riobamba", "Loja", "Guayaquil",
+                "Quito", "Ambato", "Manta", "Machala", "Esmeraldas",
+                "Ibarra", "Santa Elena", "Portoviejo", "Santo Domingo"
+                // Añadir más cantones según necesidad
+            ];
+
+            const Parroquias = [
+                "El Sagrario", "La Libertad", "San Blas", "La Merced",
+                "San Sebastián", "San Francisco", "San Pedro"
+                // Añadir más parroquias según necesidad
+            ];
+            function setupAutocomplete(inputId, suggestionsId, dataList) {
+                const input = document.getElementById(inputId);
+                const suggestionsBox = document.getElementById(suggestionsId);
+
+                input.addEventListener('input', function () {
+                    const query = this.value.toLowerCase();
+                    suggestionsBox.innerHTML = ''; // Limpia las sugerencias anteriores
+
+                    if (query) {
+                        const filtered = dataList.filter(item =>
+                            item.toLowerCase().includes(query)
+                        );
+
+                        filtered.forEach(item => {
+                            const div = document.createElement('div');
+                            div.textContent = item;
+                            div.classList.add('suggestion-item');
+                            div.addEventListener('click', function () {
+                                input.value = item;
+                                suggestionsBox.innerHTML = ''; // Limpia las sugerencias después de seleccionar
+                            });
+                            suggestionsBox.appendChild(div);
+                        });
+
+                        if (filtered.length === 0) {
+                            suggestionsBox.innerHTML = '<div>No hay sugerencias</div>';
+                        }
+                    }
+                });
+            }
+
+            // Configura el autocompletado para cada campo
+            setupAutocomplete('Provincia', 'provincia-suggestions', Provincias);
+            setupAutocomplete('Canton', 'canton-suggestions', Cantones);
+            setupAutocomplete('Parroquia', 'parroquia-suggestions', Parroquias);
+
+            // Estilos para las sugerencias
+            document.head.insertAdjacentHTML('beforeend', `
+                    <style>
+                        .suggestions {
+                            border: 1px solid #ddd;
+                            max-height: 150px;
+                            overflow-y: auto;
+                            position: absolute;
+                            background-color: white;
+                            z-index: 1000;
+                        }
+                        .suggestion-item {
+                            color: black;
+                            padding: 8px;
+                            cursor: pointer;
+                        }
+                        .suggestion-item:hover {
+                            background-color: #f0f0f0;
+                        }
+                    </style>
+                `);
+        </script>
+
+
+
+
+    }
 </body>
 </html>

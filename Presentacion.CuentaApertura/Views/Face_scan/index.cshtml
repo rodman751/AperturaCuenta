@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 5: Reconocimiento Facial";
 }
-@model Presentacion.CuentaApertura.Models.FaceScan
+@model Modelos.FaceScan
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
 <head>
@@ -80,12 +80,12 @@
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
 
                             <!-- Campos ocultos para datos del rostro usando asp-for -->
-                            <input asp-for="FaceId" type="text" />
-                            <input asp-for="ImageUrl" type="text" />
-                            <input asp-for="DetectedAt" type="datetime-local" />
-                            <input asp-for="Age" type="number" />
-                            <input asp-for="Gender" type="text" />
-                            <input asp-for="Emotion" type="text" />
+                            <input asp-for="FaceId" type="text" value="ejem" hidden/>
+                            <input asp-for="ImageUrl" type="text" value="ejem" hidden/>
+                            <input asp-for="DetectedAt" type="datetime-local" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" hidden/>
+                            <input asp-for="Age" type="number" value="1" hidden/>
+                            <input asp-for="Gender" type="text" value="ejem" hidden />
+                            <input asp-for="Emotion" type="text" value="ejem" hidden />
 
                             <!-- Campo de envío del formulario -->
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
@@ -173,18 +173,20 @@
     <script src="/js/face-api.min.js"></script>
     <script src="/js/script_webcam.js"></script>
     <script>
-        function verifyCameraAccess() {
+        function activateCamera() {
             const cameraAccess = localStorage.getItem('cameraAccess');
-            if (cameraAccess !== 'granted') {
-                alert('Please grant camera access in the first step.');
-                // Redirigir al usuario a la vista adecuada o mostrar instrucciones
-                window.location.href = '/first-step';
+            if (cameraAccess === 'granted') {
+                // Activar la cámara
+                // Aquí puedes agregar el código para iniciar el stream de la cámara
+                console.log('Cámara activada.');
+            } else {
+                alert('Por favor, permite el acceso a la cámara en el primer paso.');
+                window.location.href = '/home';
             }
         }
-        // Llama a verifyCameraAccess() en la carga de la cuarta vista
-        $(document).ready(function () {
-            verifyCameraAccess();
-        });
+
+        // Ejecutar la función al cargar la vista
+        document.addEventListener('DOMContentLoaded', activateCamera);
     </script>
     }
 </html>

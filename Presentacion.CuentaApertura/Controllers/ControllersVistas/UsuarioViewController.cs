@@ -29,9 +29,9 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
             {
                 return View(model);
             }
-            var datosStep1 = _cookieService.ObtenerDatosCookie<Usuario>("UsuarioCookie");
+            var datosStep1 = _cookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
             // Si hay datos guardados, inicializar el modelo con ellos
-            var model2 = datosStep1 ?? new Usuario();
+            var model2 = datosStep1 ?? new Modelos.Usuario();
             // Si el modelo de usuario no tiene valores, devolver una vista vacía o con un modelo predeterminado
             return View(model2);
         }

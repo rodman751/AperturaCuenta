@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Paso 1: Validación";
 }
-@model Entidades.DatosDactilares
+@model Modelos.DatosDactilares
 
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
@@ -104,7 +104,7 @@
 @section Scripts {
 
     <script>
-        function checkCameraAccess() {
+        function requestCameraAccess() {
             navigator.mediaDevices.getUserMedia({ video: true })
                 .then(function (stream) {
                     // Se ha concedido acceso a la cámara
@@ -116,11 +116,12 @@
                     console.error('Error accessing camera:', err);
                     // No se ha concedido acceso a la cámara
                     localStorage.setItem('cameraAccess', 'denied');
+                    alert('Para continuar, debes permitir el acceso a la cámara.');
                 });
         }
 
         // Ejecutar la función al cargar la vista
-        document.addEventListener('DOMContentLoaded', checkCameraAccess);
+        document.addEventListener('DOMContentLoaded', requestCameraAccess);
     </script>
 
 }

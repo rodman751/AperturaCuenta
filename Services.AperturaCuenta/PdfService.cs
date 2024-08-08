@@ -61,6 +61,37 @@ namespace Services.AperturaCuenta
                 await client.DisconnectAsync(true);
             }
         }
+        public async Task<string> SendOtpByEmailAsync(string toEmail, string subject, string body)
+        {
+            var message = new MimeMessage();
+            message.From.Add(new MailboxAddress("Rodman", "jg38903@gmail.com"));
+            message.To.Add(new MailboxAddress("Recipient Name", toEmail)); 
+            message.Subject = subject;
+
+            // Generar un código OTP aleatorio de 6 dígitos
+            var random = new Random();
+            int otp = random.Next(100000, 999999);
+
+            // Agregar el OTP al cuerpo del mensaje
+            body += $"\n\nTu código OTP es: {otp}";
+
+            var builder = new BodyBuilder { TextBody = body };
+
+            message.Body = builder.ToMessageBody();
+
+            using (var client = new SmtpClient())
+            {
+                await client.ConnectAsync("smtp.gmail.com", 587, SecureSocketOptions.StartTls); 
+                await client.AuthenticateAsync("jg38903@gmail.com", "ollk yvqv nxlk ebwc"); 
+                await client.SendAsync(message);
+                await client.DisconnectAsync(true);
+            }
+
+            // Retornar el OTP para que pueda ser almacenado
+            return otp.ToString();
+        }
+
+
 
 
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositorio;
 using ServiceManager;
@@ -9,18 +10,21 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
     {
         private readonly IRepositorioManager _repositoryManager;
         private readonly IServiceManager _serviceManager;
+        public INotyfService _notifyService { get; }
 
-        public OTPController(IRepositorioManager repositoryManager, IServiceManager serviceManager)
+        public OTPController(IRepositorioManager repositoryManager, IServiceManager serviceManager, INotyfService notifyService)
         {
             _repositoryManager = repositoryManager;
             _serviceManager = serviceManager;
+            _notifyService = notifyService;
         }
         public ActionResult Index()
         {
-            var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Entidades.OTP>("OTPCookie");
+            var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.OTP>("OTPCookie");
 
             // Si hay datos guardados, inicializar el modelo con ellos
-            var model = datosStep1 ?? new Entidades.OTP();
+           
+            var model = datosStep1 ?? new Modelos.OTP();
             return View(model);
         }
 

@@ -65,23 +65,23 @@ namespace Services.AperturaCuenta
             }
         }
 
-        public async Task AgregarClaimsAsync(DatosDactilares datos)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim("Identificaion", datos.Identificacion),
+        //public async Task AgregarClaimsAsync(DatosDactilares datos)
+        //{
+        //    var claims = new List<Claim>
+        //    {
+        //        new Claim("Identificaion", datos.Identificacion),
             
-            };
+        //    };
 
-            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+        //    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
-            {
-                IsPersistent = true // Configura según tus necesidades
-            };
+        //    var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
+        //    {
+        //        IsPersistent = true // Configura según tus necesidades
+        //    };
 
-            await _httpContextAccessor.HttpContext?.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-        }
+        //    await _httpContextAccessor.HttpContext?.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
+        //}
 
 
         public async Task SignOutAsync()

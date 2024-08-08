@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Paso 6: OTP";
 }
-@model Entidades.OTP
+@model Modelos.OTP
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es">
 <head>
@@ -48,7 +48,7 @@
                         </span>tu cuenta
                     </h3>
                     <div class="otp-container u-form u-form-1">
-                        <form asp-action="GuardarOTP" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="VerificarOtp" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-1"></div>
 
                             <p class="u-form-group u-form-text u-label-none u-text u-text-2">Código de Seguridad enviado a su email / Teléfono</p>
