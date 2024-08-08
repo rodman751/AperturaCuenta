@@ -18,14 +18,14 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
         public IActionResult Index()
         {
 
-            Usuario model = null;
+            Modelos.Usuario model = null;
             if (TempData["Usuario"] != null)
             {
                 // Obtener y deserializar el modelo almacenado en TempData
-                model = JsonConvert.DeserializeObject<Usuario>(TempData["Usuario"].ToString());
+                model = JsonConvert.DeserializeObject<Modelos.Usuario>(TempData["Usuario"].ToString());
             }
             // Si el modelo de usuario tiene valores, mapearlos a la vista
-            if (model != null && model.Id != 0)
+            if (model != null )
             {
                 return View(model);
             }
