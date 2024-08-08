@@ -1,5 +1,5 @@
 ﻿using Entidades;
-
+using Entidades.CuentaApertura;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -13,5 +13,6 @@ namespace Repositorio.Interfaces
     {
 
         Task<List<Usuario>> EjecutarProcedimientoAlmacenado();
+        Task GuardarUsuario(CuentaUsuario cuenta);
     }
 }

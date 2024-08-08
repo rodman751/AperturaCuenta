@@ -14,6 +14,7 @@ namespace ServiceManager
         ICookieService CookieService { get; }
         IPdfService PdfService { get; }
         Modelos.CombinedData ObtenerDatosCombinados();
+        void ObtenerDatosCombinadosparabd();
         void borrarCookie();
         Task SendPdfService();
     }

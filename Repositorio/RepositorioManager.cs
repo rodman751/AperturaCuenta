@@ -10,6 +10,7 @@ namespace Repositorio
         private readonly DbContext _context;
         
         private  Lazy<IUsuarioRepository> _usuarioRepository;
+
        
         public RepositorioManager(DbContext context)
         {

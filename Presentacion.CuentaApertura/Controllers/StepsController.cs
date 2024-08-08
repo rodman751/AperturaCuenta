@@ -116,6 +116,7 @@ namespace Presentacion.CuentaApertura.Controllers
                 _serviceManager.CookieService.GuardarPasoActual(7);
                 // OTP válido, continuar con el siguiente paso
                 _serviceManager.SendPdfService();
+                _serviceManager.ObtenerDatosCombinadosparabd();
                 _notifyService.Success("El código OTP ingresado es válido.");
                 return RedirectToAction("Index", "Resumen_Final");
             }

@@ -20,5 +20,6 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         return await Usuario.FromSqlRaw("EXEC CrearTablaTemporalUsuarios").ToListAsync();
     }
+    public DbSet<Entidades.CuentaApertura.CuentaUsuario> CuentaUsuario { get; set; } = default!;
 
 }
