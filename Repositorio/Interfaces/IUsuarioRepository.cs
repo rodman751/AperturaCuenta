@@ -13,5 +13,6 @@ namespace Repositorio.Interfaces
     {
 
         Task<List<Usuario>> EjecutarProcedimientoAlmacenado();
+        Task GuardarUsuario(CuentaUsuario cuenta);
     }
 }

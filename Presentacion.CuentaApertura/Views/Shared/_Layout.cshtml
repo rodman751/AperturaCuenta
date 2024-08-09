@@ -9,11 +9,12 @@
     <link rel="stylesheet" href="~/Presentacion.CuentaApertura.styles.css" asp-append-version="true" />
 </head>
 <body>
-    
+    @await Html.PartialAsync("_Top")
     <div >
         <main role="main" >
             @RenderBody()
         </main>
+        @await Html.PartialAsync("_Footer")
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

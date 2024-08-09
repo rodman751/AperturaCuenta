@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositorio;
 using Services.AperturaCuenta;
+using Entidades.CuentaApertura;
 
 namespace ServiceManager
 {
@@ -24,10 +25,12 @@ namespace ServiceManager
 
         private readonly ICookieService _cookieService;
         private readonly IPdfService _pdfService;
-        public ServiceManager(ICookieService cookieService, IPdfService pdfService)
+        private readonly IRepositorioManager _repositorioManager;
+        public ServiceManager(ICookieService cookieService, IPdfService pdfService, IRepositorioManager repositorioManager)
         {
             _cookieService = cookieService;
             _pdfService = pdfService;
+            _repositorioManager = repositorioManager;
         }
 
         public ICookieService CookieService => _cookieService;
@@ -51,6 +54,47 @@ namespace ServiceManager
                 FaceScan = faceScan,
                 OTP = otp
             };
+        }
+        public void ObtenerDatosCombinadosparabd()
+        {
+            var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
+            var usuarioCookie = _cookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
+            var direccionMapa = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
+            var DatosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
+            var faceScan = _cookieService.ObtenerDatosCookie<Modelos.FaceScan>("FaceScanCookie");
+            var otp = _cookieService.ObtenerDatosCookie<OTP>("OTPCookie");
+
+            CuentaUsuario UsuarioGuardar = new Entidades.CuentaApertura.CuentaUsuario
+            {
+                Identificacion = datosDactilares.Identificacion,
+                Codigo_Dactilar = datosDactilares.Codigo_Dactilar,
+                Nombre = usuarioCookie.Nombre,
+                Apellido = usuarioCookie.Apellido,
+                Telefono = usuarioCookie.Telefono,
+                Correo = usuarioCookie.Correo,
+                Provincia = direccionMapa.Provincia,
+                Canton = direccionMapa.Canton,
+                Parroquia = direccionMapa.Parroquia,
+                Direccion = direccionMapa.Direccion,
+                Referencia = direccionMapa.Referencia,
+                Ingresos = DatosAdicionales.Ingresos,
+                Gastos = DatosAdicionales.Gastos,
+                PaisNacimiento = DatosAdicionales.PaisNacimiento,
+                CiudadNacimiento = DatosAdicionales.CiudadNacimiento,
+                NivelDeInstruccion = DatosAdicionales.NivelDeInstruccion,
+                Dependiente = DatosAdicionales.Dependiente,
+                NegocioPropio = DatosAdicionales.NegocioPropio,
+                Ninguno = DatosAdicionales.Ninguno,
+                VivoConFamiliares = DatosAdicionales.VivoConFamiliares,
+                Propia = DatosAdicionales.Propia,
+                PropiaHipotecada = DatosAdicionales.PropiaHipotecada,
+                ActividadesEnOtroPais = DatosAdicionales.ActividadesEnOtroPais,
+                DetallesActividadesEnOtroPais = DatosAdicionales.DetallesActividadesEnOtroPais,
+                AceptoTerminos = DatosAdicionales.AceptoTerminos,
+                ImageUrl = faceScan.ImageUrl
+
+            };
+            _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
         }
 
         public void borrarCookie()

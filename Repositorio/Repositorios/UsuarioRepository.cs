@@ -1,5 +1,5 @@
 ﻿using Entidades;
-
+using Entidades.CuentaApertura;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,12 +17,15 @@ namespace Repositorio.Repositorios
             _context = context;
         }
 
-     
         public async Task<List<Usuario>> EjecutarProcedimientoAlmacenado()
         {
             return await _context.EjecutarProcedimientoAlmacenado();
+        }
 
-
+        public async Task GuardarUsuario(CuentaUsuario cuenta)
+        {
+            _context.Add(cuenta);
+            _context.SaveChanges();
         }
     }
 }

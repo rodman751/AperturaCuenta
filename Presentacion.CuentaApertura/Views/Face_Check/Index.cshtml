@@ -1,0 +1,133 @@
+@{
+    ViewData["Title"] = "Paso 4.5: Face Check";
+}
+<!DOCTYPE html>
+<html style="font-size: 16px;" lang="es"><head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="​Book an Appointment">
+    <meta name="description" content="">
+    <title>Page_4_5</title>
+    <link rel="stylesheet" href="/css/nicepage.css" media="screen">
+    <link rel="stylesheet" href="/css/Page_4_5.css" media="screen">
+    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
+    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
+    <meta name="generator" content="Nicepage 6.15.2, nicepage.com">
+    <meta name="referrer" content="origin">
+    <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
+    <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
+    
+    
+    
+   
+    <meta name="theme-color" content="#478ac9">
+    <meta property="og:title" content="Page_4_5">
+    <meta property="og:type" content="website">
+  <meta data-intl-tel-input-cdn-path="intlTelInput/"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        video {
+            position: absolute;
+            z-index: 1;
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+
+        .video-container {
+            position: center;
+            width: 300px; /* Ajusta el tamaño del contenedor aquí */
+            height: 300px; /* Ajusta el tamaño del contenedor aquí */
+            border: 2px solid #ccc; /* Opcional: Bordes para visualizar el contenedor */
+            border-radius: 10px; /* Opcional: Bordes redondeados */
+            overflow: hidden; /* Opcional: Para asegurarte de que el video y el canvas no se desborden */
+            background-color: #000; /* Opcional: Fondo negro para mejor contraste */
+        }
+
+        canvas {
+            position: absolute;
+            z-index: 20;
+            
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+
+
+  <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
+    
+    <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
+      <div class="u-clearfix u-sheet u-sheet-1">
+        <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
+          <div class="u-container-layout u-container-layout-1">
+            <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
+            <center>
+                        <div class="custom-expanded u-border-1 u-border-custom-color-2 u-container-style u-group u-radius u-shape-round u-group-2">
+                            <div class="u-container-layout u-container-layout-2">
+                                <div class="u-container-layout u-container-layout-2">
+                                    <div class="video-container">
+                                        <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+                                        <canvas id="overlay"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            </center>
+            <h3 class="u-text u-text-default u-text-1">
+              <br>Reconocimiento Facial
+            </h3>
+            <div class="u-form u-form-1">
+                        <form asp-action="Camara" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+                            <div class="u-align-left u-form-group u-form-submit u-label-top">
+                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
+                            </div>
+                <div class="u-form-send-message u-form-send-success">Correcto</div>
+                <div class="u-form-send-error u-form-send-message">Error</div>
+                <input type="hidden" value="" name="recaptchaResponse">
+                <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+ 
+</body>
+@section Scripts {
+
+    <script src="/js/face-api.min.js"></script>
+    <script src="/js/script_webcam.js"></script>
+    <script>
+        function activateCamera() {
+            const cameraAccess = localStorage.getItem('cameraAccess');
+            if (cameraAccess === 'granted') {
+                // Activar la cámara
+                // Aquí puedes agregar el código para iniciar el stream de la cámara
+                console.log('Cámara activada.');
+            } else {
+                alert('Por favor, permite el acceso a la cámara en el primer paso.');
+                window.location.href = '/home';
+            }
+        }
+
+        // Ejecutar la función al cargar la vista
+        document.addEventListener('DOMContentLoaded', activateCamera);
+    </script>
+}
+</html>
