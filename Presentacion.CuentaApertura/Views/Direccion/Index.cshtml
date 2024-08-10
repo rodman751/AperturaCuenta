@@ -282,25 +282,32 @@
 
             // Estilos para las sugerencias
             document.head.insertAdjacentHTML('beforeend', `
-                    <style>
-                        .suggestions {
-                            border: 1px solid #ddd;
-                            max-height: 150px;
-                            overflow-y: auto;
-                            position: absolute;
-                            background-color: white;
-                            z-index: 1000;
-                        }
-                        .suggestion-item {
-                            color: black;
-                            padding: 8px;
-                            cursor: pointer;
-                        }
-                        .suggestion-item:hover {
-                            background-color: #f0f0f0;
-                        }
-                    </style>
-                `);
+                <style>
+                    .suggestions {
+                        border: 1px solid #ddd;
+                        max-height: 150px;
+                        overflow-y: auto;
+                        position: absolute;
+                        background-color: white;
+                        z-index: 1000;
+                        border-radius: 8px;
+                        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                        font-family: 'Roboto', sans-serif;
+                    }
+                    .suggestion-item {
+                        color: #333;
+                        padding: 12px;
+                        cursor: pointer;
+                        transition: background-color 0.3s ease, color 0.3s ease;
+                        font-family: 'Montserrat', sans-serif;
+                    }
+                    .suggestion-item:hover {
+                        background-color: #e0e0e0;
+                        color: #007bff;
+                    }
+                </style>
+            `);
+
         </script>
 
 
