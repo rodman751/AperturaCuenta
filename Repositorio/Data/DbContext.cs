@@ -22,5 +22,6 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     }
     public DbSet<Entidades.CuentaApertura.CuentaUsuario> CuentaUsuario { get; set; } = default!;
     public DbSet<Entidades.CuentaApertura.RegistrosAuditoria> RegistrosAuditoria { get; set; } = default!;
+    public DbSet<Entidades.CuentaApertura.Imagenes> Imagenes { get; set; } = default!;
 
 }

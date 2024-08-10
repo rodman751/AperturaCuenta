@@ -20,6 +20,15 @@ namespace Presentacion.CuentaApertura
             builder.Services.AddDbContext<DbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DbContext") ?? throw new InvalidOperationException("Connection string 'DbContext' not found.")));
 
+
+            //imagens de la base de datos
+
+            builder.WebHost.ConfigureKestrel(options =>
+            {
+                // Establece el tamaño máximo del cuerpo de solicitud (por ejemplo, 50 MB)
+                options.Limits.MaxRequestBodySize = 50 * 1024 * 1024; // 50 MB en bytes
+            });
+            builder.Services.AddControllers();
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
@@ -43,7 +52,7 @@ namespace Presentacion.CuentaApertura
              .AddCookie(config =>
              {
                  config.Cookie.Name = "AperturaCuenta";
-                 config.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                 config.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                  config.LoginPath = "/DatosDactilares";
              });
 

@@ -20,6 +20,9 @@ function captureImage() {
     // Convierte el contenido del canvas a una imagen base64
     const base64Image = canvas.toDataURL('');
 
+
+
+
     return base64Image;
 }
 
@@ -45,11 +48,36 @@ async function onPlay() {
 
     if (fullFaceDescriptions.length > 0 && fullFaceDescriptions[0].expressions.happy > 0.5) {
         const base64Image = captureImage();
-        //await sendImageToServer(base64Image);  // Enviar la imagen al servidor
+       
+        await sendImageToServer(base64Image);  // Enviar la imagen al servidor
         console.log("", base64Image)
+       
     }
 
 
     setTimeout(() => onPlay(), 100)
 
+
+
 }
+
+async function sendImageToServer(base64Image) {
+    try {
+        const response = await fetch('/Steps/Camara2', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(base64Image)
+        });
+
+        if (response.ok) {
+            console.log('Imagen enviada con éxito');
+        } else {
+            console.error('Error al enviar la imagen', response.status, await response.text());
+        }
+    } catch (error) {
+        console.error('Error en la solicitud de red:', error);
+    }
+}
+

@@ -104,36 +104,35 @@
                             <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
                                 <label class="u-label u-label-8">Condición laboral</label>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="Dependiente" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="Dependiente" class="u-field-input" />
                                     <label class="u-field-label">Dependiente</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="NegocioPropio" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="NegocioPropio" class="u-field-input" />
                                     <label class="u-field-label">Negocio Propio</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="Ninguno" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="Ninguno" class="u-field-input" />
                                     <label class="u-field-label">Ninguno</label>
                                 </div>
-                                <span class="text-danger"></span>
+                                <span asp-validation-for="CondicionLaboral" class="text-danger"></span>
                             </div>
-
-                            <!-- Tipo de Vivienda -->
+                            <!-- Condición vivienda -->
                             <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-12">
                                 <label class="u-label u-label-9">Tipo Vivienda:</label>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="VivoConFamiliares" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
-                                    <label class="u-field-label">Vivo con familiares.</label>
+                                    <input asp-for="TipoVivienda" type="radio" value="VivoConFamiliares" class="u-field-input" />
+                                    <label class="u-field-label">Vivo con familiares</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="Propia" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="Propia" class="u-field-input" />
                                     <label class="u-field-label">Propia</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="PropiaHipotecada" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="PropiaHipotecada" class="u-field-input" />
                                     <label class="u-field-label">Propia hipotecada</label>
                                 </div>
-                                <span class="text-danger"></span>
+                                <span asp-validation-for="TipoVivienda" class="text-danger"></span>
                             </div>
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-4"></div>

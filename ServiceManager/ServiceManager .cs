@@ -55,15 +55,13 @@ namespace ServiceManager
                 OTP = otp
             };
         }
-        public void ObtenerDatosCombinadosparabd()
+        public async Task ObtenerDatosCombinadosparabd()
         {
             var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
             var usuarioCookie = _cookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
             var direccionMapa = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
             var DatosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
-            var faceScan = _cookieService.ObtenerDatosCookie<Modelos.FaceScan>("FaceScanCookie");
-            var otp = _cookieService.ObtenerDatosCookie<OTP>("OTPCookie");
-
+     
             CuentaUsuario UsuarioGuardar = new Entidades.CuentaApertura.CuentaUsuario
             {
                 Identificacion = datosDactilares.Identificacion,
@@ -82,19 +80,16 @@ namespace ServiceManager
                 PaisNacimiento = DatosAdicionales.PaisNacimiento,
                 CiudadNacimiento = DatosAdicionales.CiudadNacimiento,
                 NivelDeInstruccion = DatosAdicionales.NivelDeInstruccion,
-                Dependiente = DatosAdicionales.Dependiente,
-                NegocioPropio = DatosAdicionales.NegocioPropio,
-                Ninguno = DatosAdicionales.Ninguno,
-                VivoConFamiliares = DatosAdicionales.VivoConFamiliares,
-                Propia = DatosAdicionales.Propia,
-                PropiaHipotecada = DatosAdicionales.PropiaHipotecada,
+                CondicionLaboral = DatosAdicionales.CondicionLaboral,
+                TipoVivienda = DatosAdicionales.TipoVivienda,
                 ActividadesEnOtroPais = DatosAdicionales.ActividadesEnOtroPais,
                 DetallesActividadesEnOtroPais = DatosAdicionales.DetallesActividadesEnOtroPais,
                 AceptoTerminos = DatosAdicionales.AceptoTerminos,
-                ImageUrl = faceScan.ImageUrl
+               
 
             };
-            _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
+             _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
+            //_repositorioManager.registrosRepository.ActualizarCuentaUsuarioAsync(UsuarioGuardar);
         }
 
         public void borrarCookie()
