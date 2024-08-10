@@ -7,6 +7,8 @@ using Services.AperturaCuenta;
 using Repositorio;
 using ServiceManager;
 using AspNetCoreHero.ToastNotification.Abstractions;
+using iText.Kernel.Pdf.Canvas.Wmf;
+using Entidades.CuentaApertura;
 
 namespace Presentacion.CuentaApertura.Controllers
 {
@@ -107,7 +109,7 @@ namespace Presentacion.CuentaApertura.Controllers
             return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> VerificarOtp(string Codigo)
+        public async Task<IActionResult> VerificarOtp(string Codigo ,string Estado , Entidades.CuentaApertura.RegistrosAuditoria RegistrosAuditoria)
         {
             var storedOtp = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie");
 
@@ -116,7 +118,27 @@ namespace Presentacion.CuentaApertura.Controllers
                 _serviceManager.CookieService.GuardarPasoActual(7);
                 // OTP válido, continuar con el siguiente paso
                 _serviceManager.SendPdfService();
+
+
                 _serviceManager.ObtenerDatosCombinadosparabd();
+                //
+
+                var qwe = _serviceManager.ObtenerDatosCombinados();
+
+                RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
+                {
+                    DireccionIP = "192.168.1.1",
+                    DatosNavegador = "Mozilla/5.0",
+                    Pais = "Ecuador",
+                    Fecha = DateTime.UtcNow,
+                    Identificacion = qwe.DatosDactilares.Identificacion,
+                    CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
+                    CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
+                };
+                Estado = "Valido";
+
+                _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
+
                 _notifyService.Success("El código OTP ingresado es válido.");
                 return RedirectToAction("Index", "Resumen_Final");
             }
@@ -125,6 +147,23 @@ namespace Presentacion.CuentaApertura.Controllers
                 // OTP no válido, mostrar error
                 ModelState.AddModelError(string.Empty, "El código OTP ingresado no es válido.");
                 _notifyService.Error("El código OTP ingresado no es válido.");
+
+                var qwe = _serviceManager.ObtenerDatosCombinados();
+
+                RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
+                {
+                    DireccionIP = "192.168.1.1",
+                    DatosNavegador = "Mozilla/5.0",
+                    Pais = qwe.InformacionPersonal.PaisNacimiento,
+                    Fecha = DateTime.UtcNow,
+                    Identificacion = qwe.DatosDactilares.Identificacion,
+                    CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
+                    CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
+                };
+                Estado = "Invalido";
+
+                _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
+
                 return RedirectToAction("Index", "OTP"); // Mostrar la vista OTP nuevamente
             }
         }

@@ -11,15 +11,21 @@ namespace Repositorio
         
         private  Lazy<IUsuarioRepository> _usuarioRepository;
 
-       
-        public RepositorioManager(DbContext context)
+        private Lazy<IRegistrosRepository> _registrosRepository;
+
+
+        public RepositorioManager(DbContext context )
         {
             _context = context;
             
             _usuarioRepository = new Lazy<IUsuarioRepository>(()=> new UsuarioRepository(_context));
+
+            _registrosRepository = new Lazy<IRegistrosRepository>(() => new RegistrosRepository(_context));
         }
 
         public IUsuarioRepository UsuarioRepository => _usuarioRepository.Value;
+
+        public IRegistrosRepository registrosRepository => _registrosRepository.Value;
 
         public async Task SaveAsync()
         {
@@ -33,3 +39,4 @@ namespace Repositorio
 
     }
 }
+
