@@ -2,6 +2,8 @@
 using ServiceManager;
 using Services.AperturaCuenta;
 using Interface.AperturaCuenta;
+using Repositorio.Interfaces;
+using Repositorio.Repositorios;
 
 namespace Presentacion.CuentaApertura.Extensions
 {
@@ -24,6 +26,10 @@ namespace Presentacion.CuentaApertura.Extensions
         public static void ConfigurePdfService(this IServiceCollection services)
         {
             services.AddScoped<IPdfService, PdfService>();
+        }
+        public static void ConfigureGuardarAuditoria(this IServiceCollection services)
+        {
+            services.AddScoped<IRegistrosRepository, RegistrosRepository>();
         }
     }
 }

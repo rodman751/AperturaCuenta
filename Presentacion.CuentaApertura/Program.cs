@@ -34,6 +34,7 @@ namespace Presentacion.CuentaApertura
             builder.Services.ConfigureCookieService();
             builder.Services.AddDataProtection();
             builder.Services.ConfigurePdfService();
+            builder.Services.ConfigureGuardarAuditoria();
             // notificaciones
             builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
 
