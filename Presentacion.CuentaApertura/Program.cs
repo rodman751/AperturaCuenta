@@ -32,7 +32,6 @@ namespace Presentacion.CuentaApertura
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            builder.Services.AddControllersWithViews();
 
             // Registra el servicio de datos dactilares
             
@@ -71,7 +70,7 @@ namespace Presentacion.CuentaApertura
 
             //cokkie
             app.UseAuthentication();
-            app.UseAuthorization();
+         
             //notificaiones
             app.UseNotyf();
             //

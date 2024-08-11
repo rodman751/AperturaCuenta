@@ -12,7 +12,6 @@ namespace Repositorio
         IUsuarioRepository UsuarioRepository { get; }
 
         IRegistrosRepository registrosRepository { get; }
-        Task SaveAsync();
-        void Save();
+        
     }
 }

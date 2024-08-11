@@ -207,8 +207,8 @@ namespace Presentacion.CuentaApertura.Controllers
 
                     _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
 
-
-                    _serviceManager.ObtenerDatosCombinadosparabd();
+                    CuentaUsuario UsuarioGuardar = new CuentaUsuario();
+                    _serviceManager.ObtenerDatosCombinadosParaBD(UsuarioGuardar);
 
 
                     _serviceManager.SendPdfService();

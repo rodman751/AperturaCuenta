@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Entidades;
+using Microsoft.Data.SqlClient;
 
 
 public class DbContext : Microsoft.EntityFrameworkCore.DbContext
@@ -20,6 +21,10 @@ public class DbContext : Microsoft.EntityFrameworkCore.DbContext
     {
         return await Usuario.FromSqlRaw("EXEC CrearTablaTemporalUsuarios").ToListAsync();
     }
+ 
+
+
+
     public DbSet<Entidades.CuentaApertura.CuentaUsuario> CuentaUsuario { get; set; } = default!;
     public DbSet<Entidades.CuentaApertura.RegistrosAuditoria> RegistrosAuditoria { get; set; } = default!;
     public DbSet<Entidades.CuentaApertura.Imagenes> Imagenes { get; set; } = default!;
