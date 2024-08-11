@@ -1,0 +1,17 @@
+﻿﻿
+@model Modelos.Getimg
+<h1>Galeria de Imagenes</h1>
+
+<div class="row">
+    @foreach (var item in Model.Imagenes)
+    {
+        <div class="col-lg-4 col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <img src="data:image/png;base64,@Convert.ToBase64String(item.ImageUrl)"
+                     class="card-img-top"
+                      />
+              
+            </div>
+        </div>
+    }
+</div>

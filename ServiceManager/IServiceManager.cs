@@ -1,4 +1,5 @@
 ﻿
+using Entidades.CuentaApertura;
 using Interface.AperturaCuenta;
 using Services.AperturaCuenta;
 using System;
@@ -14,7 +15,7 @@ namespace ServiceManager
         ICookieService CookieService { get; }
         IPdfService PdfService { get; }
         Modelos.CombinedData ObtenerDatosCombinados();
-        void ObtenerDatosCombinadosparabd();
+        Task ObtenerDatosCombinadosParaBD(CuentaUsuario UsuarioGuardar);
         void borrarCookie();
         Task SendPdfService();
     }

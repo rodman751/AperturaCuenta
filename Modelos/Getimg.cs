@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Modelos
 {
-    public class FaceScan
+    public class Getimg
     {
-  
-
-        public byte[] ImageUrl { get; set; }  // URL de la imagen del rostro
-
-
+        public List<FaceScan> Imagenes { get; set; }
     }
 }

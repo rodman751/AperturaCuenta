@@ -16,14 +16,10 @@ namespace Modelos
         public string NivelDeInstruccion { get; set; }
 
         // Condición Laboral
-        public bool Dependiente { get; set; }
-        public bool NegocioPropio { get; set; }
-        public bool Ninguno { get; set; }
+        public string CondicionLaboral { get; set; } // Dependiente, NegocioPropio, Ninguno
 
         // Tipo de Vivienda
-        public bool VivoConFamiliares { get; set; }
-        public bool Propia { get; set; }
-        public bool PropiaHipotecada { get; set; }
+        public string TipoVivienda { get; set; } // VivoConFamiliares, Propia, PropiaHipotecada
 
         // Actividades en otro país
         public bool ActividadesEnOtroPais { get; set; }

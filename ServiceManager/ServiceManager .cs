@@ -55,47 +55,42 @@ namespace ServiceManager
                 OTP = otp
             };
         }
-        public void ObtenerDatosCombinadosparabd()
+        public async Task ObtenerDatosCombinadosParaBD(CuentaUsuario UsuarioGuardar)
         {
+            // Obtener los datos de las cookies
             var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
             var usuarioCookie = _cookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
             var direccionMapa = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
-            var DatosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
-            var faceScan = _cookieService.ObtenerDatosCookie<Modelos.FaceScan>("FaceScanCookie");
-            var otp = _cookieService.ObtenerDatosCookie<OTP>("OTPCookie");
+            var datosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
 
-            CuentaUsuario UsuarioGuardar = new Entidades.CuentaApertura.CuentaUsuario
-            {
-                Identificacion = datosDactilares.Identificacion,
-                Codigo_Dactilar = datosDactilares.Codigo_Dactilar,
-                Nombre = usuarioCookie.Nombre,
-                Apellido = usuarioCookie.Apellido,
-                Telefono = usuarioCookie.Telefono,
-                Correo = usuarioCookie.Correo,
-                Provincia = direccionMapa.Provincia,
-                Canton = direccionMapa.Canton,
-                Parroquia = direccionMapa.Parroquia,
-                Direccion = direccionMapa.Direccion,
-                Referencia = direccionMapa.Referencia,
-                Ingresos = DatosAdicionales.Ingresos,
-                Gastos = DatosAdicionales.Gastos,
-                PaisNacimiento = DatosAdicionales.PaisNacimiento,
-                CiudadNacimiento = DatosAdicionales.CiudadNacimiento,
-                NivelDeInstruccion = DatosAdicionales.NivelDeInstruccion,
-                Dependiente = DatosAdicionales.Dependiente,
-                NegocioPropio = DatosAdicionales.NegocioPropio,
-                Ninguno = DatosAdicionales.Ninguno,
-                VivoConFamiliares = DatosAdicionales.VivoConFamiliares,
-                Propia = DatosAdicionales.Propia,
-                PropiaHipotecada = DatosAdicionales.PropiaHipotecada,
-                ActividadesEnOtroPais = DatosAdicionales.ActividadesEnOtroPais,
-                DetallesActividadesEnOtroPais = DatosAdicionales.DetallesActividadesEnOtroPais,
-                AceptoTerminos = DatosAdicionales.AceptoTerminos,
-                ImageUrl = faceScan.ImageUrl
+            // Asignar los valores a la instancia UsuarioGuardar
+            UsuarioGuardar.Identificacion = datosDactilares.Identificacion;
+            UsuarioGuardar.Codigo_Dactilar = datosDactilares.Codigo_Dactilar;
+            UsuarioGuardar.Nombre = usuarioCookie.Nombre;
+            UsuarioGuardar.Apellido = usuarioCookie.Apellido;
+            UsuarioGuardar.Telefono = usuarioCookie.Telefono;
+            UsuarioGuardar.Correo = usuarioCookie.Correo;
+            UsuarioGuardar.Provincia = direccionMapa.Provincia;
+            UsuarioGuardar.Canton = direccionMapa.Canton;
+            UsuarioGuardar.Parroquia = direccionMapa.Parroquia;
+            UsuarioGuardar.Direccion = direccionMapa.Direccion;
+            UsuarioGuardar.Referencia = direccionMapa.Referencia;
+            UsuarioGuardar.Ingresos = datosAdicionales.Ingresos;
+            UsuarioGuardar.Gastos = datosAdicionales.Gastos;
+            UsuarioGuardar.PaisNacimiento = datosAdicionales.PaisNacimiento;
+            UsuarioGuardar.CiudadNacimiento = datosAdicionales.CiudadNacimiento;
+            UsuarioGuardar.NivelDeInstruccion = datosAdicionales.NivelDeInstruccion;
+            UsuarioGuardar.CondicionLaboral = datosAdicionales.CondicionLaboral;
+            UsuarioGuardar.TipoVivienda = datosAdicionales.TipoVivienda;
+            UsuarioGuardar.ActividadesEnOtroPais = datosAdicionales.ActividadesEnOtroPais;
+            UsuarioGuardar.DetallesActividadesEnOtroPais = datosAdicionales.DetallesActividadesEnOtroPais;
+            UsuarioGuardar.AceptoTerminos = datosAdicionales.AceptoTerminos;
 
-            };
-            _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
+            // Guardar el usuario en el repositorio
+            await _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
+            //await _repositorioManager.UsuarioRepository.EjecutarPA_obtenerURLimage();
         }
+
 
         public void borrarCookie()
         {
