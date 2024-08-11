@@ -3,6 +3,17 @@
     background-image: none;
 }
 
+.u-video-container {
+    position: center;
+    width: 282px; /* Ajusta el tamaño del contenedor aquí */
+    height: 300px; /* Ajusta el tamaño del contenedor aquí */
+    border: 2px solid #ccc; /* Opcional: Bordes para visualizar el contenedor */
+    border-radius: 10px; /* Opcional: Bordes redondeados */
+    overflow: hidden; /* Opcional: Para asegurarte de que el video y el canvas no se desborden */
+    background-color: #000; /* Opcional: Fondo negro para mejor contraste */
+    margin-left: 21.5%;
+}
+
     .u-section-1 .u-sheet-1 {
         min-height: 794px;
     }
@@ -75,6 +86,7 @@
     --radius: 20px;
 }
 
+
 @media (max-width: 1199px) {
     .u-section-1 .u-group-1 {
         height: auto;
@@ -106,6 +118,14 @@
 }
 
 @media (max-width: 767px) {
+
+    .u-video-container {
+        width: 235px; /* El contenedor se ajusta al 100% del ancho de la pantalla */
+        height: 250px; /* Mantiene la proporción del video al ajustar el ancho */
+        max-width: 282px; /* Máximo ancho permitido */
+        margin: 20px auto; /* Centra el contenedor con un margen superior/inferior */
+        margin-left: 15.5%;
+    }
     .u-section-1 .u-container-layout-1 {
         padding-left: 30px;
         padding-right: 30px;
@@ -139,11 +159,12 @@
     }
 
     .u-section-1 .u-image-1 {
-        height: 219px;
+        height: 260px;
         margin-top: 29px;
         margin-right: initial;
         margin-left: initial;
         width: auto;
+       
     }
 
     .u-section-1 .u-text-1 {

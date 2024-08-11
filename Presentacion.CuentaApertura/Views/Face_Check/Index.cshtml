@@ -53,7 +53,9 @@
             border-radius: 10px; /* Opcional: Bordes redondeados */
             overflow: hidden; /* Opcional: Para asegurarte de que el video y el canvas no se desborden */
             background-color: #000; /* Opcional: Fondo negro para mejor contraste */
+
         }
+
 
         canvas {
             position: absolute;
@@ -62,6 +64,7 @@
             width: 100%;
             height: 100%;
         }
+        
     </style>
 </head>
 
@@ -75,18 +78,18 @@
             <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
                 <div class="u-container-layout u-container-layout">
             <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
-            <center>
-                <div class="custom-expanded u-border-1 u-border-custom-color-2 u-container-style u-group u-radius u-shape-round u-group-2" style=" margin-left: 0px; margin-right: 0px;">
+            
+                <div class=" u-container-style u-group u-radius u-shape-round u-group-2" >
                     <div class="u-container-layout u-container-layout-2">
-                        <div class="u-container-layout u-container-layout-2">
-                            <div class="video-container">
+                        
+                            <div class="u-video-container">
                                 <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
                                 <canvas id="overlay"></canvas>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
-            </center>
+            
             <h3 class="u-text u-text-default u-text-1">
               <br>Reconocimiento Facial
             </h3>
