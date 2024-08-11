@@ -28,7 +28,7 @@
         :where([autocomplete=one-time-code]) {
             --otp-digits: 6;
             --otp-ls: 2ch;
-            --otp-gap: 1.25;
+            --otp-gap: 1.15;
             /* private consts */
             --_otp-bgsz: calc(var(--otp-ls) + 1ch);
             --_otp-digit: 0;
@@ -39,7 +39,7 @@
             background-size: var(--_otp-bgsz) 100%;
             caret-color: var(--otp-cc, #222);
             caret-shape: block;
-            clip-path: inset(0% calc(var(--otp-ls) / 2) 0% 0%);
+            /* clip-path: inset(0% calc(var(--otp-ls) / 2) 0% 0%); */
             font-family: ui-monospace, monospace;
             font-size: var(--otp-fz, 2.5em);
             inline-size: calc(var(--otp-digits) * var(--_otp-bgsz));
@@ -69,7 +69,7 @@
                     <h3 class="u-text u-text-default u-text-1">
                         <br>Apertura <span style="font-weight: 700;">
                             <span style="font-weight: 400;">
-                                <span style="font-weight: 700;"></span>
+                                <span style="font-weight: 700;"></span> 
                             </span>
                         </span>tu cuenta
                     </h3>
@@ -79,21 +79,16 @@
 
                             <p class="u-form-group u-form-text u-label-none u-text u-text-2">Código de Seguridad enviado a su email / Teléfono</p>
 
-                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-2"></div>
-
+                            
                             <div class="u-form-group u-label-none u-form-group-4">
                                 <label asp-for="Codigo" class="u-label u-label-1">OTP</label>
-                                <input asp-for="Codigo" type="text" placeholder="" id="text-56b0" class="u-border-2 u-border-grey-10 u-gradient u-input u-input-rectangle u-none u-radius u-input-1" required="required">
+                                <input asp-for="Codigo" type="text" placeholder="******" id="text-56b0" class="u-border-1 u-border-grey-10 u-gradient u-input u-input-rectangle u-none u-radius u-input-1" type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" pattern="\d{6}" required="required" style="--_otp-digit: 6;width: 192px;margin-left: 27.3%;" >
                                 <span asp-validation-for="Codigo" class="text-danger"></span>
                             </div>
-
-                            <div class="u-align-center u-form-group">
-                                <label>
-                                    <p class="u-form-group u-form-text u-label-none u-text u-text-2">Código de Seguridad enviado a su email / Teléfono</p>
-                                    <input type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" pattern="\d{6}">
-                                </label>
-                            </div>
                             
+                            
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-none u-line u-line-horizontal u-line-2"></div>
+
 
                             <div class="u-align-left u-form-group u-form-submit u-label-none">
                                 <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
@@ -119,6 +114,8 @@
     <script>
         const input = document.querySelector('[autocomplete=one-time-code');
         input.addEventListener('input', () => input.style.setProperty('--_otp-digit', input.selectionStart));
+
     </script>
+
 }
 </html>
