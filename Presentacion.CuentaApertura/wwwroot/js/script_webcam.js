@@ -10,7 +10,7 @@ function captureImage() {
     const canvas = document.createElement('canvas');
     const context = canvas.getContext('2d');
 
-    // Configura el tamaño del canvas para que coincida con el tamaño del video
+    // Configura el tamaï¿½o del canvas para que coincida con el tamaï¿½o del video
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
@@ -50,8 +50,8 @@ async function onPlay() {
         const base64Image = captureImage();
        
         await sendImageToServer(base64Image);  // Enviar la imagen al servidor
-        console.log("", base64Image)
-       
+
+       //console.log("", base64Image)
     }
 
 
@@ -72,7 +72,16 @@ async function sendImageToServer(base64Image) {
         });
 
         if (response.ok) {
-            console.log('Imagen enviada con éxito');
+            console.log('Imagen enviada con ï¿½xito');
+
+            const btn = document.getElementById('btnContinuar');
+            console.log(btn);
+            if (btn) {
+                btn.style.display = 'block';
+            } else {
+                console.error('Botï¿½n no encontrado');
+            }
+
         } else {
             console.error('Error al enviar la imagen', response.status, await response.text());
         }

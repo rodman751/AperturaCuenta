@@ -70,6 +70,7 @@
   <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
     
     <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
+
         <div class="u-clearfix u-sheet u-sheet-1">
             <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
                 <div class="u-container-layout u-container-layout">
@@ -89,13 +90,12 @@
             <h3 class="u-text u-text-default u-text-1">
               <br>Reconocimiento Facial
             </h3>
-                    <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-1"> SONRIE!!</p>
             <div class="u-form u-form-1">
-                <form asp-action="Camara" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="Camara" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
                 <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
-                            <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
+                        <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
+                                <button id="btnContinuar" name="btnContinuar" type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" style="display: none;">CONTINUAR</button>
                             </div>
                 <div class="u-form-send-message u-form-send-success">Correcto</div>
                 <div class="u-form-send-error u-form-send-message">Error</div>
@@ -107,8 +107,26 @@
         </div>
       </div>
     </section>
-    
- 
+
+    <!-- Modal 1: No usar gorras, lentes y levantar el pelo -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+           
+            <p>Por favor, en este paso no uses gorras, lentes y evita tapar tu rostro.</p>
+            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+        </div>
+    </div>
+
+    <!-- Modal 2: Sonríe a la cámara -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            
+            <p>Sonríe a la cámara.</p>
+            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+        </div>
+    </div>
+    <link href="~/css/Modals.css" rel="stylesheet" />
+
 </body>
 @section Scripts {
 
@@ -128,7 +146,51 @@
         }
 
         // Ejecutar la función al cargar la vista
-        document.addEventListener('DOMContentLoaded', activateCamera);
+    document.addEventListener('DOMContentLoaded', activateCamera);
+
+        // Mostrar el primer modal al cargar la vista
+    document.addEventListener('DOMContentLoaded', function() {
+    var modal1 = document.getElementById('modal1');
+    var modal2 = document.getElementById('modal2');
+    
+    // Mostrar el primer modal
+     setTimeout(function() {
+        modal1.style.display = 'block';
+    }, 2000);
+            setTimeout(function () {
+                modal1.style.display = 'none';
+            }, 7000);
+
+
+
+            // Mostrar el segundo modal después de unos segundos (por ejemplo, 5 segundos)
+    setTimeout(function() {
+        modal2.style.display = 'block';
+    }, 9000);
+            setTimeout(function () {
+                modal2.style.display = 'none';
+            }, 12000);
+    // Cerrar el primer modal
+    document.getElementById('closeModal1').onclick = function() {
+        modal1.style.display = 'none';
+    }
+
+    // Cerrar el segundo modal
+    document.getElementById('closeModal2').onclick = function() {
+        modal2.style.display = 'none';
+    }
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (event.target == modal1) {
+            modal1.style.display = 'none';
+        }
+        if (event.target == modal2) {
+            modal2.style.display = 'none';
+        }
+    }
+});
+
     </script>
 }
 </html>

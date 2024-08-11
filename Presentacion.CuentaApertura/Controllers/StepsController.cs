@@ -80,6 +80,12 @@ namespace Presentacion.CuentaApertura.Controllers
         {
             
             //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", data);
+            var paso= _serviceManager.CookieService.ObtenerPasoActual();
+            if (paso == 5)
+            {
+                ViewBag.Message = "Ya se ha realizado el paso de Face Scan";
+            }
+           
 
             return RedirectToAction("Index", "Face_scan");
         }
@@ -127,15 +133,18 @@ namespace Presentacion.CuentaApertura.Controllers
                 };
 
                 await _repositoryManager.registrosRepository.GuardarImagen(model);
-                _serviceManager.CookieService.GuardarPasoActual(5);
+                
+
 
                 FaceScan model2 = new FaceScan
                 {
                     ImageUrl = imageBytes
                 };
-               // _serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model2);
+                // _serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model2);
+                _serviceManager.CookieService.GuardarPasoActual(5);
 
-                return RedirectToAction("Index", "Face_scan");
+                //return RedirectToAction("Index", "Face_scan");
+                return Json(new { success = true, redirectUrl = Url.Action("Index", "Face_scan") });
             }
             catch (FormatException ex)
             {
