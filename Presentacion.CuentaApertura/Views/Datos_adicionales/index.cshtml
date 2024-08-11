@@ -57,13 +57,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
                                 <label asp-for="Ingresos" class="u-label u-label-3">Ingresos:</label>
-                                <input asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" required />
+                                <input asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
                                 <span asp-validation-for="Ingresos" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
                                 <label asp-for="Gastos" class="u-label u-label-4">Gastos:</label>
-                                <input asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" required />
+                                <input asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
                                 <span asp-validation-for="Gastos" class="text-danger"></span>
                             </div>
 
@@ -71,13 +71,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-8">
                                 <label asp-for="PaisNacimiento" class="u-label u-label-5">Pais de Nacimiento:</label>
-                                <input asp-for="PaisNacimiento" placeholder="Ingrese el Pais de Nacimiento" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
+                                <input asp-for="PaisNacimiento" placeholder="Ingrese su Pais de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
                                 <span asp-validation-for="PaisNacimiento" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-9">
                                 <label asp-for="CiudadNacimiento" class="u-label u-label-6"> Ciudad de Nacimiento:</label>
-                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su apellido" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required />
+                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su Ciudad de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required />
                                 <span asp-validation-for="CiudadNacimiento" class="text-danger"></span>
                             </div>
 
@@ -101,15 +101,15 @@
                             <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
                                 <label class="u-label u-label-8">Condición laboral</label>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="CondicionLaboral" type="radio" value="Dependiente" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="Dependiente" class="u-field-input" required />
                                     <label class="u-field-label">Dependiente</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="CondicionLaboral" type="radio" value="NegocioPropio" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="NegocioPropio" class="u-field-input" required />
                                     <label class="u-field-label">Negocio Propio</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="CondicionLaboral" type="radio" value="Ninguno" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="Ninguno" class="u-field-input" required />
                                     <label class="u-field-label">Ninguno</label>
                                 </div>
                                 <span asp-validation-for="CondicionLaboral" class="text-danger"></span>
@@ -118,15 +118,15 @@
                             <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-12">
                                 <label class="u-label u-label-9">Tipo Vivienda:</label>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="TipoVivienda" type="radio" value="VivoConFamiliares" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="VivoConFamiliares" class="u-field-input" required />
                                     <label class="u-field-label">Vivo con familiares</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="TipoVivienda" type="radio" value="Propia" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="Propia" class="u-field-input" required />
                                     <label class="u-field-label">Propia</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="TipoVivienda" type="radio" value="PropiaHipotecada" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="PropiaHipotecada" class="u-field-input" required />
                                     <label class="u-field-label">Propia hipotecada</label>
                                 </div>
                                 <span asp-validation-for="TipoVivienda" class="text-danger"></span>

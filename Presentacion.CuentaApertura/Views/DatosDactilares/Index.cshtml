@@ -43,12 +43,12 @@
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
                             <div class="u-form-group u-form-name u-label-top">
                                 <label asp-for="Identificacion" class="u-label u-label-1">IDENTIFICACIÓN</label>
-                                <input asp-for="Identificacion" type="text" placeholder="Ingresa tu Identificación" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" />
+                                <input asp-for="Identificacion" type="text" placeholder="Ingresa tu Identificación" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required/>
                                 <span asp-validation-for="Identificacion" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-label-top u-form-group-3">
                                 <label asp-for="Codigo_Dactilar" class="u-label u-label-2">CÓDIGO DACTILAR</label>
-                                <input asp-for="Codigo_Dactilar" type="text" placeholder="Ingresa tu Código Dactilar" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" />
+                                <input asp-for="Codigo_Dactilar" type="text" placeholder="Ingresa tu Código Dactilar" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius-20" maxlength="10" required />
                                 <span asp-validation-for="Codigo_Dactilar" class="text-danger"></span>
                             </div>
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
