@@ -209,7 +209,7 @@ namespace Presentacion.CuentaApertura.Controllers
                     DireccionIP = ipAddress,
                     DatosNavegador = userAgent,
                     Pais = qwe.InformacionPersonal.PaisNacimiento,
-                    Fecha = DateTime.UtcNow,
+                    Fecha = DateTime.UtcNow,     
                     Identificacion = qwe.DatosDactilares.Identificacion,
                     CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
                     CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,

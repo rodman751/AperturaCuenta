@@ -25,9 +25,9 @@
 }
 
 .u-section-1 .u-image-1 {
-  width: 307px;
-  height: 197px;
-  margin: 0 auto;
+  width: 340px;
+  height: 250px;
+  margin: 30px auto;
 }
 
 .u-section-1 .u-text-1 {
@@ -268,10 +268,11 @@
     padding-right: 0;
   }
 
-  .u-section-1 .u-image-1 {
-    margin-left: 0;
-    margin-right: 0;
-  }
+    .u-section-1 .u-image-1 {
+        
+        margin-right: 0;
+        
+    }
 
   .u-section-1 .u-form-1 {
     width: 340px;
