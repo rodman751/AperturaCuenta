@@ -12,8 +12,6 @@
     <title>Page_2</title>
     <link rel="stylesheet" href="./css/nicepage.css" media="screen">
     <link rel="stylesheet" href="./css/Page_2.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 6.14.4, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -278,25 +276,31 @@
 
             // Estilos para las sugerencias
             document.head.insertAdjacentHTML('beforeend', `
-                    <style>
-                        .suggestions {
-                            border: 1px solid #ddd;
-                            max-height: 150px;
-                            overflow-y: auto;
-                            position: absolute;
-                            background-color: white;
-                            z-index: 1000;
-                        }
-                        .suggestion-item {
-                            color: black;
-                            padding: 8px;
-                            cursor: pointer;
-                        }
-                        .suggestion-item:hover {
-                            background-color: #f0f0f0;
-                        }
-                    </style>
-                `);
+                            <style>
+                                .suggestions {
+                                    border: 1px solid #ddd;
+                                    max-height: 150px;
+                                    overflow-y: auto;
+                                    position: absolute;
+                                    background-color: white;
+                                    z-index: 1000;
+                                    border-radius: 8px;
+                                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                                    font-family: 'Roboto', sans-serif;
+                                }
+                                .suggestion-item {
+                                    color: #333;
+                                    padding: 12px;
+                                    cursor: pointer;
+                                    transition: background-color 0.3s ease, color 0.3s ease;
+                                    font-family: 'Montserrat', sans-serif;
+                                }
+                                .suggestion-item:hover {
+                                    background-color: #e0e0e0;
+                                    color: #007bff;
+                                }
+                            </style>
+                        `);
         </script>
 
 
