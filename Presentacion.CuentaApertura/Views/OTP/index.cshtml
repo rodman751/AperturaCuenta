@@ -35,7 +35,7 @@
             all: unset;
             
             background-position: calc(var(--_otp-digit) * var(--_otp-bgsz)) 0, 0 0;
-            background-repeat: no-repeat, repeat-x;
+            /* background-repeat: no-repeat, repeat-x; */
             background-size: var(--_otp-bgsz) 100%;
             caret-color: var(--otp-cc, #222);
             caret-shape: block;
@@ -82,7 +82,7 @@
                             
                             <div class="u-form-group u-label-none u-form-group-4">
                                 <label asp-for="Codigo" class="u-label u-label-1">OTP</label>
-                                <input asp-for="Codigo" type="text" placeholder="******" id="text-56b0" class="u-border-1 u-border-grey-10 u-gradient u-input u-input-rectangle u-none u-radius u-input-1" type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" pattern="\d{6}" required="required" style="--_otp-digit: 6;width: 192px;margin-left: 27.3%;" >
+                                <input asp-for="Codigo" type="text" placeholder="******" id="text-56b0" class="u-align-center u-border-1 u-border-grey-10 u-gradient u-input u-input-rectangle u-none u-radius u-input-1" type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" pattern="\d{6}" required="required" style="--_otp-digit: 6;" >
                                 <span asp-validation-for="Codigo" class="text-danger"></span>
                             </div>
                             
