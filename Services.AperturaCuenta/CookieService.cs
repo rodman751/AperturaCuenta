@@ -29,7 +29,7 @@ namespace Services.AperturaCuenta
         {
             var options = new CookieOptions
             {
-                Expires = DateTimeOffset.UtcNow.AddMinutes(5) // Expiración de la cookie
+                Expires = DateTimeOffset.UtcNow.AddMinutes(20) // Expiración de la cookie
             };
 
             // Serializar los datos como JSON para almacenarlos en la cookie
@@ -104,7 +104,9 @@ namespace Services.AperturaCuenta
         {
             var options = new CookieOptions
             {
-                Expires = DateTimeOffset.UtcNow.AddMinutes(5)
+
+                Expires = DateTimeOffset.UtcNow.AddMinutes(18)
+
             };
 
             _httpContextAccessor.HttpContext?.Response.Cookies.Append("PasoActualCookie", paso.ToString(), options);

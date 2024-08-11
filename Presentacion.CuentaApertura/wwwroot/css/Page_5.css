@@ -56,10 +56,11 @@
   text-transform: uppercase;
 }
 
-.u-section-1 .u-input-1 {
-  --radius: 20px;
-  background-image: linear-gradient(to right, #344ce0, #344ce0);
-}
+    .u-section-1 .u-input-1 {
+        --radius: 20px;
+        background-image: linear-gradient(to right, #344ce0, #344ce0);
+        
+    }
 
 .u-section-1 .u-btn-1 {
   border-style: none;

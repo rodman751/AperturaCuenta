@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositorio;
 using Services.AperturaCuenta;
+using Entidades.CuentaApertura;
 
 namespace ServiceManager
 {
@@ -24,10 +25,12 @@ namespace ServiceManager
 
         private readonly ICookieService _cookieService;
         private readonly IPdfService _pdfService;
-        public ServiceManager(ICookieService cookieService, IPdfService pdfService)
+        private readonly IRepositorioManager _repositorioManager;
+        public ServiceManager(ICookieService cookieService, IPdfService pdfService, IRepositorioManager repositorioManager)
         {
             _cookieService = cookieService;
             _pdfService = pdfService;
+            _repositorioManager = repositorioManager;
         }
 
         public ICookieService CookieService => _cookieService;
@@ -52,6 +55,42 @@ namespace ServiceManager
                 OTP = otp
             };
         }
+        public async Task ObtenerDatosCombinadosParaBD(CuentaUsuario UsuarioGuardar)
+        {
+            // Obtener los datos de las cookies
+            var datosDactilares = _cookieService.ObtenerDatosCookie<DatosDactilares>("DatosDactilaresCookie");
+            var usuarioCookie = _cookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
+            var direccionMapa = _cookieService.ObtenerDatosCookie<DireccionMapa>("DireccionMCokkie");
+            var datosAdicionales = _cookieService.ObtenerDatosCookie<InformacionPersonal>("GuardarDatos_Adicionales");
+
+            // Asignar los valores a la instancia UsuarioGuardar
+            UsuarioGuardar.Identificacion = datosDactilares.Identificacion;
+            UsuarioGuardar.Codigo_Dactilar = datosDactilares.Codigo_Dactilar;
+            UsuarioGuardar.Nombre = usuarioCookie.Nombre;
+            UsuarioGuardar.Apellido = usuarioCookie.Apellido;
+            UsuarioGuardar.Telefono = usuarioCookie.Telefono;
+            UsuarioGuardar.Correo = usuarioCookie.Correo;
+            UsuarioGuardar.Provincia = direccionMapa.Provincia;
+            UsuarioGuardar.Canton = direccionMapa.Canton;
+            UsuarioGuardar.Parroquia = direccionMapa.Parroquia;
+            UsuarioGuardar.Direccion = direccionMapa.Direccion;
+            UsuarioGuardar.Referencia = direccionMapa.Referencia;
+            UsuarioGuardar.Ingresos = datosAdicionales.Ingresos;
+            UsuarioGuardar.Gastos = datosAdicionales.Gastos;
+            UsuarioGuardar.PaisNacimiento = datosAdicionales.PaisNacimiento;
+            UsuarioGuardar.CiudadNacimiento = datosAdicionales.CiudadNacimiento;
+            UsuarioGuardar.NivelDeInstruccion = datosAdicionales.NivelDeInstruccion;
+            UsuarioGuardar.CondicionLaboral = datosAdicionales.CondicionLaboral;
+            UsuarioGuardar.TipoVivienda = datosAdicionales.TipoVivienda;
+            UsuarioGuardar.ActividadesEnOtroPais = datosAdicionales.ActividadesEnOtroPais;
+            UsuarioGuardar.DetallesActividadesEnOtroPais = datosAdicionales.DetallesActividadesEnOtroPais;
+            UsuarioGuardar.AceptoTerminos = datosAdicionales.AceptoTerminos;
+
+            // Guardar el usuario en el repositorio
+            await _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
+            //await _repositorioManager.UsuarioRepository.EjecutarPA_obtenerURLimage();
+        }
+
 
         public void borrarCookie()
         {

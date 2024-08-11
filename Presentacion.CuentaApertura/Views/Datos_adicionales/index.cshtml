@@ -13,9 +13,6 @@
     <title>Page_3</title>
     <link rel="stylesheet" href="./css/nicepage.css" media="screen">
     <link rel="stylesheet" href="./css/Page_3.css" media="screen">
-    
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 6.14.4, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -32,7 +29,7 @@
         <div class="u-clearfix u-sheet u-sheet-1">
             <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
                 <div class="u-container-layout u-container-layout-1">
-                    <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
+                    <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476" style="margin-top: 20px;">
                     <h3 class="u-text u-text-1">
                         <br>Apertura <span style="font-weight: 700;">
                             <span style="font-weight: 400;">
@@ -41,7 +38,7 @@
                         </span>tu cuenta
                     </h3>
                     <div class="u-form u-form-1">
-                        <form asp-action="GuardarDatos_Adicionales" asp-controller="Steps" class="u-clearfix u-form-spacing-13 u-form-vertical u-inner-form" method="post" style="padding: 5px;">
+                        <form asp-action="GuardarDatos_Adicionales" asp-controller="Steps" class="u-clearfix u-form-spacing-13 u-form-vertical u-inner-form" method="post" style="padding: 50px;">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
@@ -60,13 +57,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
                                 <label asp-for="Ingresos" class="u-label u-label-3">Ingresos:</label>
-                                <input asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" required />
+                                <input asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
                                 <span asp-validation-for="Ingresos" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
                                 <label asp-for="Gastos" class="u-label u-label-4">Gastos:</label>
-                                <input asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" required />
+                                <input asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
                                 <span asp-validation-for="Gastos" class="text-danger"></span>
                             </div>
 
@@ -74,13 +71,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-8">
                                 <label asp-for="PaisNacimiento" class="u-label u-label-5">Pais de Nacimiento:</label>
-                                <input asp-for="PaisNacimiento" placeholder="Ingrese el Pais de Nacimiento" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
+                                <input asp-for="PaisNacimiento" placeholder="Ingrese su Pais de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
                                 <span asp-validation-for="PaisNacimiento" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-9">
                                 <label asp-for="CiudadNacimiento" class="u-label u-label-6"> Ciudad de Nacimiento:</label>
-                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su apellido" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required />
+                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su Ciudad de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required />
                                 <span asp-validation-for="CiudadNacimiento" class="text-danger"></span>
                             </div>
 
@@ -104,36 +101,35 @@
                             <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
                                 <label class="u-label u-label-8">Condición laboral</label>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="Dependiente" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="Dependiente" class="u-field-input" required />
                                     <label class="u-field-label">Dependiente</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="NegocioPropio" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="NegocioPropio" class="u-field-input" required />
                                     <label class="u-field-label">Negocio Propio</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="Ninguno" type="radio" name="CondicionLaboral" value="true" class="u-field-input" />
+                                    <input asp-for="CondicionLaboral" type="radio" value="Ninguno" class="u-field-input" required />
                                     <label class="u-field-label">Ninguno</label>
                                 </div>
-                                <span class="text-danger"></span>
+                                <span asp-validation-for="CondicionLaboral" class="text-danger"></span>
                             </div>
-
-                            <!-- Tipo de Vivienda -->
+                            <!-- Condición vivienda -->
                             <div class="u-form-group u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-12">
                                 <label class="u-label u-label-9">Tipo Vivienda:</label>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="VivoConFamiliares" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
-                                    <label class="u-field-label">Vivo con familiares.</label>
+                                    <input asp-for="TipoVivienda" type="radio" value="VivoConFamiliares" class="u-field-input" required />
+                                    <label class="u-field-label">Vivo con familiares</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="Propia" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="Propia" class="u-field-input" required />
                                     <label class="u-field-label">Propia</label>
                                 </div>
                                 <div class="u-form-radio-button-wrapper">
-                                    <input asp-for="PropiaHipotecada" type="radio" name="TipoVivienda" value="true" class="u-field-input" />
+                                    <input asp-for="TipoVivienda" type="radio" value="PropiaHipotecada" class="u-field-input" required />
                                     <label class="u-field-label">Propia hipotecada</label>
                                 </div>
-                                <span class="text-danger"></span>
+                                <span asp-validation-for="TipoVivienda" class="text-danger"></span>
                             </div>
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-4"></div>

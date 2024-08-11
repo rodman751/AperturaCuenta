@@ -13,8 +13,6 @@
     <title>Page_1</title>
     <link rel="stylesheet" href="./css/nicepage.css" media="screen">
     <link rel="stylesheet" href="./css/Page_1.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 6.14.4, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -54,7 +52,7 @@
                             </div>
                             <div class="u-form-group u-label-top u-form-group-4">
                                 <label asp-for="Telefono" class="u-label u-label-3">Teléfono:</label>
-                                <input asp-for="Telefono" placeholder="Ingresa tu Teléfono." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" />
+                                <input asp-for="Telefono" placeholder="Ingresa tu Teléfono." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
                                 <span asp-validation-for="Telefono" class="text-danger"></span>
                             </div>
                             <div class="u-form-email u-form-group u-label-top u-form-group-5">

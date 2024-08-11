@@ -1,6 +1,7 @@
 @{
     ViewData["Title"] = "Paso 4.5: Face Check";
 }
+@model Modelos.FaceScan
 <!DOCTYPE html>
 <html style="font-size: 16px;" lang="es"><head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +11,6 @@
     <title>Page_4_5</title>
     <link rel="stylesheet" href="/css/nicepage.css" media="screen">
     <link rel="stylesheet" href="/css/Page_4_5.css" media="screen">
-    <script class="u-script" type="text/javascript" src="jquery.js" defer=""></script>
-    <script class="u-script" type="text/javascript" src="nicepage.js" defer=""></script>
     <meta name="generator" content="Nicepage 6.15.2, nicepage.com">
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
@@ -48,13 +47,15 @@
 
         .video-container {
             position: center;
-            width: 300px; /* Ajusta el tamaño del contenedor aquí */
+            width: 282px; /* Ajusta el tamaño del contenedor aquí */
             height: 300px; /* Ajusta el tamaño del contenedor aquí */
             border: 2px solid #ccc; /* Opcional: Bordes para visualizar el contenedor */
             border-radius: 10px; /* Opcional: Bordes redondeados */
             overflow: hidden; /* Opcional: Para asegurarte de que el video y el canvas no se desborden */
             background-color: #000; /* Opcional: Fondo negro para mejor contraste */
+
         }
+
 
         canvas {
             position: absolute;
@@ -63,6 +64,7 @@
             width: 100%;
             height: 100%;
         }
+        
     </style>
 </head>
 
@@ -71,32 +73,33 @@
   <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
     
     <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
-      <div class="u-clearfix u-sheet u-sheet-1">
-        <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
-          <div class="u-container-layout u-container-layout-1">
+
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
+                <div class="u-container-layout u-container-layout">
             <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
-            <center>
-                        <div class="custom-expanded u-border-1 u-border-custom-color-2 u-container-style u-group u-radius u-shape-round u-group-2">
-                            <div class="u-container-layout u-container-layout-2">
-                                <div class="u-container-layout u-container-layout-2">
-                                    <div class="video-container">
-                                        <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
-                                        <canvas id="overlay"></canvas>
-                                    </div>
-                                </div>
+            
+                <div class=" u-container-style u-group u-radius u-shape-round u-group-2" >
+                    <div class="u-container-layout u-container-layout-2">
+                        
+                            <div class="u-video-container">
+                                <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+                                <canvas id="overlay"></canvas>
                             </div>
-                        </div>
-            </center>
+                        
+                    </div>
+                </div>
+            
             <h3 class="u-text u-text-default u-text-1">
               <br>Reconocimiento Facial
             </h3>
             <div class="u-form u-form-1">
-              <form action="https://forms.nicepagesrv.com/v2/form/process" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="Camara" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
                 <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
-                <div class="u-align-left u-form-group u-form-submit u-label-top">
-                  <input type="submit" value="submit" class="u-form-control-hidden">
-                  <a href="#" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</a>
-                </div>
+                        <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
+                            <div class="u-align-left u-form-group u-form-submit u-label-top">
+                                <button id="btnContinuar" name="btnContinuar" type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" style="display: none;">CONTINUAR</button>
+                            </div>
                 <div class="u-form-send-message u-form-send-success">Correcto</div>
                 <div class="u-form-send-error u-form-send-message">Error</div>
                 <input type="hidden" value="" name="recaptchaResponse">
@@ -107,8 +110,26 @@
         </div>
       </div>
     </section>
-    
- 
+
+    <!-- Modal 1: No usar gorras, lentes y levantar el pelo -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+           
+            <p>Por favor, en este paso no uses gorras, lentes y evita tapar tu rostro.</p>
+            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+        </div>
+    </div>
+
+    <!-- Modal 2: Sonríe a la cámara -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            
+            <p>Sonríe a la cámara.</p>
+            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+        </div>
+    </div>
+    <link href="~/css/Modals.css" rel="stylesheet" />
+
 </body>
 @section Scripts {
 
@@ -123,12 +144,56 @@
                 console.log('Cámara activada.');
             } else {
                 alert('Por favor, permite el acceso a la cámara en el primer paso.');
-                window.location.href = '/home';
+               
             }
         }
 
         // Ejecutar la función al cargar la vista
-        document.addEventListener('DOMContentLoaded', activateCamera);
+    document.addEventListener('DOMContentLoaded', activateCamera);
+
+        // Mostrar el primer modal al cargar la vista
+    document.addEventListener('DOMContentLoaded', function() {
+    var modal1 = document.getElementById('modal1');
+    var modal2 = document.getElementById('modal2');
+    
+    // Mostrar el primer modal
+     setTimeout(function() {
+        modal1.style.display = 'block';
+    }, 2000);
+            setTimeout(function () {
+                modal1.style.display = 'none';
+            }, 7000);
+
+
+
+            // Mostrar el segundo modal después de unos segundos (por ejemplo, 5 segundos)
+    setTimeout(function() {
+        modal2.style.display = 'block';
+    }, 9000);
+            setTimeout(function () {
+                modal2.style.display = 'none';
+            }, 12000);
+    // Cerrar el primer modal
+    document.getElementById('closeModal1').onclick = function() {
+        modal1.style.display = 'none';
+    }
+
+    // Cerrar el segundo modal
+    document.getElementById('closeModal2').onclick = function() {
+        modal2.style.display = 'none';
+    }
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (event.target == modal1) {
+            modal1.style.display = 'none';
+        }
+        if (event.target == modal2) {
+            modal2.style.display = 'none';
+        }
+    }
+});
+
     </script>
 }
 </html>

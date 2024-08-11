@@ -10,7 +10,8 @@ namespace Repositorio
     public interface IRepositorioManager
     {
         IUsuarioRepository UsuarioRepository { get; }
-        Task SaveAsync();
-        void Save();
+
+        IRegistrosRepository registrosRepository { get; }
+        
     }
 }
