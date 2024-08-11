@@ -198,11 +198,16 @@ namespace Presentacion.CuentaApertura.Controllers
                 // OTP válido, continuar con el siguiente paso
                 
                 var qwe = _serviceManager.ObtenerDatosCombinados();
+                string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                // Obtener el User-Agent del navegador
+                string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
+
 
                 RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
                 {
-                    DireccionIP = "192.168.1.1",
-                    DatosNavegador = "Mozilla/5.0",
+                    DireccionIP = ipAddress,
+                    DatosNavegador = userAgent,
                     Pais = qwe.InformacionPersonal.PaisNacimiento,
                     Fecha = DateTime.UtcNow,
                     Identificacion = qwe.DatosDactilares.Identificacion,
@@ -233,11 +238,16 @@ namespace Presentacion.CuentaApertura.Controllers
                 _notifyService.Error("El código OTP ingresado no es válido.");
 
                 var qwe = _serviceManager.ObtenerDatosCombinados();
+                string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                // Obtener el User-Agent del navegador
+                string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
+
 
                 RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
                 {
-                    DireccionIP = "192.168.1.1",
-                    DatosNavegador = "Mozilla/5.0",
+                    DireccionIP = ipAddress,
+                    DatosNavegador = userAgent,
                     Pais = qwe.InformacionPersonal.PaisNacimiento,
                     Fecha = DateTime.UtcNow,
                     Identificacion = qwe.DatosDactilares.Identificacion,
