@@ -104,7 +104,7 @@ namespace Services.AperturaCuenta
         {
             var options = new CookieOptions
             {
-                Expires = DateTimeOffset.UtcNow.AddMinutes(20)
+                Expires = DateTimeOffset.UtcNow.AddMinutes(18)
             };
 
             _httpContextAccessor.HttpContext?.Response.Cookies.Append("PasoActualCookie", paso.ToString(), options);

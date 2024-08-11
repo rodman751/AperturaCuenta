@@ -50,7 +50,7 @@ async function onPlay() {
         const base64Image = captureImage();
        
         await sendImageToServer(base64Image);  // Enviar la imagen al servidor
-        console.log("", base64Image)
+       //console.log("", base64Image)
        
     }
 
@@ -63,6 +63,7 @@ async function onPlay() {
 
 async function sendImageToServer(base64Image) {
     try {
+        
         const response = await fetch('/Steps/Camara2', {
             method: 'POST',
             headers: {
@@ -73,6 +74,13 @@ async function sendImageToServer(base64Image) {
 
         if (response.ok) {
             console.log('Imagen enviada con éxito');
+            const btn = document.getElementById('btnContinuar');
+            console.log(btn);
+            if (btn) {
+                btn.style.display = 'block';
+            } else {
+                console.error('Botón no encontrado');
+            }
         } else {
             console.error('Error al enviar la imagen', response.status, await response.text());
         }

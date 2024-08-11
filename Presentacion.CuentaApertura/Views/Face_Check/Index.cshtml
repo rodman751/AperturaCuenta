@@ -96,8 +96,10 @@
                 <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
                             <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                <button type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">CONTINUAR</button>
+                                <button id="btnContinuar" name="btnContinuar" type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" style="display: none;">CONTINUAR</button>
                             </div>
+
+
                 <div class="u-form-send-message u-form-send-success">Correcto</div>
                 <div class="u-form-send-error u-form-send-message">Error</div>
                 <input type="hidden" value="" name="recaptchaResponse">
@@ -108,6 +110,25 @@
         </div>
       </div>
     </section>
+
+    <!-- Modal 1: No usar gorras, lentes y levantar el pelo -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+           
+            <p>Por favor, en este paso no uses gorras, lentes y evita tapar tu rostro.</p>
+            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+        </div>
+    </div>
+
+    <!-- Modal 2: Sonríe a la cámara -->
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            
+            <p>Sonríe a la cámara.</p>
+            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+        </div>
+    </div>
+    <link href="~/css/Modals.css" rel="stylesheet" />
     
  
 </body>
@@ -130,6 +151,50 @@
 
         // Ejecutar la función al cargar la vista
         document.addEventListener('DOMContentLoaded', activateCamera);
+
+        // Mostrar el primer modal al cargar la vista
+document.addEventListener('DOMContentLoaded', function() {
+    var modal1 = document.getElementById('modal1');
+    var modal2 = document.getElementById('modal2');
+    
+    // Mostrar el primer modal
+     setTimeout(function() {
+        modal1.style.display = 'block';
+    }, 2000);
+            setTimeout(function () {
+                modal1.style.display = 'none';
+            }, 7000);
+
+
+
+            // Mostrar el segundo modal después de unos segundos (por ejemplo, 5 segundos)
+    setTimeout(function() {
+        modal2.style.display = 'block';
+    }, 9000);
+            setTimeout(function () {
+                modal2.style.display = 'none';
+            }, 12000);
+    // Cerrar el primer modal
+    document.getElementById('closeModal1').onclick = function() {
+        modal1.style.display = 'none';
+    }
+
+    // Cerrar el segundo modal
+    document.getElementById('closeModal2').onclick = function() {
+        modal2.style.display = 'none';
+    }
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = function(event) {
+        if (event.target == modal1) {
+            modal1.style.display = 'none';
+        }
+        if (event.target == modal2) {
+            modal2.style.display = 'none';
+        }
+    }
+});
+
     </script>
 }
 </html>
