@@ -69,6 +69,54 @@
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-3"></div>
 
+                            <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
+                                <label class="u-label u-label-3">Gasto de Transporte:</label>
+                                <input placeholder="Ingrese sus gastos de Transporte." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
+                                <span  class="text-danger"></span>
+                            </div>
+
+                            <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
+                                <label class="u-label u-label-4">Gasto de Educacion:</label>
+                                <input placeholder="Ingrese sus gastos en Educacion." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
+                                <span  class="text-danger"></span>
+                            </div>
+
+                            <div class="u-form-group  u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
+                                <label class="u-label u-label-8">Deudas:</label>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input  type="radio" value="Creditos" class="u-field-input" required />
+                                    <label class="u-field-label">Creditos</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input type="radio" value="Tarjetas_de_Credito" class="u-field-input" required />
+                                    <label class="u-field-label">Tarjetas de Credito</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input type="radio" value="Ninguno" class="u-field-input" required />
+                                    <label class="u-field-label">Ninguno</label>
+                                </div>
+                                <span  class="text-danger"></span>
+                            </div>
+
+                            <div class="u-form-group  u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
+                                <label class="u-label u-label-8">Valor Bienes:</label>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input type="radio" value="Creditos" class="u-field-input" required />
+                                    <label class="u-field-label">Casa</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input type="radio" value="Tarjetas_de_Credito" class="u-field-input" required />
+                                    <label class="u-field-label">Carro</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input type="radio" value="Ninguno" class="u-field-input" required />
+                                    <label class="u-field-label">Terreno</label>
+                                </div>
+                                <span class="text-danger"></span>
+                            </div>
+
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-3"></div>
+
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-8">
                                 <label asp-for="PaisNacimiento" class="u-label u-label-5">Pais de Nacimiento:</label>
                                 <input asp-for="PaisNacimiento" placeholder="Ingrese su Pais de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
