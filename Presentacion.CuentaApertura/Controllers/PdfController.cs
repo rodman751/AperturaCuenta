@@ -21,7 +21,7 @@ namespace Presentacion.CuentaApertura.Controllers
             // Obtén los datos necesarios del servicio
             var clienteNombre = "Rodman Guerrero";
             var cuentaNumero = "1234567890";
-            var correo = "ppruebas109@gmail.com";
+            var correo = "premiunjoel7@gmail.com";
             var cedula = "0450080940";
 
 
@@ -37,6 +37,21 @@ namespace Presentacion.CuentaApertura.Controllers
             byte[] pdfContent = _serviceManager.PdfService.GeneratePdf(htmlContent);
 
             await _serviceManager.PdfService.SendPdfByEmailAsync(correo, "Contrato de Apertura de Cuenta", "Adjunto encontrará el contrato de apertura de cuenta.", pdfContent);
+
+            return Ok("PDF enviado exitosamente.");
+        }
+        public async Task<IActionResult> OTP2()
+        {
+            var clienteNombre = "Rodman Guerrero";
+            
+            var correo = "premiunjoel7@gmail.com";
+           
+
+            // Enviar el OTP por correo y guardar el OTP
+            var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Templates", "OTP.html");
+            string htmlContent = await System.IO.File.ReadAllTextAsync(templatePath);
+            htmlContent = htmlContent.Replace("{{Nombre}}", clienteNombre);
+            string otp = await _serviceManager.PdfService.SendOtpByEmailAsync(correo, "Tu código OTP", htmlContent);
 
             return Ok("PDF enviado exitosamente.");
         }

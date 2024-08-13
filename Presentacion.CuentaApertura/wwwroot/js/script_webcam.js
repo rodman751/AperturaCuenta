@@ -59,7 +59,7 @@ async function onPlay() {
     }
 
 
-    setTimeout(() => onPlay(), 250)
+    setTimeout(() => onPlay(), 100)
 
 
 

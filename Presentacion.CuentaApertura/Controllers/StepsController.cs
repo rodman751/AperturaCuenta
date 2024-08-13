@@ -177,7 +177,10 @@ namespace Presentacion.CuentaApertura.Controllers
                 ViewBag.Apellido = usuarioCookie.Apellido;
 
                 // Enviar el OTP por correo y guardar el OTP
-                string otp = await _serviceManager.PdfService.SendOtpByEmailAsync(usuarioCookie.Correo, "Tu código OTP", "Por favor, usa el siguiente código para completar tu proceso de Apertura de Cuenta:");
+                var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Templates", "OTP.html");
+                string htmlContent = await System.IO.File.ReadAllTextAsync(templatePath);
+                htmlContent = htmlContent.Replace("{{Nombre}}", usuarioCookie.Nombre);
+                string otp = await _serviceManager.PdfService.SendOtpByEmailAsync(usuarioCookie.Correo, "Tu código OTP", htmlContent);
 
                 // Guardar el OTP en la cookie (o en sesión)
                 _serviceManager.CookieService.GuardarDatosCookie("OtpCookie", otp);

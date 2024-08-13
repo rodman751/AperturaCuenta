@@ -184,7 +184,7 @@
     <div id="modal1" class="modal">
         <div class="modal-content">
            
-            <p>Por favor, en este paso no uses gorras, lentes y evita tapar tu rostro.</p>
+            <p>Por favor, evita usar gorras🧢, lentes 🕶️y evita tapar tu rostro.🤗</p>
             <button class="close btn btn-primary btn-sm" id="closeModal1">Continuar</button>
         </div>
     </div>
@@ -193,8 +193,8 @@
     <div id="modal2" class="modal">
         <div class="modal-content">
             
-            <p>Sonríe a la cámara.</p>
-            <button class="close btn btn-primary btn-sm" id="closeModal1">Continuar</button>
+            <p>Evita estar en contraluz y sonríe a la cámara. 😁</p>
+            <button class="close btn btn-primary btn-sm" id="closeModal2">Continuar</button>
         </div>
     </div>
     <link href="~/css/Modals.css" rel="stylesheet" />
@@ -218,50 +218,50 @@
         }
 
         // Ejecutar la función al cargar la vista
-    document.addEventListener('DOMContentLoaded', activateCamera);
+        document.addEventListener('DOMContentLoaded', activateCamera);
 
         // Mostrar el primer modal al cargar la vista
-    document.addEventListener('DOMContentLoaded', function() {
-    var modal1 = document.getElementById('modal1');
-    var modal2 = document.getElementById('modal2');
+        document.addEventListener('DOMContentLoaded', function() {
+            var modal1 = document.getElementById('modal1');
+            var modal2 = document.getElementById('modal2');
     
-    // Mostrar el primer modal
-     setTimeout(function() {
-        modal1.style.display = 'block';
-    }, 2000);
-            setTimeout(function () {
+            // Mostrar el primer modal
+             setTimeout(function() {
+                modal1.style.display = 'block';
+            }, 2000);
+                    setTimeout(function () {
+                        modal1.style.display = 'none';
+                    }, 7000);
+
+
+
+                    // Mostrar el segundo modal después de unos segundos (por ejemplo, 5 segundos)
+            setTimeout(function() {
+                modal2.style.display = 'block';
+            }, 9000);
+                    setTimeout(function () {
+                        modal2.style.display = 'none';
+                    }, 12000);
+            // Cerrar el primer modal
+            document.getElementById('closeModal1').onclick = function() {
                 modal1.style.display = 'none';
-            }, 7000);
+            }
 
-
-
-            // Mostrar el segundo modal después de unos segundos (por ejemplo, 5 segundos)
-    setTimeout(function() {
-        modal2.style.display = 'block';
-    }, 9000);
-            setTimeout(function () {
+            // Cerrar el segundo modal
+            document.getElementById('closeModal2').onclick = function() {
                 modal2.style.display = 'none';
-            }, 12000);
-    // Cerrar el primer modal
-    document.getElementById('closeModal1').onclick = function() {
-        modal1.style.display = 'none';
-    }
+            }
 
-    // Cerrar el segundo modal
-    document.getElementById('closeModal2').onclick = function() {
-        modal2.style.display = 'none';
-    }
-
-    // Cerrar el modal si se hace clic fuera de él
-    window.onclick = function(event) {
-        if (event.target == modal1) {
-            modal1.style.display = 'none';
-        }
-        if (event.target == modal2) {
-            modal2.style.display = 'none';
-        }
-    }
-});
+            // Cerrar el modal si se hace clic fuera de él
+            window.onclick = function(event) {
+                if (event.target == modal1) {
+                    modal1.style.display = 'none';
+                }
+                if (event.target == modal2) {
+                    modal2.style.display = 'none';
+                }
+            }
+        });
 
        
 

@@ -61,7 +61,13 @@ namespace Services.AperturaCuenta
                 await client.DisconnectAsync(true);
             }
         }
-        public async Task<string> SendOtpByEmailAsync(string toEmail, string subject, string body)
+        public  string ConvertImageToBase64(string imagePath)
+        {
+            byte[] imageBytes = File.ReadAllBytes(imagePath);
+            return Convert.ToBase64String(imageBytes);
+        }
+
+        public async Task<string> SendOtpByEmailAsync(string toEmail, string subject, string htmlContent)
         {
             var message = new MimeMessage();
             message.From.Add(new MailboxAddress("Rodman", "jg38903@gmail.com"));
@@ -72,11 +78,13 @@ namespace Services.AperturaCuenta
             var random = new Random();
             int otp = random.Next(100000, 999999);
 
-            // Agregar el OTP al cuerpo del mensaje
-            body += $"\n\nTu código OTP es: {otp}";
+            // Reemplazar el marcador de posición en el HTML
+            htmlContent = htmlContent.Replace("{{OTP}}", otp.ToString());
 
-            var builder = new BodyBuilder { TextBody = body };
+            var builder = new BodyBuilder { HtmlBody = htmlContent };
 
+
+        
             message.Body = builder.ToMessageBody();
 
             using (var client = new SmtpClient())
