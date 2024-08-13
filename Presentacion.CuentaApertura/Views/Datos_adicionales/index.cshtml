@@ -24,7 +24,7 @@
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
 </head>
 <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
-    
+
     <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
         <div class="u-clearfix u-sheet u-sheet-1">
             <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
@@ -65,6 +65,54 @@
                                 <label asp-for="Gastos" class="u-label u-label-4">Gastos:</label>
                                 <input asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
                                 <span asp-validation-for="Gastos" class="text-danger"></span>
+                            </div>
+
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-3"></div>
+
+                            <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
+                                <label asp-for="Gasto_de_Transporte" class="u-label u-label-3">Gasto de Transporte:</label>
+                                <input asp-for="Gasto_de_Transporte" placeholder="Ingrese sus gastos de Transporte." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
+                                <span asp-validation-for="Gasto_de_Transporte" class="text-danger"></span>
+                            </div>
+
+                            <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
+                                <label asp-for="Gasto_de_Educacion" class="u-label u-label-4">Gasto de Educacion:</label>
+                                <input asp-for="Gasto_de_Educacion" placeholder="Ingrese sus gastos en Educacion." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
+                                <span asp-validation-for="Gasto_de_Educacion" class="text-danger"></span>
+                            </div>
+
+                            <div class="u-form-group  u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
+                                <label class="u-label u-label-8">Deudas:</label>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Creditos" type="checkbox"  class="u-field-input"  />
+                                    <label class="u-field-label">Creditos</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Tarjetas_de_Credito" type="checkbox" class="u-field-input" />
+                                    <label class="u-field-label">Tarjetas de Credito</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Ninguno" type="checkbox" class="u-field-input"  />
+                                    <label class="u-field-label">Ninguno</label>
+                                </div>
+                                <span class="text-danger"></span>
+                            </div>
+
+                            <div class="u-form-group  u-form-input-layout-vertical u-form-partition-factor-2 u-label-top u-form-group-11">
+                                <label class="u-label u-label-8">Valor Bienes:</label>
+                                <div class="u-form-checkbox-button-wrapper">
+                                    <input asp-for="Casa" type="checkbox" class="u-field-input" />
+                                    <label  class="u-field-label">Casa</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Carro" class="u-field-input" />
+                                    <label class="u-field-label">Carro</label>
+                                </div>
+                                <div class="u-form-radio-button-wrapper">
+                                    <input asp-for="Terreno" type="checkbox" class="u-field-input" />
+                                    <label class="u-field-label">Terreno</label>
+                                </div>
+                                <span class="text-danger"></span>
                             </div>
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-3"></div>
@@ -141,7 +189,7 @@
 
                             <div class="u-form-group u-form-partition-factor-2 u-label-top u-form-group-15" id="DetallesActividadesEnOtroPaisDiv" style="display: none;">
                                 <label asp-for="DetallesActividadesEnOtroPais" class="u-form-control-hidden u-label u-label-10"></label>
-                                <input asp-for="DetallesActividadesEnOtroPais" placeholder="" class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8" />
+                                <input asp-for="DetallesActividadesEnOtroPais" placeholder="Ingrese el Pais." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8" />
                                 <span asp-validation-for="DetallesActividadesEnOtroPais" class="text-danger"></span>
                             </div>
 
@@ -155,16 +203,16 @@
                                 </label>
                                 <span asp-validation-for="AceptoTerminos" class="text-danger"></span>
                             </div>
-                            
+
                             @* <div class="u-align-left u-form-group u-form-submit u-label-top">
-                                <button class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">Guardar</button>
+                            <button class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">Guardar</button>
                             </div> *@
 
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-6"></div>
                             <div class="u-align-center u-form-group u-form-submit u-label-top">
                                 <input class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-2" type="submit" value="CONTINUAR" class="u-form-control-hidden">
-                                
+
                             </div>
 
                             @* <div class="u-form-send-message u-form-send-success">Correcto</div>
@@ -184,22 +232,22 @@
 
 
 
-    
+
 
 </body>
 </html>
 
-@section Scripts{
+@section Scripts {
 
 
     <script>
-    document.getElementById('ActividadesEnOtroPaisCheckbox').addEventListener('change', function() {
-        var detallesDiv = document.getElementById('DetallesActividadesEnOtroPaisDiv');
-        if (this.checked) {
-            detallesDiv.style.display = 'block';
-        } else {
-            detallesDiv.style.display = 'none';
-        }
-    });
+        document.getElementById('ActividadesEnOtroPaisCheckbox').addEventListener('change', function() {
+            var detallesDiv = document.getElementById('DetallesActividadesEnOtroPaisDiv');
+            if (this.checked) {
+                detallesDiv.style.display = 'block';
+            } else {
+                detallesDiv.style.display = 'none';
+            }
+        });
     </script>
 }

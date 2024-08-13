@@ -86,6 +86,18 @@ namespace ServiceManager
             UsuarioGuardar.DetallesActividadesEnOtroPais = datosAdicionales.DetallesActividadesEnOtroPais;
             UsuarioGuardar.AceptoTerminos = datosAdicionales.AceptoTerminos;
 
+            UsuarioGuardar.Gasto_de_Transporte = datosAdicionales.Gasto_de_Transporte;
+            UsuarioGuardar.Gasto_de_Educacion = datosAdicionales.Gasto_de_Educacion;
+
+            UsuarioGuardar.Creditos = datosAdicionales.Creditos;
+            UsuarioGuardar.Tarjetas_de_Credito = datosAdicionales.Tarjetas_de_Credito;
+            UsuarioGuardar.Ninguno = datosAdicionales.Ninguno;
+
+            UsuarioGuardar.Casa = datosAdicionales.Casa;
+            UsuarioGuardar.Carro = datosAdicionales.Carro;
+            UsuarioGuardar.Terreno = datosAdicionales.Terreno;
+
+
             // Guardar el usuario en el repositorio
             await _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
             //await _repositorioManager.UsuarioRepository.EjecutarPA_obtenerURLimage();
