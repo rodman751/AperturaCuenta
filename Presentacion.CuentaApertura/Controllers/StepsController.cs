@@ -75,20 +75,20 @@ namespace Presentacion.CuentaApertura.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Camara()
-        {
+        //[HttpPost]
+        //public IActionResult Camara()
+        //{
             
-            //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", data);
-            var paso= _serviceManager.CookieService.ObtenerPasoActual();
-            if (paso == 5)
-            {
-                ViewBag.Message = "Ya se ha realizado el paso de Face Scan";
-            }
+        //    //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", data);
+        //    var paso= _serviceManager.CookieService.ObtenerPasoActual();
+        //    if (paso == 5)
+        //    {
+        //        ViewBag.Message = "Ya se ha realizado el paso de Face Scan";
+        //    }
            
 
-            return RedirectToAction("Index", "Face_scan");
-        }
+        //    return RedirectToAction("Index", "Face_scan");
+        //}
 
         
         [Consumes("application/json")]
@@ -141,10 +141,10 @@ namespace Presentacion.CuentaApertura.Controllers
                     ImageUrl = imageBytes
                 };
                 // _serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model2);
-                _serviceManager.CookieService.GuardarPasoActual(5);
+                //_serviceManager.CookieService.GuardarPasoActual(5);
 
                 //return RedirectToAction("Index", "Face_scan");
-                return Json(new { success = true, redirectUrl = Url.Action("Index", "Face_scan") });
+                return Json(new { success = true, redirectUrl = Url.Action("Index", "OTP") });
             }
             catch (FormatException ex)
             {
@@ -171,7 +171,7 @@ namespace Presentacion.CuentaApertura.Controllers
         {
             
                 //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model);
-                _serviceManager.CookieService.GuardarPasoActual(6);
+                _serviceManager.CookieService.GuardarPasoActual(5);
                 var usuarioCookie = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
                 ViewBag.Usuario = usuarioCookie.Nombre;
                 ViewBag.Apellido = usuarioCookie.Apellido;
@@ -194,7 +194,7 @@ namespace Presentacion.CuentaApertura.Controllers
 
             if (storedOtp == Codigo)
             {
-                _serviceManager.CookieService.GuardarPasoActual(7);
+                _serviceManager.CookieService.GuardarPasoActual(6);
                 // OTP válido, continuar con el siguiente paso
                 
                 var qwe = _serviceManager.ObtenerDatosCombinados();
@@ -211,7 +211,7 @@ namespace Presentacion.CuentaApertura.Controllers
                     Pais = qwe.InformacionPersonal.PaisNacimiento,
                     Fecha = DateTime.UtcNow,     
                     Identificacion = qwe.DatosDactilares.Identificacion,
-                    CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
+                    CodigoOTP = Codigo,
                     CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
                 };
                 Estado = "Valido";
@@ -251,7 +251,7 @@ namespace Presentacion.CuentaApertura.Controllers
                     Pais = qwe.InformacionPersonal.PaisNacimiento,
                     Fecha = DateTime.UtcNow,
                     Identificacion = qwe.DatosDactilares.Identificacion,
-                    CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
+                    CodigoOTP = Codigo,
                     CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
                 };
                 Estado = "Invalido";

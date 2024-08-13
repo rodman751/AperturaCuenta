@@ -64,6 +64,14 @@
             width: 100%;
             height: 100%;
         }
+
+        #cameraSection {
+            display: block;
+        }
+
+        #successSection {
+            display: none;
+        }
         
     </style>
 </head>
@@ -72,7 +80,7 @@
 
   <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
     
-    <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
+    @* <section class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
 
         <div class="u-clearfix u-sheet u-sheet-1">
             <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
@@ -94,7 +102,7 @@
               <br>Reconocimiento Facial
             </h3>
             <div class="u-form u-form-1">
-                        <form asp-action="Camara" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="GuardarFaceScan" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
                 <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
                         <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
                             <div class="u-align-left u-form-group u-form-submit u-label-top">
@@ -109,6 +117,67 @@
           </div>
         </div>
       </div>
+    </section> *@
+
+    <section id="cameraSection" class="u-align-center u-clearfix u-custom-color-2 u-section-1" id="carousel_ac2e">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
+                <div class="u-container-layout u-container-layout">
+                    <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
+                    <div class="u-container-style u-group u-radius u-shape-round u-group-2">
+                        <div class="u-container-layout u-container-layout-2">
+                            <div class="u-video-container">
+                                <video onloadedmetadata="onPlay(this)" id="inputVideo" autoplay muted playsinline></video>
+                                <canvas id="overlay"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="u-text u-text-default u-text-1"><br>Reconocimiento Facial</h3>
+                    <div class="u-form u-form-1">
+                     @*    <form asp-action="GuardarFaceScan" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+                            <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
+                            <div class="u-align-left u-form-group u-form-submit u-label-top">
+                                <button id="btnContinuar" name="btnContinuar" type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" style="display: none;">CONTINUAR</button>
+                            </div>
+                            <div class="u-form-send-message u-form-send-success">Correcto</div>
+                            <div class="u-form-send-error u-form-send-message">Error</div>
+                            <input type="hidden" value="" name="recaptchaResponse">
+                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+                        </form> *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de éxito -->
+    <section id="successSection" class="u-align-center u-clearfix u-custom-color-2 u-section-1">
+        <div class="u-clearfix u-sheet u-sheet-1">
+            <div class="u-align-center u-container-style u-custom-color-3 u-expanded-width-xs u-group u-radius-20 u-shape-round u-group-1">
+                <div class="u-container-layout u-container-layout-1">
+                    <img class="custom-expanded u-image u-image-default u-image-1" src="images/asd.png" alt="" data-image-width="623" data-image-height="476">
+                    <h3 class="u-text u-text-default u-text-1"><br>Reconocimiento Facial Correcto</h3>
+                    <span class="u-file-icon">
+                        <img src="images/391125.png" style="width: 150px; height: 250px; padding-left: 6%;" alt="">
+                    </span>
+                    <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-2">¡Felicidades! Tu Rostro ha sido escaneado satisfactoriamente.</p>
+                    <div class="u-form u-form-1">
+                        <form asp-action="GuardarFaceScan" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                            <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
+                            <input type="hidden" name="ImageUrl" value="" asp-for="ImageUrl" />
+                            <div class="u-align-left u-form-group u-form-submit u-label-top">
+                                <button id="btnContinuar" name="btnContinuar" type="submit" class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" style="display: none;">CONTINUAR</button>
+                            </div>
+                            <div class="u-form-send-message u-form-send-success">Correcto</div>
+                            <div class="u-form-send-error u-form-send-message">Error</div>
+                            <input type="hidden" value="" name="recaptchaResponse">
+                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Modal 1: No usar gorras, lentes y levantar el pelo -->
@@ -116,7 +185,7 @@
         <div class="modal-content">
            
             <p>Por favor, en este paso no uses gorras, lentes y evita tapar tu rostro.</p>
-            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+            <button class="close btn btn-primary btn-sm" id="closeModal1">Continuar</button>
         </div>
     </div>
 
@@ -125,7 +194,7 @@
         <div class="modal-content">
             
             <p>Sonríe a la cámara.</p>
-            <span class="close btn btn-primary btn-sm" id="closeModal1">Continuar</span>
+            <button class="close btn btn-primary btn-sm" id="closeModal1">Continuar</button>
         </div>
     </div>
     <link href="~/css/Modals.css" rel="stylesheet" />
@@ -193,6 +262,9 @@
         }
     }
 });
+
+       
+
 
     </script>
 }
