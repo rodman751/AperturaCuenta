@@ -1,8 +1,10 @@
 using Interface.AperturaCuenta;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Asn1.Cms;
 using Presentacion.CuentaApertura.Models;
 using System.Diagnostics;
 using System.Reflection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Presentacion.CuentaApertura.Controllers
 {
@@ -34,6 +36,9 @@ namespace Presentacion.CuentaApertura.Controllers
         [HttpPost]
         public IActionResult Inicio()
         {
+            Entidades.CuentaApertura.RegistrosAuditoria data = new Entidades.CuentaApertura.RegistrosAuditoria ();
+            data.Fecha_inicio = DateTime.Now;
+            _cookieService.GuardarDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio", data);
             int pasoActual = _cookieService.ObtenerPasoActual();
             switch (pasoActual)
             {

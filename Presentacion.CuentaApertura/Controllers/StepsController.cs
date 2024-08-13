@@ -194,6 +194,10 @@ namespace Presentacion.CuentaApertura.Controllers
         public async Task<IActionResult> VerificarOtp(string Codigo ,string Estado , Entidades.CuentaApertura.RegistrosAuditoria RegistrosAuditoria)
         {
             var storedOtp = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie");
+            var Fecha_ini = _serviceManager.CookieService.ObtenerDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio");
+            var ip = "181.196.12.140";
+            string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+            string pais = await _serviceManager.ObtenerPaisDesdeIP(ipAddress);
 
             if (storedOtp == Codigo)
             {
@@ -201,7 +205,7 @@ namespace Presentacion.CuentaApertura.Controllers
                 // OTP válido, continuar con el siguiente paso
                 
                 var qwe = _serviceManager.ObtenerDatosCombinados();
-                string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+                
 
                 // Obtener el User-Agent del navegador
                 string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
@@ -211,8 +215,9 @@ namespace Presentacion.CuentaApertura.Controllers
                 {
                     DireccionIP = ipAddress,
                     DatosNavegador = userAgent,
-                    Pais = qwe.InformacionPersonal.PaisNacimiento,
-                    Fecha = DateTime.UtcNow,     
+                    Pais = pais,
+                    Fecha_inicio = Fecha_ini.Fecha_inicio,
+                    Fecha_Fin = DateTime.Now,
                     Identificacion = qwe.DatosDactilares.Identificacion,
                     CodigoOTP = Codigo,
                     CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
@@ -241,7 +246,8 @@ namespace Presentacion.CuentaApertura.Controllers
                 _notifyService.Error("El código OTP ingresado no es válido.");
 
                 var qwe = _serviceManager.ObtenerDatosCombinados();
-                string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+
+                
 
                 // Obtener el User-Agent del navegador
                 string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
@@ -251,8 +257,10 @@ namespace Presentacion.CuentaApertura.Controllers
                 {
                     DireccionIP = ipAddress,
                     DatosNavegador = userAgent,
-                    Pais = qwe.InformacionPersonal.PaisNacimiento,
-                    Fecha = DateTime.UtcNow,
+                    Pais = pais,
+                    Fecha_inicio = Fecha_ini.Fecha_inicio,
+                    Fecha_Fin = DateTime.Now,
+                    Correo_envio_OTP = qwe.Usuario.Correo,
                     Identificacion = qwe.DatosDactilares.Identificacion,
                     CodigoOTP = Codigo,
                     CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,

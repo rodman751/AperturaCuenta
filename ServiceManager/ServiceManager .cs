@@ -7,6 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositorio;
 using Services.AperturaCuenta;
 using Entidades.CuentaApertura;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+
 
 namespace ServiceManager
 {
@@ -143,6 +147,33 @@ namespace ServiceManager
             await PdfService.SendPdfByEmailAsync(correo, "Contrato de Apertura de Cuenta", "Adjunto encontrará el contrato de apertura de cuenta.", pdfContent);
 
             //return Ok("PDF enviado exitosamente.");
+        }
+
+        public async Task<string> ObtenerPaisDesdeIP(string ipAddress)
+        {
+            // Endpoint de ip-api.com para obtener información de la IP
+            string url = $"http://ip-api.com/json/{ipAddress}?fields=country";
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Llamada al servicio para obtener la información de la IP
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Leer la respuesta y convertirla a JSON
+                    string result = await response.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(result);
+
+                    // Obtener el país desde la respuesta
+                    string pais = json["country"]?.ToString();
+                    return pais;
+                }
+                else
+                {
+                    // Manejar el error de manera apropiada
+                    return "Desconocido";
+                }
+            }
         }
 
     }
