@@ -114,7 +114,7 @@ namespace Services.AperturaCuenta
             var options = new CookieOptions
             {
 
-                Expires = DateTimeOffset.UtcNow.AddMinutes(18)
+                Expires = DateTimeOffset.UtcNow.AddMinutes(5)
 
             };
 
