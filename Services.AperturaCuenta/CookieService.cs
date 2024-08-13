@@ -65,23 +65,22 @@ namespace Services.AperturaCuenta
             }
         }
 
-        //public async Task AgregarClaimsAsync(DatosDactilares datos)
-        //{
-        //    var claims = new List<Claim>
-        //    {
-        //        new Claim("Identificaion", datos.Identificacion),
-            
-        //    };
+        public async Task AgregarClaimsAsync(ClaimsPrincipal user, int tiempoSesionEnMinutos)
+        {
 
-        //    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            // Definir las propiedades de autenticación, incluyendo el tiempo de expiración
+            var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
+            {
+                IsPersistent = true, // La cookie persistirá entre sesiones del navegador
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(tiempoSesionEnMinutos) // Duración de la sesión
+            };
 
-        //    var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
-        //    {
-        //        IsPersistent = true // Configura según tus necesidades
-        //    };
-
-        //    await _httpContextAccessor.HttpContext?.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-        //}
+            // Iniciar la sesión usando la autenticación de cookies
+            await _httpContextAccessor.HttpContext?.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                user,
+                authProperties);
+        }
 
 
         public async Task SignOutAsync()

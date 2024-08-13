@@ -118,7 +118,7 @@ namespace ServiceManager
             _cookieService.EliminarCookie("FaceScanCookie");
             _cookieService.EliminarCookie("OTPCookie");
             _cookieService.EliminarCookie("OtpCookie");
-
+            _cookieService.EliminarCookie("Fecha_inicio");
         }
 
         public async Task SendPdfService()

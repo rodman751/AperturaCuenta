@@ -191,47 +191,40 @@ namespace Presentacion.CuentaApertura.Controllers
             //return View();
         }
         [HttpPost]
-        public async Task<IActionResult> VerificarOtp(string Codigo ,string Estado , Entidades.CuentaApertura.RegistrosAuditoria RegistrosAuditoria)
+        public async Task<IActionResult> VerificarOtp(string Codigo, string Estado, Entidades.CuentaApertura.RegistrosAuditoria RegistrosAuditoria)
         {
             var storedOtp = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie");
             var Fecha_ini = _serviceManager.CookieService.ObtenerDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio");
-            var ip = "181.196.12.140";
             string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
             string pais = await _serviceManager.ObtenerPaisDesdeIP(ipAddress);
+            string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
+            var qwe = _serviceManager.ObtenerDatosCombinados();
+
+            // Initialize the RegistrosAuditoria object once
+            RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
+            {
+                DireccionIP = ipAddress,
+                DatosNavegador = userAgent,
+                Pais = pais,
+                Fecha_inicio = Fecha_ini.Fecha_inicio,
+                Fecha_Fin = DateTime.Now,
+                Correo_envio_OTP = qwe.Usuario.Correo,
+                Identificacion = qwe.DatosDactilares.Identificacion,
+                CodigoOTP = Codigo,
+                CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
+            };
 
             if (storedOtp == Codigo)
             {
                 _serviceManager.CookieService.GuardarPasoActual(6);
-                // OTP válido, continuar con el siguiente paso
-                
-                var qwe = _serviceManager.ObtenerDatosCombinados();
-                
-
-                // Obtener el User-Agent del navegador
-                string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
-
-
-                RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
-                {
-                    DireccionIP = ipAddress,
-                    DatosNavegador = userAgent,
-                    Pais = pais,
-                    Fecha_inicio = Fecha_ini.Fecha_inicio,
-                    Fecha_Fin = DateTime.Now,
-                    Identificacion = qwe.DatosDactilares.Identificacion,
-                    CodigoOTP = Codigo,
-                    CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
-                };
                 Estado = "Valido";
 
                 lock (_lock)
                 {
-
                     _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
 
                     CuentaUsuario UsuarioGuardar = new CuentaUsuario();
                     _serviceManager.ObtenerDatosCombinadosParaBD(UsuarioGuardar);
-
 
                     _serviceManager.SendPdfService();
                 }
@@ -241,35 +234,12 @@ namespace Presentacion.CuentaApertura.Controllers
             }
             else
             {
-                // OTP no válido, mostrar error
-                ModelState.AddModelError(string.Empty, "El código OTP ingresado no es válido.");
-                _notifyService.Error("El código OTP ingresado no es válido.");
-
-                var qwe = _serviceManager.ObtenerDatosCombinados();
-
-                
-
-                // Obtener el User-Agent del navegador
-                string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
-
-
-                RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
-                {
-                    DireccionIP = ipAddress,
-                    DatosNavegador = userAgent,
-                    Pais = pais,
-                    Fecha_inicio = Fecha_ini.Fecha_inicio,
-                    Fecha_Fin = DateTime.Now,
-                    Correo_envio_OTP = qwe.Usuario.Correo,
-                    Identificacion = qwe.DatosDactilares.Identificacion,
-                    CodigoOTP = Codigo,
-                    CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
-                };
                 Estado = "Invalido";
-
                 _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
 
-                return RedirectToAction("Index", "OTP"); // Mostrar la vista OTP nuevamente
+                ModelState.AddModelError(string.Empty, "El código OTP ingresado no es válido.");
+                _notifyService.Error("El código OTP ingresado no es válido.");
+                return RedirectToAction("Index", "OTP");
             }
         }
 
