@@ -19,5 +19,6 @@ namespace ServiceManager
         void borrarCookie();
         Task SendPdfService();
         Task<string> ObtenerPaisDesdeIP(string ipAddress);
+        Task borrarCookie2();
     }
 }

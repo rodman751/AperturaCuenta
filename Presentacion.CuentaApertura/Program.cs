@@ -50,10 +50,20 @@ namespace Presentacion.CuentaApertura
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/Home"; // Ruta para la página de inicio de sesión
+                    options.LoginPath = "/Home";
                  
-                    options.ExpireTimeSpan = TimeSpan.FromMinutes(18); // Tiempo de expiración de la cookie
-                    options.SlidingExpiration = true; // Renueva la cookie automáticamente si el usuario está activo
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(18);
+                    options.SlidingExpiration = true;
+
+                    options.Events = new CookieAuthenticationEvents
+                    {
+                        OnSigningOut = async context =>
+                        {
+                            var serviceManager = context.HttpContext.RequestServices.GetRequiredService<IServiceManager>();
+                            serviceManager.borrarCookie();
+                            await serviceManager.borrarCookie2();
+                        }
+                    };
                 });
 
 

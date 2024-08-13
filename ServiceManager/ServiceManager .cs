@@ -10,6 +10,7 @@ using Entidades.CuentaApertura;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Http;
 
 
 namespace ServiceManager
@@ -30,11 +31,13 @@ namespace ServiceManager
         private readonly ICookieService _cookieService;
         private readonly IPdfService _pdfService;
         private readonly IRepositorioManager _repositorioManager;
-        public ServiceManager(ICookieService cookieService, IPdfService pdfService, IRepositorioManager repositorioManager)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ServiceManager(ICookieService cookieService, IPdfService pdfService, IRepositorioManager repositorioManager, IHttpContextAccessor httpContextAccessor)
         {
             _cookieService = cookieService;
             _pdfService = pdfService;
             _repositorioManager = repositorioManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public ICookieService CookieService => _cookieService;
@@ -119,6 +122,23 @@ namespace ServiceManager
             _cookieService.EliminarCookie("OTPCookie");
             _cookieService.EliminarCookie("OtpCookie");
             _cookieService.EliminarCookie("Fecha_inicio");
+        }
+        public async Task borrarCookie2()
+        {
+            var context = _httpContextAccessor.HttpContext;
+            if (context != null)
+            {
+                context.Response.Cookies.Delete("PasoActualCookie");
+                context.Response.Cookies.Delete("DatosDactilaresCookie");
+                context.Response.Cookies.Delete("UsuarioCookie");
+                context.Response.Cookies.Delete("DireccionMCokkie");
+                context.Response.Cookies.Delete("GuardarDatos_Adicionales");
+                context.Response.Cookies.Delete("FaceScanCookie");
+                context.Response.Cookies.Delete("OTPCookie");
+                context.Response.Cookies.Delete("OtpCookie");
+                context.Response.Cookies.Delete("Fecha_inicio");
+                // Añade más cookies si es necesario
+            }
         }
 
         public async Task SendPdfService()

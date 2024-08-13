@@ -79,7 +79,8 @@ namespace Services.AperturaCuenta
             var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
             {
                 IsPersistent = true,
-                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(18)
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(0.2)
+
 
             };
 
