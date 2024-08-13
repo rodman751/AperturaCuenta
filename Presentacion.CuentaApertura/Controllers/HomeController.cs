@@ -36,6 +36,8 @@ namespace Presentacion.CuentaApertura.Controllers
         [HttpPost]
         public IActionResult Inicio()
         {
+            _cookieService.AgregarClaimsAsync();
+            
             Entidades.CuentaApertura.RegistrosAuditoria data = new Entidades.CuentaApertura.RegistrosAuditoria ();
             data.Fecha_inicio = DateTime.Now;
             _cookieService.GuardarDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio", data);

@@ -13,7 +13,7 @@ namespace Interface.AperturaCuenta
         void GuardarDatosCookie<T>(string cookieName, T data);
         T? ObtenerDatosCookie<T>(string cookieName) where T : class;
 
-        Task AgregarClaimsAsync(ClaimsPrincipal user, int tiempoSesionEnMinutos);
+        Task AgregarClaimsAsync();
         Task SignOutAsync();
         void EliminarCookie(string cookieName);
         void GuardarPasoActual(int paso);

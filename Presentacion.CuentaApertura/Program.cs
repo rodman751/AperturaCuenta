@@ -46,16 +46,16 @@ namespace Presentacion.CuentaApertura
             // notificaciones
             builder.Services.AddNotyf(config => { config.DurationInSeconds = 10; config.IsDismissable = true; config.Position = NotyfPosition.TopCenter; });
 
-            //servico de cokkie
+            // Configura los servicios de autenticación y autorización
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-             .AddCookie(config =>
-             {
-                 config.Cookie.Name = "AperturaCuenta";
-                 config.ExpireTimeSpan = TimeSpan.FromMinutes(20);
-                 config.LoginPath = "/DatosDactilares";
-             });
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Home"; // Ruta para la página de inicio de sesión
+                 
+                    options.ExpireTimeSpan = TimeSpan.FromMinutes(18); // Tiempo de expiración de la cookie
+                    options.SlidingExpiration = true; // Renueva la cookie automáticamente si el usuario está activo
+                });
 
-       
 
             var app = builder.Build();
 
@@ -70,7 +70,8 @@ namespace Presentacion.CuentaApertura
 
             //cokkie
             app.UseAuthentication();
-         
+
+            app.MapControllers();
             //notificaiones
             app.UseNotyf();
             //

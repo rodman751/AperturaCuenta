@@ -248,8 +248,9 @@ namespace Presentacion.CuentaApertura.Controllers
         public async Task<IActionResult> FinalizarApertura()
         {
 
-           
+
             _serviceManager.borrarCookie();
+            _serviceManager.CookieService.SignOutAsync();
             _notifyService.Success("Tu cuenta ha sido abierta con éxito. ¡Gracias por elegirnos!");
             return RedirectToAction("Index", "Home");
 

@@ -34,8 +34,8 @@ namespace Repositorio.Repositorios
         public async Task GuardarUsuario(CuentaUsuario cuenta)
         {
 
-            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
+            //using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+           // {
                 try
                 {
                     // Usar DbContext para operaciones CRUD
@@ -49,14 +49,14 @@ namespace Repositorio.Repositorios
                     }
 
                     // Commit the transaction
-                    transaction.Complete();
+                    //transaction.Complete();
                 }
                 catch (Exception ex)
                 {
                     // Log the exception or rethrow it
                     throw new Exception("Error al guardar el usuario", ex);
                 }
-            }
+           //}
         }
       
 

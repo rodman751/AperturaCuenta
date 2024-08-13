@@ -31,7 +31,7 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
             _serviceManager = serviceManager;
         }
 
-
+        [Authorize]
         public IActionResult Index()
         {
             if (TempData.ContainsKey("Message"))

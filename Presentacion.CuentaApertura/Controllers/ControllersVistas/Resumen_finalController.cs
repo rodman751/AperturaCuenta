@@ -1,4 +1,5 @@
 ﻿using Interface.AperturaCuenta;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositorio;
@@ -17,6 +18,7 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
             _repositoryManager = repositoryManager;
             _serviceManager = serviceManager;
         }
+        [Authorize]
         public ActionResult Index()
         {
             var datos = _serviceManager.ObtenerDatosCombinados();
