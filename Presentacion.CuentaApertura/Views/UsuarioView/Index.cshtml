@@ -41,13 +41,13 @@
                         <form asp-action="GuardarUsuCookie" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 22px;">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-1"></div>
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                                <label asp-for="Nombre" class="u-label u-label-1">Nombre</label>
-                                <input asp-for="Nombre" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required />
+                                <label asp-for="Nombre" class="u-label u-label-1">Nombres:</label>
+                                <input asp-for="Nombre" placeholder="Ingrese su nombre." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="20" required />
                                 <span asp-validation-for="Nombre" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
-                                <label asp-for="Apellido" class="u-label u-label-2">Apellido</label>
-                                <input asp-for="Apellido" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required />
+                                <label asp-for="Apellido" class="u-label u-label-2">Apellidos:</label>
+                                <input asp-for="Apellido" placeholder="Ingrese su apellido." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="20" required />
                                 <span asp-validation-for="Apellido" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-label-top u-form-group-4">

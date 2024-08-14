@@ -57,13 +57,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
                                 <label asp-for="Ingresos" class="u-label u-label-3">Ingresos:</label>
-                                <input data-mask='#.##0,00 ' asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" required />
+                                <input data-mask='#.##0,00' asp-for="Ingresos" placeholder="Ingrese sus ingresos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" maxlength="7" required />
                                 <span asp-validation-for="Ingresos" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
                                 <label asp-for="Gastos" class="u-label u-label-4">Gastos:</label>
-                                <input data-mask='#.##0,00 ' asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4"  required />
+                                <input data-mask='#.##0,00' asp-for="Gastos" placeholder="Ingrese sus gastos." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" maxlength="7" required />
                                 <span asp-validation-for="Gastos" class="text-danger"></span>
                             </div>
 
@@ -71,13 +71,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-5">
                                 <label asp-for="Gasto_de_Transporte" class="u-label u-label-3">Gasto de Transporte:</label>
-                                <input data-mask='#.##0,00 ' asp-for="Gasto_de_Transporte" placeholder="Ingrese sus gastos de Transporte." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" required />
+                                <input data-mask='#.##0,00' asp-for="Gasto_de_Transporte" placeholder="Ingrese sus gastos de Transporte." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="7" required />
                                 <span asp-validation-for="Gasto_de_Transporte" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-6">
                                 <label asp-for="Gasto_de_Educacion" class="u-label u-label-4">Gasto de Educacion:</label>
-                                <input data-mask='#.##0,00 ' asp-for="Gasto_de_Educacion" placeholder="Ingrese sus gastos en Educacion." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
+                                <input data-mask='#.##0,00' asp-for="Gasto_de_Educacion" placeholder="Ingrese sus gastos en Educacion." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-4" oninput="this.value = this.value.replace(/[^0-9]/g, '');" maxlength="7" required />
                                 <span asp-validation-for="Gasto_de_Educacion" class="text-danger"></span>
                             </div>
 
@@ -119,13 +119,13 @@
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-8">
                                 <label asp-for="PaisNacimiento" class="u-label u-label-5">Pais de Nacimiento:</label>
-                                <input asp-for="PaisNacimiento" placeholder="Ingrese su Pais de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" required />
+                                <input asp-for="PaisNacimiento" placeholder="Ingrese su Pais de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-5" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="15" required />
                                 <span asp-validation-for="PaisNacimiento" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-9">
                                 <label asp-for="CiudadNacimiento" class="u-label u-label-6"> Ciudad de Nacimiento:</label>
-                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su Ciudad de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" required />
+                                <input asp-for="CiudadNacimiento" placeholder="Ingrese su Ciudad de Nacimiento." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-6" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="15" required />
                                 <span asp-validation-for="CiudadNacimiento" class="text-danger"></span>
                             </div>
 
@@ -189,7 +189,7 @@
 
                             <div class="u-form-group u-form-partition-factor-2 u-label-top u-form-group-15" id="DetallesActividadesEnOtroPaisDiv" style="display: none;">
                                 <label asp-for="DetallesActividadesEnOtroPais" class="u-form-control-hidden u-label u-label-10"></label>
-                                <input asp-for="DetallesActividadesEnOtroPais" placeholder="Ingrese el Pais." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8" />
+                                <input asp-for="DetallesActividadesEnOtroPais" oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '');" maxlength="15" placeholder="Ingrese el Pais." class="u-border-2 u-border-grey-10 u-grey-10 u-input u-input-rectangle u-radius u-input-8" />
                                 <span asp-validation-for="DetallesActividadesEnOtroPais" class="text-danger"></span>
                             </div>
 

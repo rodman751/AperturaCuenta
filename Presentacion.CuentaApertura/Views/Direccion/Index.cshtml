@@ -61,7 +61,7 @@
                             <!-- Provincias -->
                             <div class="u-form-group u-form-text u-label-top u-form-group-5">
                                 <label asp-for="Provincia" class="u-label u-label-3">Provincias</label>
-                                <input asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" type="text" required>
+                                <input asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required>
                                 <div id="provincia-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Provincia" class="text-danger"></span>
                             </div>
@@ -69,7 +69,7 @@
                             <!-- Cantones -->
                             <div class="u-form-group u-form-text u-label-top u-form-group-6">
                                 <label asp-for="Canton" class="u-label u-label-4">Cantón:</label>
-                                <input asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" type="text" required>
+                                <input asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required>
                                 <div id="canton-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Canton" class="text-danger"></span>
                             </div>
@@ -77,7 +77,7 @@
                             <!-- Parroquias -->
                             <div class="u-form-group u-form-text u-label-top u-form-group-7">
                                 <label asp-for="Parroquia" class="u-label u-label-5">Parroquia:</label>
-                                <input asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5" required>
+                                <input asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required>
                                 <div id="parroquia-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Parroquia" class="text-danger"></span>
                             </div>
@@ -86,13 +86,13 @@
 
                             <div class="u-form-group u-label-top u-form-group-8">
                                 <label asp-for="Direccion" class="u-label u-label-6">Dirección:</label>
-                                <input asp-for="Direccion" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-6" required />
+                                <input asp-for="Direccion" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-6" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required />
                                 <span asp-validation-for="Direccion" class="text-danger"></span>
                             </div>
 
                             <div class="u-form-group u-label-top u-form-group-9">
                                 <label asp-for="Referencia" class="u-label u-label-7">Referencia</label>
-                                <input asp-for="Referencia" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-7" required />
+                                <input asp-for="Referencia" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-7" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="20" required />
                                 <span asp-validation-for="Referencia" class="text-danger"></span>
                             </div>
 
