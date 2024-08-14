@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Interface.AperturaCuenta;
 using Repositorio;
 using ServiceManager;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
 {
@@ -22,6 +23,7 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
 
 
         [HttpGet]
+        [Authorize]
         public ActionResult Index()
         {
             // Obtener todos los datos de las cookies para confirmar

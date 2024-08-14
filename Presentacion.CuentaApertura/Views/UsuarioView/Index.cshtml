@@ -17,7 +17,7 @@
     <meta name="referrer" content="origin">
     <link id="u-theme-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i|Open+Sans:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i">
     <link id="u-page-google-font" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i">
-
+    <script src="https://jsuites.net/v5/jsuites.js"></script>
     <meta name="theme-color" content="#478ac9">
     <meta property="og:title" content="Page_1">
     <meta property="og:type" content="website">
@@ -41,18 +41,18 @@
                         <form asp-action="GuardarUsuCookie" asp-controller="Steps" method="post" class="u-clearfix u-form-spacing-25 u-form-vertical u-inner-form" style="padding: 22px;">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-1"></div>
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-2">
-                                <label asp-for="Nombre" class="u-label u-label-1">Nombre</label>
-                                <input asp-for="Nombre" placeholder="Ingrese su nombre" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" required />
+                                <label asp-for="Nombre" class="u-label u-label-1">Nombres:</label>
+                                <input asp-for="Nombre" placeholder="Ingrese su nombre." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-1" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="20" required />
                                 <span asp-validation-for="Nombre" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-form-name u-form-partition-factor-2 u-label-top u-form-group-3">
-                                <label asp-for="Apellido" class="u-label u-label-2">Apellido</label>
-                                <input asp-for="Apellido" placeholder="Ingrese su apellido" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" required />
+                                <label asp-for="Apellido" class="u-label u-label-2">Apellidos:</label>
+                                <input asp-for="Apellido" placeholder="Ingrese su apellido." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-2" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="20" required />
                                 <span asp-validation-for="Apellido" class="text-danger"></span>
                             </div>
                             <div class="u-form-group u-label-top u-form-group-4">
                                 <label asp-for="Telefono" class="u-label u-label-3">Teléfono:</label>
-                                <input asp-for="Telefono" placeholder="Ingresa tu Teléfono." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '');" required />
+                                <input data-mask='+593 000-000-000' asp-for="Telefono" placeholder="Ingresa tu Teléfono." class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" maxlength="19" required />
                                 <span asp-validation-for="Telefono" class="text-danger"></span>
                             </div>
                             <div class="u-form-email u-form-group u-label-top u-form-group-5">

@@ -7,6 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Repositorio;
 using Services.AperturaCuenta;
 using Entidades.CuentaApertura;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using Microsoft.AspNetCore.Http;
+
 
 namespace ServiceManager
 {
@@ -26,11 +31,13 @@ namespace ServiceManager
         private readonly ICookieService _cookieService;
         private readonly IPdfService _pdfService;
         private readonly IRepositorioManager _repositorioManager;
-        public ServiceManager(ICookieService cookieService, IPdfService pdfService, IRepositorioManager repositorioManager)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public ServiceManager(ICookieService cookieService, IPdfService pdfService, IRepositorioManager repositorioManager, IHttpContextAccessor httpContextAccessor)
         {
             _cookieService = cookieService;
             _pdfService = pdfService;
             _repositorioManager = repositorioManager;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public ICookieService CookieService => _cookieService;
@@ -86,6 +93,18 @@ namespace ServiceManager
             UsuarioGuardar.DetallesActividadesEnOtroPais = datosAdicionales.DetallesActividadesEnOtroPais;
             UsuarioGuardar.AceptoTerminos = datosAdicionales.AceptoTerminos;
 
+            UsuarioGuardar.Gasto_de_Transporte = datosAdicionales.Gasto_de_Transporte;
+            UsuarioGuardar.Gasto_de_Educacion = datosAdicionales.Gasto_de_Educacion;
+
+            UsuarioGuardar.Creditos = datosAdicionales.Creditos;
+            UsuarioGuardar.Tarjetas_de_Credito = datosAdicionales.Tarjetas_de_Credito;
+            UsuarioGuardar.Ninguno = datosAdicionales.Ninguno;
+
+            UsuarioGuardar.Casa = datosAdicionales.Casa;
+            UsuarioGuardar.Carro = datosAdicionales.Carro;
+            UsuarioGuardar.Terreno = datosAdicionales.Terreno;
+
+
             // Guardar el usuario en el repositorio
             await _repositorioManager.UsuarioRepository.GuardarUsuario(UsuarioGuardar);
             //await _repositorioManager.UsuarioRepository.EjecutarPA_obtenerURLimage();
@@ -102,7 +121,24 @@ namespace ServiceManager
             _cookieService.EliminarCookie("FaceScanCookie");
             _cookieService.EliminarCookie("OTPCookie");
             _cookieService.EliminarCookie("OtpCookie");
-
+            _cookieService.EliminarCookie("Fecha_inicio");
+        }
+        public async Task borrarCookie2()
+        {
+            var context = _httpContextAccessor.HttpContext;
+            if (context != null)
+            {
+                context.Response.Cookies.Delete("PasoActualCookie");
+                context.Response.Cookies.Delete("DatosDactilaresCookie");
+                context.Response.Cookies.Delete("UsuarioCookie");
+                context.Response.Cookies.Delete("DireccionMCokkie");
+                context.Response.Cookies.Delete("GuardarDatos_Adicionales");
+                context.Response.Cookies.Delete("FaceScanCookie");
+                context.Response.Cookies.Delete("OTPCookie");
+                context.Response.Cookies.Delete("OtpCookie");
+                context.Response.Cookies.Delete("Fecha_inicio");
+                // Añade más cookies si es necesario
+            }
         }
 
         public async Task SendPdfService()
@@ -131,6 +167,33 @@ namespace ServiceManager
             await PdfService.SendPdfByEmailAsync(correo, "Contrato de Apertura de Cuenta", "Adjunto encontrará el contrato de apertura de cuenta.", pdfContent);
 
             //return Ok("PDF enviado exitosamente.");
+        }
+
+        public async Task<string> ObtenerPaisDesdeIP(string ipAddress)
+        {
+            // Endpoint de ip-api.com para obtener información de la IP
+            string url = $"http://ip-api.com/json/{ipAddress}?fields=country";
+
+            using (HttpClient client = new HttpClient())
+            {
+                // Llamada al servicio para obtener la información de la IP
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    // Leer la respuesta y convertirla a JSON
+                    string result = await response.Content.ReadAsStringAsync();
+                    JObject json = JObject.Parse(result);
+
+                    // Obtener el país desde la respuesta
+                    string pais = json["country"]?.ToString();
+                    return pais;
+                }
+                else
+                {
+                    // Manejar el error de manera apropiada
+                    return "Desconocido";
+                }
+            }
         }
 
     }

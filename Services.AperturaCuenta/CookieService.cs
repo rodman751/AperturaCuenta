@@ -65,23 +65,32 @@ namespace Services.AperturaCuenta
             }
         }
 
-        //public async Task AgregarClaimsAsync(DatosDactilares datos)
-        //{
-        //    var claims = new List<Claim>
-        //    {
-        //        new Claim("Identificaion", datos.Identificacion),
-            
-        //    };
+        public async Task AgregarClaimsAsync()
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, "UserName"),
+                // Agrega más claims si es necesario
+            };
 
-        //    var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var user = new ClaimsPrincipal(claimsIdentity);
 
-        //    var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
-        //    {
-        //        IsPersistent = true // Configura según tus necesidades
-        //    };
+            var authProperties = new Microsoft.AspNetCore.Authentication.AuthenticationProperties
+            {
+                IsPersistent = true,
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(18)
 
-        //    await _httpContextAccessor.HttpContext?.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProperties);
-        //}
+
+            };
+
+            await _httpContextAccessor.HttpContext?.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                user,
+                authProperties);
+        }
+
+
 
 
         public async Task SignOutAsync()
@@ -105,7 +114,7 @@ namespace Services.AperturaCuenta
             var options = new CookieOptions
             {
 
-                Expires = DateTimeOffset.UtcNow.AddMinutes(18)
+                Expires = DateTimeOffset.UtcNow.AddMinutes(5)
 
             };
 

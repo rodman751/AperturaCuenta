@@ -75,20 +75,20 @@ namespace Presentacion.CuentaApertura.Controllers
             return View(model);
         }
 
-        [HttpPost]
-        public IActionResult Camara()
-        {
+        //[HttpPost]
+        //public IActionResult Camara()
+        //{
             
-            //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", data);
-            var paso= _serviceManager.CookieService.ObtenerPasoActual();
-            if (paso == 5)
-            {
-                ViewBag.Message = "Ya se ha realizado el paso de Face Scan";
-            }
+        //    //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", data);
+        //    var paso= _serviceManager.CookieService.ObtenerPasoActual();
+        //    if (paso == 5)
+        //    {
+        //        ViewBag.Message = "Ya se ha realizado el paso de Face Scan";
+        //    }
            
 
-            return RedirectToAction("Index", "Face_scan");
-        }
+        //    return RedirectToAction("Index", "Face_scan");
+        //}
 
         
         [Consumes("application/json")]
@@ -141,10 +141,10 @@ namespace Presentacion.CuentaApertura.Controllers
                     ImageUrl = imageBytes
                 };
                 // _serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model2);
-                _serviceManager.CookieService.GuardarPasoActual(5);
+                //_serviceManager.CookieService.GuardarPasoActual(5);
 
                 //return RedirectToAction("Index", "Face_scan");
-                return Json(new { success = true, redirectUrl = Url.Action("Index", "Face_scan") });
+                return Json(new { success = true, redirectUrl = Url.Action("Index", "OTP") });
             }
             catch (FormatException ex)
             {
@@ -171,13 +171,16 @@ namespace Presentacion.CuentaApertura.Controllers
         {
             
                 //_serviceManager.CookieService.GuardarDatosCookie("FaceScanCookie", model);
-                _serviceManager.CookieService.GuardarPasoActual(6);
+                _serviceManager.CookieService.GuardarPasoActual(5);
                 var usuarioCookie = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.Usuario>("UsuarioCookie");
                 ViewBag.Usuario = usuarioCookie.Nombre;
                 ViewBag.Apellido = usuarioCookie.Apellido;
 
                 // Enviar el OTP por correo y guardar el OTP
-                string otp = await _serviceManager.PdfService.SendOtpByEmailAsync(usuarioCookie.Correo, "Tu código OTP", "Por favor, usa el siguiente código para completar tu proceso de Apertura de Cuenta:");
+                var templatePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Templates", "OTP.html");
+                string htmlContent = await System.IO.File.ReadAllTextAsync(templatePath);
+                htmlContent = htmlContent.Replace("{{Nombre}}", usuarioCookie.Nombre);
+                string otp = await _serviceManager.PdfService.SendOtpByEmailAsync(usuarioCookie.Correo, "Tu código OTP", htmlContent);
 
                 // Guardar el OTP en la cookie (o en sesión)
                 _serviceManager.CookieService.GuardarDatosCookie("OtpCookie", otp);
@@ -188,42 +191,40 @@ namespace Presentacion.CuentaApertura.Controllers
             //return View();
         }
         [HttpPost]
-        public async Task<IActionResult> VerificarOtp(string Codigo ,string Estado , Entidades.CuentaApertura.RegistrosAuditoria RegistrosAuditoria)
+        public async Task<IActionResult> VerificarOtp(string Codigo, string Estado, Entidades.CuentaApertura.RegistrosAuditoria RegistrosAuditoria)
         {
             var storedOtp = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie");
+            var Fecha_ini = _serviceManager.CookieService.ObtenerDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio");
+            string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
+            string pais = await _serviceManager.ObtenerPaisDesdeIP(ipAddress);
+            string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
+            var qwe = _serviceManager.ObtenerDatosCombinados();
+
+            // Initialize the RegistrosAuditoria object once
+            RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
+            {
+                DireccionIP = ipAddress,
+                DatosNavegador = userAgent,
+                Pais = pais,
+                Fecha_inicio = Fecha_ini.Fecha_inicio,
+                Fecha_Fin = DateTime.Now,
+                Correo_envio_OTP = qwe.Usuario.Correo,
+                Identificacion = qwe.DatosDactilares.Identificacion,
+                CodigoOTP = Codigo,
+                CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
+            };
 
             if (storedOtp == Codigo)
             {
-                _serviceManager.CookieService.GuardarPasoActual(7);
-                // OTP válido, continuar con el siguiente paso
-                
-                var qwe = _serviceManager.ObtenerDatosCombinados();
-                string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
-
-                // Obtener el User-Agent del navegador
-                string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
-
-
-                RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
-                {
-                    DireccionIP = ipAddress,
-                    DatosNavegador = userAgent,
-                    Pais = qwe.InformacionPersonal.PaisNacimiento,
-                    Fecha = DateTime.UtcNow,     
-                    Identificacion = qwe.DatosDactilares.Identificacion,
-                    CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
-                    CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
-                };
+                _serviceManager.CookieService.GuardarPasoActual(6);
                 Estado = "Valido";
 
                 lock (_lock)
                 {
-
                     _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
 
                     CuentaUsuario UsuarioGuardar = new CuentaUsuario();
                     _serviceManager.ObtenerDatosCombinadosParaBD(UsuarioGuardar);
-
 
                     _serviceManager.SendPdfService();
                 }
@@ -233,32 +234,12 @@ namespace Presentacion.CuentaApertura.Controllers
             }
             else
             {
-                // OTP no válido, mostrar error
-                ModelState.AddModelError(string.Empty, "El código OTP ingresado no es válido.");
-                _notifyService.Error("El código OTP ingresado no es válido.");
-
-                var qwe = _serviceManager.ObtenerDatosCombinados();
-                string ipAddress = HttpContext.Connection.RemoteIpAddress?.ToString();
-
-                // Obtener el User-Agent del navegador
-                string userAgent = HttpContext.Request.Headers["User-Agent"].ToString();
-
-
-                RegistrosAuditoria = new Entidades.CuentaApertura.RegistrosAuditoria
-                {
-                    DireccionIP = ipAddress,
-                    DatosNavegador = userAgent,
-                    Pais = qwe.InformacionPersonal.PaisNacimiento,
-                    Fecha = DateTime.UtcNow,
-                    Identificacion = qwe.DatosDactilares.Identificacion,
-                    CodigoOTP = _serviceManager.CookieService.ObtenerDatosCookie<string>("OtpCookie"),
-                    CodigoDactilar = qwe.DatosDactilares.Codigo_Dactilar,
-                };
                 Estado = "Invalido";
-
                 _repositoryManager.registrosRepository.GuardarAuditora(RegistrosAuditoria, Estado);
 
-                return RedirectToAction("Index", "OTP"); // Mostrar la vista OTP nuevamente
+                ModelState.AddModelError(string.Empty, "El código OTP ingresado no es válido.");
+                _notifyService.Error("El código OTP ingresado no es válido.");
+                return RedirectToAction("Index", "OTP");
             }
         }
 
@@ -267,8 +248,9 @@ namespace Presentacion.CuentaApertura.Controllers
         public async Task<IActionResult> FinalizarApertura()
         {
 
-           
+
             _serviceManager.borrarCookie();
+            _serviceManager.CookieService.SignOutAsync();
             _notifyService.Success("Tu cuenta ha sido abierta con éxito. ¡Gracias por elegirnos!");
             return RedirectToAction("Index", "Home");
 

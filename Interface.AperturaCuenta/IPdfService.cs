@@ -11,5 +11,6 @@ namespace Interface.AperturaCuenta
         byte[] GeneratePdf(string content);
         Task SendPdfByEmailAsync(string toEmail, string subject, string body, byte[] pdfContent);
         Task<string> SendOtpByEmailAsync(string toEmail, string subject, string body);
+        string ConvertImageToBase64(string imagePath);
     }
 }

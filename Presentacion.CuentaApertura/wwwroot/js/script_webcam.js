@@ -1,5 +1,6 @@
 const video = document.getElementById('inputVideo');
 const canvas = document.getElementById('overlay');
+let hasCaptured = false;  // Variable para controlar si ya se ha capturado una imagen
 
 (async () => {
     const stream = await navigator.mediaDevices.getUserMedia({ video: {} });
@@ -51,7 +52,10 @@ async function onPlay() {
        
         await sendImageToServer(base64Image);  // Enviar la imagen al servidor
 
-       //console.log("", base64Image)
+        hasCaptured = true;  // Marcar como capturado para evitar futuras capturas
+        //console.log("", base64Image)
+
+        return; 
     }
 
 
@@ -89,4 +93,32 @@ async function sendImageToServer(base64Image) {
         console.error('Error en la solicitud de red:', error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    var btnContinuar = document.getElementById('btnContinuar');
+    var cameraSection = document.getElementById('cameraSection');
+    var successSection = document.getElementById('successSection');
+
+    // Crear un observador para detectar cambios en el botón
+    var observer = new MutationObserver(function (mutationsList, observer) {
+        mutationsList.forEach(function (mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+                if (btnContinuar.style.display === 'block') {
+                    // Desactivar el observador para evitar loops
+                    observer.disconnect();
+
+                    // Ocultar la sección de la cámara y mostrar la de éxito
+                    cameraSection.style.display = 'none';
+                    successSection.style.display = 'block';
+                }
+            }
+        });
+    });
+
+    // Configurar el observer para observar cambios en el atributo de estilo del botón
+    observer.observe(btnContinuar, { attributes: true });
+
+    // Iniciar la detección de caras
+    onPlay();
+});
 

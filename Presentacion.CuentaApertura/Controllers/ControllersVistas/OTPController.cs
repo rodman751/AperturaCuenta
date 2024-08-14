@@ -1,4 +1,5 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositorio;
@@ -18,6 +19,7 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
             _serviceManager = serviceManager;
             _notifyService = notifyService;
         }
+        [Authorize]
         public ActionResult Index()
         {
             var datosStep1 = _serviceManager.CookieService.ObtenerDatosCookie<Modelos.OTP>("OTPCookie");

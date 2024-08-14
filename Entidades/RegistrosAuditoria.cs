@@ -12,11 +12,15 @@ namespace Entidades.CuentaApertura
         public string DireccionIP { get; set; }      // Dirección IP del usuario
         public string DatosNavegador { get; set; }  // Datos del navegador del usuario
         public string Pais { get; set; }            // País de origen del usuario
-        public DateTime Fecha { get; set; }         // Fecha y hora de la acción
+        public string Correo_envio_OTP { get; set; }    // Correo_envio_OTP
+
+        public DateTime Fecha_inicio { get; set; }         // Fecha_inicio y hora de la acción
+        public DateTime Fecha_Fin { get; set; }         // Fecha_Fin y hora de la acción
         public string Identificacion { get; set; }  // Identificación de la sesión del usuario
         
         public string CodigoDactilar { get; set; }  // Código dactilar del usuario
         public string CodigoOTP { get; set; }        // Código OTP (One-Time Password) validado o enviado
         public string EstadoOTP { get; set; }        // Estado del código OTP (por ejemplo, validado o enviado)
+
     }
 }

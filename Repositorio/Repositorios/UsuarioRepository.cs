@@ -11,6 +11,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Repositorio.Repositorios
 {
@@ -32,7 +33,9 @@ namespace Repositorio.Repositorios
 
         public async Task GuardarUsuario(CuentaUsuario cuenta)
         {
-           
+
+            //using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
+           // {
                 try
                 {
                     // Usar DbContext para operaciones CRUD
@@ -44,12 +47,16 @@ namespace Repositorio.Repositorios
                     {
                         await dbConnection.ExecuteAsync("EXEC sp_UpdateImageUrl");
                     }
+
+                    // Commit the transaction
+                    //transaction.Complete();
                 }
                 catch (Exception ex)
                 {
                     // Log the exception or rethrow it
                     throw new Exception("Error al guardar el usuario", ex);
                 }
+           //}
         }
       
 

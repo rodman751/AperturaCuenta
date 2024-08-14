@@ -45,9 +45,10 @@
                             padding-left: 6%;
                             " alt="">
                     </span>
+                    <h1> toca borrar es ta visa </h1>
                     <p class="u-align-center u-form-group u-form-text u-label-none u-text u-text-2"> ¡Felicidades! Tu Rostro ha sido escaneado satisfactoriamente.</p>
                     <div class="u-form u-form-1">
-                        <form asp-action="GuardarFaceScan" asp-controller="Steps" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
+                        <form asp-action="" asp-controller="" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" source="email" name="form" style="padding: 5px;" redirect="true" redirect-address="Page_1.html">
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-line u-line-horizontal u-line-1"></div>
 
                             <!-- Campos ocultos para datos del rostro usando asp-for -->
@@ -60,10 +61,10 @@
                             </div>
 
                             <!-- Mensajes de éxito y error -->
-                            <div class="u-form-send-message u-form-send-success">Correcto</div>
+                            @* <div class="u-form-send-message u-form-send-success">Correcto</div>
                             <div class="u-form-send-error u-form-send-message">Error</div>
                             <input type="hidden" value="" name="recaptchaResponse">
-                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a">
+                            <input type="hidden" name="formServices" value="9d5de5cf-c74d-2673-4c36-3c5014c4e60a"> *@
                         </form>
                     </div>
                 </div>

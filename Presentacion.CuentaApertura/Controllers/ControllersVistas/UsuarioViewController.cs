@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using Interface.AperturaCuenta;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
@@ -14,7 +15,7 @@ namespace Presentacion.CuentaApertura.Controllers.ControllersVistas
             _cookieService = cookieService;
         }
 
-
+        [Authorize]
         public IActionResult Index()
         {
 

@@ -20,7 +20,8 @@
     <meta property="og:title" content="Page_2">
     <meta property="og:type" content="website">
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&libraries=places"></script>
+
+    
 
 </head>
 <body data-path-to-root="./" data-include-products="false" class="u-body u-xl-mode" data-lang="es">
@@ -58,10 +59,16 @@
 
                             <div class="u-border-1 u-border-palette-2-light-3 u-form-group u-form-line u-label-top u-line u-line-horizontal u-line-2"></div>
 
+                            <div class="u-form-group u-label-top u-form-group-8">
+                                <label asp-for="Direccion" class="u-label u-label-6">Dirección:</label>
+                                <input asp-for="Direccion" type="text" placeholder="av.***, Ciudad" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-6" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required />
+                                <span asp-validation-for="Direccion" class="text-danger"></span>
+                            </div>
+
                             <!-- Provincias -->
                             <div class="u-form-group u-form-text u-label-top u-form-group-5">
                                 <label asp-for="Provincia" class="u-label u-label-3">Provincias</label>
-                                <input asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" type="text" required>
+                                <input asp-for="Provincia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-3" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required>
                                 <div id="provincia-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Provincia" class="text-danger"></span>
                             </div>
@@ -69,7 +76,7 @@
                             <!-- Cantones -->
                             <div class="u-form-group u-form-text u-label-top u-form-group-6">
                                 <label asp-for="Canton" class="u-label u-label-4">Cantón:</label>
-                                <input asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" type="text" required>
+                                <input asp-for="Canton" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-4" type="text" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required>
                                 <div id="canton-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Canton" class="text-danger"></span>
                             </div>
@@ -77,22 +84,17 @@
                             <!-- Parroquias -->
                             <div class="u-form-group u-form-text u-label-top u-form-group-7">
                                 <label asp-for="Parroquia" class="u-label u-label-5">Parroquia:</label>
-                                <input asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5" required>
+                                <input asp-for="Parroquia" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-5" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="17" required>
                                 <div id="parroquia-suggestions" class="suggestions"></div>
                                 <span asp-validation-for="Parroquia" class="text-danger"></span>
                             </div>
 
 
 
-                            <div class="u-form-group u-label-top u-form-group-8">
-                                <label asp-for="Direccion" class="u-label u-label-6">Dirección:</label>
-                                <input asp-for="Direccion" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-6" required />
-                                <span asp-validation-for="Direccion" class="text-danger"></span>
-                            </div>
-
+                           
                             <div class="u-form-group u-label-top u-form-group-9">
                                 <label asp-for="Referencia" class="u-label u-label-7">Referencia</label>
-                                <input asp-for="Referencia" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-7" required />
+                                <input asp-for="Referencia" type="text" placeholder="" class="u-border-2 u-border-white u-input u-input-rectangle u-radius u-text-grey-80 u-input-7" oninput="this.value = this.value.replace(/[^a-zA-ZñÑ\s]/g, '');" maxlength="20" required />
                                 <span asp-validation-for="Referencia" class="text-danger"></span>
                             </div>
 
@@ -112,12 +114,8 @@
                     </div>
                     <div class="u-grey-light-2 u-map u-map-1">
                         <div class="embed-responsive">
-                            <div id="map" style="height: 400px; width: 100%;"></div>
-                            <script async
-                                    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDaeWicvigtP9xPv919E-RNoxfvC-Hqik&loading=async&libraries=places&callback=initMap">
-                            </script>
-                            
-                            @* <iframe class="embed-responsive-item" src="https://maps.google.com/maps?output=embed&amp;q=Ibarra%2C%20Ecuador&amp;z=10&amp;t=m" data-map="JTdCJTIycG9zaXRpb25UeXBlJTIyJTNBJTIybWFwLXBvaW50JTIyJTJDJTIyYWRkcmVzcyUyMiUzQSUyMkliYXJyYSUyQyUyMEVjdWFkb3IlMjIlMkMlMjJ6b29tJTIyJTNBMTAlMkMlMjJ0eXBlSWQlMjIlM0ElMjJyb2FkJTIyJTJDJTIybGFuZyUyMiUzQW51bGwlMkMlMjJhcGlLZXklMjIlM0FudWxsJTJDJTIybWFya2VycyUyMiUzQSU1QiU1RCU3RA=="></iframe>*@
+                            <div id="map" style="height: 350px; width: 100%;"></div>
+                           
                         </div>
                     </div>
 
@@ -127,117 +125,106 @@
             </div>
         </div>
     </section>
+
+
+    <!-- Modal 1: No usar gorras, lentes y levantar el pelo -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+
+            <p>Puedes agregar tu dirección, o para mayor precisión, usa el puntero rojo del mapa 📍</p>
+
+            <button class="close btn btn-primary btn-sm" id="closeModal1">Continuar</button>
+        </div>
+    </div>
+    <link href="~/css/Modals.css" rel="stylesheet" />
    
     @section Scripts{
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJ0pLsT4Ra598n5FNXGLBfrts2PW-fTP8&libraries=places&callback=initMap"></script>
         <script>
-            function initialize() {
-                var inputProvincia = document.querySelector('input[name="Provincia"]');
-                var inputCanton = document.querySelector('input[name="Canton"]');
-                var inputParroquia = document.querySelector('input[name="Parroquia"]');
-                var inputDireccion = document.querySelector('input[name="Direccion"]');
-                var inputReferencia = document.querySelector('input[name="Referencia"]');
-
-                var autocomplete = new google.maps.places.Autocomplete(inputDireccion, {
-                    types: ['geocode']
-                });
-
-                autocomplete.addListener('place_changed', function () {
-                    var place = autocomplete.getPlace();
-                    if (place.address_components) {
-                        var addressComponents = place.address_components;
-                        addressComponents.forEach(function (component) {
-                            switch (component.types[0]) {
-                                case 'locality': // Ciudad
-                                    inputCanton.value = component.long_name;
-                                    break;
-                                case 'administrative_area_level_1': // Provincia
-                                    inputProvincia.value = component.long_name;
-                                    break;
-                                case 'sublocality_level_1': // Parroquia (si aplica)
-                                    inputParroquia.value = component.long_name;
-                                    break;
-                                case 'street_address': // Dirección
-                                    inputDireccion.value = component.long_name;
-                                    break;
-                            }
-                        });
-                    }
-                });
-
-                // Puedes agregar lógica similar para manejar los campos Provincia, Canton y Parroquia
-            }
-
-            google.maps.event.addDomListener(window, 'load', initialize);
+            let map, marker, geocoder, autocomplete;
 
             function initMap() {
-                var map = new google.maps.Map(document.getElementById('map'), {
-                    center: { lat: -0.231, lng: -78.524 }, // Coordenadas iniciales
-                    zoom: 12
-                });
+                try {
+                    geocoder = new google.maps.Geocoder();
 
-                var marker = new google.maps.Marker({
-                    position: map.getCenter(),
-                    map: map,
-                    draggable: true
-                });
-
-                var geocoder = new google.maps.Geocoder();
-
-                google.maps.event.addListener(marker, 'dragend', function () {
-                    geocodePosition(marker.getPosition(), geocoder, function (address) {
-                        var components = address.address_components;
-                        components.forEach(function (component) {
-                            switch (component.types[0]) {
-                                case 'locality': // Ciudad
-                                    inputCanton.value = component.long_name;
-                                    break;
-                                case 'administrative_area_level_1': // Provincia
-                                    inputProvincia.value = component.long_name;
-                                    break;
-                                case 'sublocality_level_1': // Parroquia (si aplica)
-                                    inputParroquia.value = component.long_name;
-                                    break;
-                                case 'street_address': // Dirección
-                                    inputDireccion.value = component.long_name;
-                                    break;
-                            }
-                        });
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: -0.231, lng: -78.524 }, // Coordenadas iniciales
+                        zoom: 12
                     });
-                });
+
+                    marker = new google.maps.Marker({
+                        position: map.getCenter(),
+                        map: map,
+                        draggable: true
+                    });
+
+                    autocomplete = new google.maps.places.Autocomplete(document.getElementById('Direccion'), {
+                        types: ['geocode']
+                    });
+
+                    autocomplete.addListener('place_changed', onPlaceChanged);
+
+                    google.maps.event.addListener(marker, 'dragend', function () {
+                        geocodePosition(marker.getPosition());
+                    });
+                } catch (error) {
+                    console.error('Error initializing Google Maps:', error);
+                }
             }
 
-            function geocodePosition(position, geocoder, callback) {
-                geocoder.geocode({
-                    latLng: position
-                }, function (results) {
-                    if (results && results.length > 0) {
-                        callback(results[0]);
+            function onPlaceChanged() {
+                const place = autocomplete.getPlace();
+
+                if (!place.geometry) {
+                    return;
+                }
+
+                // Actualiza el mapa a la ubicación seleccionada
+                map.setCenter(place.geometry.location);
+                map.setZoom(17);
+                marker.setPosition(place.geometry.location);
+
+                // Actualiza los campos según la dirección seleccionada
+                place.address_components.forEach(function (component) {
+                    const types = component.types;
+                    if (types.includes('administrative_area_level_1')) {
+                        document.getElementById('Provincia').value = component.long_name;
+                    } else if (types.includes('locality')) {
+                        document.getElementById('Canton').value = component.long_name;
+                    } else if (types.includes('sublocality_level_1')) {
+                        document.getElementById('Parroquia').value = component.long_name;
+                    } else if (types.includes('street_address') || types.includes('route')) {
+                        document.getElementById('Direccion').value = component.long_name;
                     }
                 });
             }
 
-            window.addEventListener('load', initialize);
+            function geocodePosition(position) {
+                geocoder.geocode({ latLng: position }, function (results, status) {
+                    if (status === google.maps.GeocoderStatus.OK && results[0]) {
+                        const address = results[0].formatted_address;
+                        document.getElementById('Direccion').value = address;
 
-            const Provincias = [
-                "Azuay", "Bolívar", "Cañar", "Carchi", "Chimborazo",
-                "Cotopaxi", "El Oro", "Esmeraldas", "Galápagos", "Guayas",
-                "Imbabura", "Loja", "Los Ríos", "Manabí", "Morona Santiago",
-                "Napo", "Orellana", "Pastaza", "Pichincha", "Santa Elena",
-                "Santa Isabel", "Santo Domingo de los Tsáchilas", "Sucumbíos", "Tungurahua", "Zamora-Chinchipe"
-            ];
+                        results[0].address_components.forEach(function (component) {
+                            const types = component.types;
+                            if (types.includes('administrative_area_level_1')) {
+                                document.getElementById('Provincia').value = component.long_name;
+                            } else if (types.includes('locality')) {
+                                document.getElementById('Canton').value = component.long_name;
+                            } else if (types.includes('sublocality_level_1')) {
+                                document.getElementById('Parroquia').value = component.long_name;
+                            }
+                        });
+                    }
+                });
+            }
 
-            const Cantones = [
-                "Cuenca", "Azogues", "Riobamba", "Loja", "Guayaquil",
-                "Quito", "Ambato", "Manta", "Machala", "Esmeraldas",
-                "Ibarra", "Santa Elena", "Portoviejo", "Santo Domingo"
-                // Añadir más cantones según necesidad
-            ];
+            const Provincias = ["Azuay", "Bolívar", "Cañar", "Carchi", "Chimborazo", "Cotopaxi", "El Oro", "Esmeraldas", "Galápagos", "Guayas", "Imbabura", "Loja", "Los Ríos", "Manabí", "Morona Santiago", "Napo", "Orellana", "Pastaza", "Pichincha", "Santa Elena", "Santa Isabel", "Santo Domingo de los Tsáchilas", "Sucumbíos", "Tungurahua", "Zamora-Chinchipe"];
 
-            const Parroquias = [
-                "El Sagrario", "La Libertad", "San Blas", "La Merced",
-                "San Sebastián", "San Francisco", "San Pedro"
-                // Añadir más parroquias según necesidad
-            ];
+            const Cantones = ["Cuenca", "Azogues", "Riobamba", "Loja", "Guayaquil", "Quito", "Ambato", "Manta", "Machala", "Esmeraldas", "Ibarra", "Santa Elena", "Portoviejo", "Santo Domingo"];
+
+            const Parroquias = ["El Sagrario", "La Libertad", "San Blas", "La Merced", "San Sebastián", "San Francisco", "San Pedro"];
+
             function setupAutocomplete(inputId, suggestionsId, dataList) {
                 const input = document.getElementById(inputId);
                 const suggestionsBox = document.getElementById(suggestionsId);
@@ -247,9 +234,7 @@
                     suggestionsBox.innerHTML = ''; // Limpia las sugerencias anteriores
 
                     if (query) {
-                        const filtered = dataList.filter(item =>
-                            item.toLowerCase().includes(query)
-                        );
+                        const filtered = dataList.filter(item => item.toLowerCase().includes(query));
 
                         filtered.forEach(item => {
                             const div = document.createElement('div');
@@ -276,33 +261,57 @@
 
             // Estilos para las sugerencias
             document.head.insertAdjacentHTML('beforeend', `
-                            <style>
-                                .suggestions {
-                                    border: 1px solid #ddd;
-                                    max-height: 150px;
-                                    overflow-y: auto;
-                                    position: absolute;
-                                    background-color: white;
-                                    z-index: 1000;
-                                    border-radius: 8px;
-                                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-                                    font-family: 'Roboto', sans-serif;
-                                }
-                                .suggestion-item {
-                                    color: #333;
-                                    padding: 12px;
-                                    cursor: pointer;
-                                    transition: background-color 0.3s ease, color 0.3s ease;
-                                    font-family: 'Montserrat', sans-serif;
-                                }
-                                .suggestion-item:hover {
-                                    background-color: #e0e0e0;
-                                    color: #007bff;
-                                }
-                            </style>
-                        `);
-        </script>
+                        <style>
+                            .suggestions {
+                                border: 1px solid #ddd;
+                                max-height: 150px;
+                                overflow-y: auto;
+                                position: absolute;
+                                background-color: white;
+                                z-index: 1000;
+                                border-radius: 8px;
+                                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                                font-family: 'Roboto', sans-serif;
+                            }
+                            .suggestion-item {
+                                color: #333;
+                                padding: 12px;
+                                cursor: pointer;
+                                transition: background-color 0.3s ease, color 0.3s ease;
+                                font-family: 'Montserrat', sans-serif;
+                            }
+                            .suggestion-item:hover {
+                                background-color: #e0e0e0;
+                                color: #007bff;
+                            }
+                        </style>
+                    `);
 
+
+            document.addEventListener('DOMContentLoaded', function () {
+                var modal1 = document.getElementById('modal1');
+               
+
+                // Mostrar el primer modal
+                setTimeout(function () {
+                    modal1.style.display = 'block';
+                }, 2000);
+                setTimeout(function () {
+                    modal1.style.display = 'none';
+                }, 7000);
+
+                document.getElementById('closeModal1').onclick = function () {
+                    modal1.style.display = 'none';
+                }
+                // Cerrar el modal si se hace clic fuera de él
+                window.onclick = function (event) {
+                    if (event.target == modal1) {
+                        modal1.style.display = 'none';
+                    }
+                    
+                }
+            });
+        </script>
 
 
 
