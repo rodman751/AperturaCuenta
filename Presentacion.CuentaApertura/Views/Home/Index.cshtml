@@ -49,7 +49,12 @@
                     <br>
                     <div class="otp-container u-form u-form-1">
                         <form asp-action="Inicio"  method="post" class="u-clearfix u-form-spacing-60 u-form-vertical u-inner-form" id="carousel-fa54">
-                            
+
+
+                            <div class="u-form-group">
+                                <input type="hidden" id="cameraAccess" name="CameraAccess" value="false">
+                            </div>
+
                             <div class="u-align-left u-form-group u-form-submit u-label-none">
                                 <input class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1" type="submit" name="Inicio" value="Inicar Cuenta Apertura" />   
                             </div>
@@ -75,5 +80,80 @@
 </body>
 
 
+@section Scripts {
+    <script>
+        window.onload = function () {
+            requestCameraAccess();
+        };
+
+        function requestCameraAccess() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    console.log("Permisos de cámara concedidos.");
+                    document.getElementById('cameraAccess').value = 'true';
+                    // Se puede almacenar el estado si es necesario
+                    localStorage.setItem('cameraAccessGranted', 'true');
+
+                })
+                .catch(function (error) {
+                    console.log("Permisos de cámara no concedidos.");
+                    // Si se rechazan los permisos, vuelves a solicitar acceso
+                    localStorage.setItem('cameraAccessGranted', 'false');
+                    setTimeout(function () {
+                      
+  //                      alert('Para continuar, debes permitir el acceso a la cámara.');
+                        // Bloquear la interacción en la página
+                        document.body.innerHTML = `
+            <div style="
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100vh;
+                background-color: #112659;
+                color: white;
+                text-align: center;
+                font-family: 'Roboto', sans-serif;
+                margin: 0;
+                padding: 0;
+                flex-direction: column; /* Ensure vertical alignment */
+            ">
+                <div>
+                    <h2>Acceso a la Cámara Requerido</h2>
+                    <p>Para continuar, debes permitir el acceso a la cámara en la configuración de tu navegador en la parte superior.</p>
+                    <button onclick="location.reload()" style="
+                        padding: 10px 20px;
+                        border: none;
+                        background-color: #007bff;
+                        color: white;
+                        font-size: 16px;
+                        cursor: pointer;
+                        border-radius: 5px;
+                        margin-top: 20px;
+                    ">Reintentar</button>
+                </div>
+                <div style="
+                    margin-top: 20px; /* Space between button and GIF */
+                ">
+                    <img class="gif"
+                            src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExZTAzaW14cWhpOWYzcTZyeGo2dGlyOHpoMWtsazVhb2J4YXdsYzF0YiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/sQZmj7laOnoJyQhJTQ/giphy.gif" alt="gif">
+                </div>
+                <img class="flecha" style="
+                    position: relative;
+                    height: 150px;
+                    transform: rotate(180deg);
+                    right: -39%;
+                    top: -70%;
+                " src="https://cdn-icons-png.flaticon.com/512/3183/3183327.png" alt="flecha">
+            </div>
+        `;
+
+
+                        requestCameraAccess();
+
+                    }, 3000); 
+                });
+        }
+    </script>
+}
 
 

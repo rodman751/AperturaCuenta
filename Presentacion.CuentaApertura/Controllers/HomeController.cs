@@ -34,32 +34,40 @@ namespace Presentacion.CuentaApertura.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
         [HttpPost]
-        public IActionResult Inicio()
+        public IActionResult Inicio(string CameraAccess)
         {
-            _cookieService.AgregarClaimsAsync();
-            
-            Entidades.CuentaApertura.RegistrosAuditoria data = new Entidades.CuentaApertura.RegistrosAuditoria ();
-            data.Fecha_inicio = DateTime.Now;
-            _cookieService.GuardarDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio", data);
-            int pasoActual = _cookieService.ObtenerPasoActual();
-            switch (pasoActual)
+            if (CameraAccess == "true")
             {
-                case 1:
-                    return RedirectToAction("Index", "UsuarioView");
-                case 2:
-                    return RedirectToAction("Index", "Direccion");
-                case 3:
-                    return RedirectToAction("Index", "Datos_adicionales");
-                case 4:
-                    return RedirectToAction("Index", "Face_Check");
-               
-                case 5:
-                    return RedirectToAction("Index", "OTP");
-                case 6:
-                    return RedirectToAction("Index", "Resumen_final");
-                default:
-                    return RedirectToAction("Index", "DatosDactilares");
+                _cookieService.AgregarClaimsAsync();
+
+                Entidades.CuentaApertura.RegistrosAuditoria data = new Entidades.CuentaApertura.RegistrosAuditoria();
+                data.Fecha_inicio = DateTime.Now;
+                _cookieService.GuardarDatosCookie<Entidades.CuentaApertura.RegistrosAuditoria>("Fecha_inicio", data);
+                int pasoActual = _cookieService.ObtenerPasoActual();
+                switch (pasoActual)
+                {
+                    case 1:
+                        return RedirectToAction("Index", "UsuarioView");
+                    case 2:
+                        return RedirectToAction("Index", "Direccion");
+                    case 3:
+                        return RedirectToAction("Index", "Datos_adicionales");
+                    case 4:
+                        return RedirectToAction("Index", "Face_Check");
+
+                    case 5:
+                        return RedirectToAction("Index", "OTP");
+                    case 6:
+                        return RedirectToAction("Index", "Resumen_final");
+                    default:
+                        return RedirectToAction("Index", "DatosDactilares");
+                }
             }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            
         }
 
 
