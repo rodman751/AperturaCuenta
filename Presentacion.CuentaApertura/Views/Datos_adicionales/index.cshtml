@@ -199,10 +199,27 @@
                                 <label class="u-label u-label-11"></label>
                                 <input asp-for="AceptoTerminos" type="checkbox" class="u-agree-checkbox u-field-input" required />
                                 <label class="u-agree-label u-field-label">
-                                    Yo acepto los <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1" href="/TerminosYcondiciones" target="_blank">Términos de Servicio</a>
+                                    Yo acepto los
+                                    <a class="u-active-none u-border-none u-btn u-button-link u-button-style u-hover-none u-none u-text-palette-1-base u-btn-1"
+                                       href="#"
+                                       id="openTermsModal">Términos de Servicio</a>
                                 </label>
                                 <span asp-validation-for="AceptoTerminos" class="text-danger"></span>
                             </div>
+
+                            <!-- Modal for Términos de Servicio -->
+                            <div id="termsModal" class="modal">
+                                <div class="">
+                                    
+                                    <div id="termsModalBody">
+                                        
+                                    </div>
+                                    <span class="close btn btn-primary btn-lg" id="closeTermsModal">Cerrar</span>
+                                </div>
+                            </div>
+
+                            <link href="~/css/Modals.css" rel="stylesheet" />
+
 
                             @* <div class="u-align-left u-form-group u-form-submit u-label-top">
                             <button class="u-border-none u-btn u-btn-round u-btn-submit u-button-style u-custom-color-5 u-custom-font u-font-montserrat u-radius-20 u-btn-1">Guardar</button>
@@ -249,5 +266,52 @@
                 detallesDiv.style.display = 'none';
             }
         });
+
+
+        // Function to open the modal and load the content
+        function openModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = 'block';
+        }
+
+        // Function to close the modal
+        function closeModal(modalId) {
+            var modal = document.getElementById(modalId);
+            modal.style.display = 'none';
+        }
+
+        // Function to load content into the modal
+        function loadModalContent(url, modalBodyId) {
+            var modalBody = document.getElementById(modalBodyId);
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    modalBody.innerHTML = data;
+                })
+                .catch(error => console.error('Error loading modal content:', error));
+        }
+
+        // Attach event listener to the link that opens the modal
+        document.getElementById('openTermsModal').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the default link behavior
+            loadModalContent('/TerminosYcondiciones', 'termsModalBody'); // Load the content into the modal
+            openModal('termsModal'); // Open the modal
+        });
+
+        // Attach event listener to the close button inside the modal
+        document.getElementById('closeTermsModal').addEventListener('click', function () {
+            closeModal('termsModal'); // Close the modal
+        });
+
+        // Optional: Close the modal when clicking outside of it
+        window.addEventListener('click', function (event) {
+            var modal = document.getElementById('termsModal');
+            if (event.target === modal) {
+                closeModal('termsModal');
+            }
+        });
+
+
+
     </script>
 }
